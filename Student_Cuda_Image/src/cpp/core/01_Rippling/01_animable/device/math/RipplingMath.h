@@ -16,70 +16,65 @@ using namespace gpu;
 
 class RipplingMath
     {
-
 	/*--------------------------------------*\
-	|*		Constructor		*|
+	|*		Constructeur		*|
 	 \*-------------------------------------*/
 
     public:
-
-	__device__ RipplingMath(int w, int h)|
+	__device__
+	RipplingMath(uint w)
 	    {
-	    this->dim2 = w / 2;
+	    this->dim2 = w / 2.f;
 	    }
 
-	// constructeur copie automatique car pas pointeur dans VagueMath
-
+	// constructeur copie: pas besoin car pas attribut ptr
 	__device__
-	   virtual ~RipplingMath()
+	virtual ~RipplingMath(void)
 	    {
 	    // rien
 	    }
 
 	/*--------------------------------------*\
-	|*		Methodes		*|
+	|*		Methode			*|
 	 \*-------------------------------------*/
 
     public:
-
 	__device__
-	void colorIJ(uchar4* ptrColor, int i, int j, float t)
+	void colorIJ(uchar4* ptrColorIJ, int i, int j, float t)
 	    {
 	    uchar levelGris;
 
-	    f(&levelGris, i, j, t); // update levelGris
+	    f(j, i, t, &levelGris);
 
-	    ptrColor->x = levelGris;
-	    ptrColor->y = levelGris;
-	    ptrColor->z = levelGris;
+	    ptrColorIJ->x = levelGris;
+	    ptrColorIJ->y = levelGris;
+	    ptrColorIJ->z = levelGris;
 
-	    ptrColor->w = 255; // opaque
+	    ptrColorIJ->w = 255; //opaque
 	    }
 
     private:
-
 	__device__
-	void f(uchar* ptrLevelGris, int i, int j, float t)
+	void f(int i, int j, float t, uchar* ptrlevelGris)
 	    {
-	    // TODO cf fonction math pdf
-	    // use focntion dij ci-dessous
+	    float d;
+	    dij(i,j,&d);
+	    *ptrlevelGris = 128.f + 127.f * cosf((d / 10.f) - t / 7.f) / ((d / 10.f) + 1.f);
 
-	    // Note
-	    //		Si code OMP focntionnel:
-	    // 			Step1 : Delete le contenur de ce fichier (si!),
-	    // 			Step2 : Copie-past le contenu de RipplingMath.h de omp,
-	    // 			Step3 : Ajouter __device__  devant methode et constructeur!
 	    }
-
 	__device__
-	float  dij(int i, int j)
+	void dij(int i, int j, float* ptrResult)
 	    {
-	    //TODO cf fonction math pdf
-	    // return ...
+	    *ptrResult = sqrtf(f(i) * f(i) + f(j) * f(j));
+	    }
+	__device__
+	float f(int i)
+	    {
+	    return i - dim2;
 	    }
 
 	/*--------------------------------------*\
-	|*		Attributs		*|
+	|*		Attribut		*|
 	 \*-------------------------------------*/
 
     private:

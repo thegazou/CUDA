@@ -1,8 +1,9 @@
-#include "RipplingProvider.h"
 #include "Rippling.h"
 
 #include "MathTools.h"
 #include "Grid.h"
+
+#include "RipplingProvider.h"
 
 
 
@@ -46,7 +47,9 @@ Animable_I<uchar4>* RipplingProvider::createAnimable()
     int mp = Device::getMPCount();
     int coreMP = Device::getCoreCountMP();
 
-    Grid grid;  // TODO definissez une grille cuda (dg, db)
+    dim3 dg = dim3(20, 1, 1);  		// disons, a optimiser selon le gpu, peut drastiqument ameliorer ou baisser les performances
+    dim3 db = dim3(1024, 1, 1);   	// disons, a optimiser selon le gpu, peut drastiqument ameliorer ou baisser les performances
+    Grid grid(dg, db);
 
     return new Rippling(grid,dw, dh, dt);
     }

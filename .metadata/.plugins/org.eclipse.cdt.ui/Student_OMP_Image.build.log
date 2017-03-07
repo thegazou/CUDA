@@ -1,4 +1,4 @@
-09:08:28 **** Incremental Build of configuration GCC_parallel for project Student_OMP_Image ****
+16:38:01 **** Incremental Build of configuration GCC_parallel for project Student_OMP_Image ****
 cbicc gcc jall 
 
 --------------------------------------------------------
@@ -236,22 +236,135 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 [Student_OMP_Image_gcc_x86_64] -> g++ compiling .cpp : src/core/04_Raytracing/a_animable/Raytracing.cpp
 [Student_OMP_Image_gcc_x86_64] -> g++ compiling .cpp : src/core/04_Raytracing/b_provider/RaytracingProvider.cpp
+In file included from src/core/04_Raytracing/a_animable/Raytracing.h:7:0,
+                 from src/core/04_Raytracing/a_animable/Raytracing.cpp:1:
+src/core/04_Raytracing/a_animable/math/RaytracingMath.h:27:25: error: ‘Sphere’ has not been declared
+  RaytracingMath(uint t, Sphere* ptrTabSphere) :
+                         ^
+src/core/04_Raytracing/a_animable/math/RaytracingMath.h:98:2: error: ‘Sphere’ does not name a type
+  Sphere* ptrTabSphere;
+  ^
+src/core/04_Raytracing/a_animable/math/RaytracingMath.h: In constructor ‘RaytracingMath::RaytracingMath(uint, int*)’:
+src/core/04_Raytracing/a_animable/math/RaytracingMath.h:31:12: error: ‘class RaytracingMath’ has no member named ‘ptrTabSphere’
+      this->ptrTabSphere=ptrTabSphere;
+            ^
+src/core/04_Raytracing/a_animable/math/RaytracingMath.h: In member function ‘float RaytracingMath::f(cpu::float2)’:
+src/core/04_Raytracing/a_animable/math/RaytracingMath.h:78:3: error: ‘hCarre’ was not declared in this scope
+   hCarre = ptrTabSphere->hCarre(xySol);
+   ^
+src/core/04_Raytracing/a_animable/math/RaytracingMath.h:78:12: error: ‘ptrTabSphere’ was not declared in this scope
+   hCarre = ptrTabSphere->hCarre(xySol);
+            ^
+src/core/04_Raytracing/a_animable/math/RaytracingMath.h:82:7: error: ‘distnace’ was not declared in this scope
+       distnace=ptrTabSphere->distance(dz);
+       ^
 In file included from src/core/04_Raytracing/a_animable/Raytracing.h:8:0,
                  from src/core/04_Raytracing/a_animable/Raytracing.cpp:1:
-src/core/04_Raytracing/a_animable/geometry/Sphere.h:5:23: fatal error: cudaTools.h: No such file or directory
- #include "cudaTools.h"
-                       ^
-compilation terminated.
-In file included from src/core/04_Raytracing/b_provider/../a_animable/Raytracing.h:8:0,
-                 from src/core/04_Raytracing/b_provider/RaytracingProvider.cpp:8:
-src/core/04_Raytracing/b_provider/../a_animable/geometry/Sphere.h:5:23: fatal error: cudaTools.h: No such file or directory
- #include "cudaTools.h"
-                       ^
-compilation terminated.
+src/core/04_Raytracing/a_animable/geometry/Sphere.h: At global scope:
+src/core/04_Raytracing/a_animable/geometry/Sphere.h:13:1: error: ‘__host__’ does not name a type
+ __host__
+ ^
+src/core/04_Raytracing/a_animable/geometry/Sphere.h:26:1: error: ‘__host__’ does not name a type
+ __host__
+ ^
+src/core/04_Raytracing/a_animable/geometry/Sphere.h:31:1: error: ‘__device__’ does not name a type
+ __device__
+ ^
+src/core/04_Raytracing/a_animable/geometry/Sphere.h:38:1: error: ‘__device__’ does not name a type
+ __device__
+ ^
+src/core/04_Raytracing/a_animable/geometry/Sphere.h:43:1: error: ‘__device__’ does not name a type
+ __device__
+ ^
+src/core/04_Raytracing/a_animable/geometry/Sphere.h:48:1: error: ‘__device__’ does not name a type
+ __device__
+ ^
+src/core/04_Raytracing/a_animable/geometry/Sphere.h:53:1: error: ‘__device__’ does not name a type
+ __device__
+ ^
+src/core/04_Raytracing/a_animable/geometry/Sphere.h:58:1: error: ‘__device__’ does not name a type
+ __device__
+ ^
+src/core/04_Raytracing/a_animable/geometry/Sphere.h:63:1: error: ‘__device__’ does not name a type
+ __device__
+ ^
+src/core/04_Raytracing/a_animable/Raytracing.cpp: In constructor ‘Raytracing::Raytracing(uint, uint, uint, const cpu::DomaineMath&)’:
+src/core/04_Raytracing/a_animable/Raytracing.cpp:46:5: error: ‘ShereCreator’ was not declared in this scope
+     ShereCreator shereCreator(nbSphere, w, h); // sur la pile
+     ^
+src/core/04_Raytracing/a_animable/Raytracing.cpp:46:18: error: expected ‘;’ before ‘shereCreator’
+     ShereCreator shereCreator(nbSphere, w, h); // sur la pile
+                  ^
+src/core/04_Raytracing/a_animable/Raytracing.cpp:47:26: error: ‘shereCreator’ was not declared in this scope
+     this->ptrTabSphere = shereCreator.getTab();
+                          ^
+src/core/04_Raytracing/a_animable/Raytracing.cpp: At global scope:
+src/core/04_Raytracing/a_animable/Raytracing.cpp:55:1: error: ‘cout’ does not name a type
+ cout << "\n[Raytracing] : OMP : nbThread = " << this->nbThread << endl;// protected dans super classe Animable
+ ^
+src/core/04_Raytracing/a_animable/Raytracing.cpp:56:1: error: expected declaration before ‘}’ token
+ }
+ ^
 make[1]: *** [/tmp/ramdrive/arc22/Targets/Student_OMP_Image/obj/Raytracing.o] Error 1
 make[1]: *** Waiting for unfinished jobs....
+In file included from src/core/04_Raytracing/b_provider/../a_animable/Raytracing.h:7:0,
+                 from src/core/04_Raytracing/b_provider/RaytracingProvider.cpp:8:
+src/core/04_Raytracing/b_provider/../a_animable/math/RaytracingMath.h:27:25: error: ‘Sphere’ has not been declared
+  RaytracingMath(uint t, Sphere* ptrTabSphere) :
+                         ^
+src/core/04_Raytracing/b_provider/../a_animable/math/RaytracingMath.h:98:2: error: ‘Sphere’ does not name a type
+  Sphere* ptrTabSphere;
+  ^
+src/core/04_Raytracing/b_provider/../a_animable/math/RaytracingMath.h: In constructor ‘RaytracingMath::RaytracingMath(uint, int*)’:
+src/core/04_Raytracing/b_provider/../a_animable/math/RaytracingMath.h:31:12: error: ‘class RaytracingMath’ has no member named ‘ptrTabSphere’
+      this->ptrTabSphere=ptrTabSphere;
+            ^
+src/core/04_Raytracing/b_provider/../a_animable/math/RaytracingMath.h: In member function ‘float RaytracingMath::f(cpu::float2)’:
+src/core/04_Raytracing/b_provider/../a_animable/math/RaytracingMath.h:78:3: error: ‘hCarre’ was not declared in this scope
+   hCarre = ptrTabSphere->hCarre(xySol);
+   ^
+src/core/04_Raytracing/b_provider/../a_animable/math/RaytracingMath.h:78:12: error: ‘ptrTabSphere’ was not declared in this scope
+   hCarre = ptrTabSphere->hCarre(xySol);
+            ^
+src/core/04_Raytracing/b_provider/../a_animable/math/RaytracingMath.h:82:7: error: ‘distnace’ was not declared in this scope
+       distnace=ptrTabSphere->distance(dz);
+       ^
+In file included from src/core/04_Raytracing/b_provider/../a_animable/Raytracing.h:8:0,
+                 from src/core/04_Raytracing/b_provider/RaytracingProvider.cpp:8:
+src/core/04_Raytracing/b_provider/../a_animable/geometry/Sphere.h: At global scope:
+src/core/04_Raytracing/b_provider/../a_animable/geometry/Sphere.h:13:1: error: ‘__host__’ does not name a type
+ __host__
+ ^
+src/core/04_Raytracing/b_provider/../a_animable/geometry/Sphere.h:26:1: error: ‘__host__’ does not name a type
+ __host__
+ ^
+src/core/04_Raytracing/b_provider/../a_animable/geometry/Sphere.h:31:1: error: ‘__device__’ does not name a type
+ __device__
+ ^
+src/core/04_Raytracing/b_provider/../a_animable/geometry/Sphere.h:38:1: error: ‘__device__’ does not name a type
+ __device__
+ ^
+src/core/04_Raytracing/b_provider/../a_animable/geometry/Sphere.h:43:1: error: ‘__device__’ does not name a type
+ __device__
+ ^
+src/core/04_Raytracing/b_provider/../a_animable/geometry/Sphere.h:48:1: error: ‘__device__’ does not name a type
+ __device__
+ ^
+src/core/04_Raytracing/b_provider/../a_animable/geometry/Sphere.h:53:1: error: ‘__device__’ does not name a type
+ __device__
+ ^
+src/core/04_Raytracing/b_provider/../a_animable/geometry/Sphere.h:58:1: error: ‘__device__’ does not name a type
+ __device__
+ ^
+src/core/04_Raytracing/b_provider/../a_animable/geometry/Sphere.h:63:1: error: ‘__device__’ does not name a type
+ __device__
+ ^
+src/core/04_Raytracing/b_provider/RaytracingProvider.cpp: In member function ‘virtual cpu::Animable_I<cpu::uchar4>* RaytracingProvider::createAnimable()’:
+src/core/04_Raytracing/b_provider/RaytracingProvider.cpp:34:35: error: ‘nbShpere’ was not declared in this scope
+     return new Raytracing(dw, dh, nbShpere, domaineMath);
+                                   ^
 make[1]: *** [/tmp/ramdrive/arc22/Targets/Student_OMP_Image/obj/RaytracingProvider.o] Error 1
 make: *** [jall] Error 2
 
-09:08:29 Build Finished (took 823ms)
+16:38:02 Build Finished (took 777ms)
 

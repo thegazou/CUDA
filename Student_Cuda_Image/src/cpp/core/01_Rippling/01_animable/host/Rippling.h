@@ -22,7 +22,7 @@ class Rippling: public Animable_I<uchar4>
 
     public:
 
-	Rippling(const Grid& grid, uint w, uint h, float dt = 2 * PI / 1000);
+	Rippling(const Grid& grid, uint w, uint h, float dt);
 	virtual ~Rippling(void);
 
 	/*--------------------------------------*\

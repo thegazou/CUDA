@@ -4,6 +4,7 @@
 #include "Barivox.h"
 
 #include "RipplingProvider.h"
+#include "MandelbrotProvider.h"
 
 #include "Settings_GPU.h"
 using namespace gpu;
@@ -31,6 +32,7 @@ int mainBarivox(Settings& settings);
  \*-------------------------------------*/
 
 static void rippling();
+static void mandelbrot();
 
 // Tools
 template<typename T>
@@ -65,6 +67,13 @@ void rippling()
     {
     RipplingProvider provider;
     barivox<uchar4>(&provider, "Rippling_RGBA_uchar4");
+    }
+
+
+void mandelbrot()
+    {
+    MandelbrotProvider provider;
+        barivox<uchar4>(&provider, "Mandelbrot_RGBA_uchar4");
     }
 
 /*-----------------------------------*\

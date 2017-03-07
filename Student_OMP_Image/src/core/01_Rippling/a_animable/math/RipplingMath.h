@@ -24,7 +24,7 @@ class RipplingMath
 
 	RipplingMath(uint w)
 	    {
-	    this->dim2 = w / 2;
+	    this->dim2 = w / 2.f;
 	    }
 
 	// constructeur copie: pas besoin car pas attribut ptr
@@ -59,7 +59,7 @@ class RipplingMath
 	    {
 	    float d;
 	    dij(i,j,&d);
-	    *ptrlevelGris = 128.f + 127.f * cosf((d / 10.f) - t / 7.f) / ((d / 10.f) + 1);
+	    *ptrlevelGris = 128.f + 127.f * cosf((d / 10.f) - t / 7.f) / ((d / 10.f) + 1.f);
 
 	    }
 
