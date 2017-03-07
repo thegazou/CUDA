@@ -1,0 +1,1 @@
+/home/arc22/CUDA/toStudent/code/WCuda/Student_OMP_Image/src/core/02_Mandelbrot/b_Provider/MandelbrotProvider.h
