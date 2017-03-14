@@ -1,4 +1,4 @@
-18:10:26 **** Incremental Build of configuration CudaGCC for project Student_Cuda_Image ****
+17:14:55 **** Incremental Build of configuration CudaGCC for project Student_Cuda_Image ****
 cbicc cuda all 
 
 --------------------------------------------------------
@@ -112,6 +112,7 @@ Cuda compilation tools, release 8.0, V8.0.44
 [CBI] -> NVCCFLAGS (Partial) :
 [CBI] ->
 [CBI] ->              : --fmad=true
+[CBI] ->              : --ptxas-options=-v
 [CBI] ->              : -arch=sm_52
 [CBI] ->              : -m64
 [CBI] ->              : -std=c++11
@@ -128,7 +129,6 @@ Cuda compilation tools, release 8.0, V8.0.44
 [CBI] ->              : src/cpp/core/02_Mandelbrot_Julia/moo/device/math/
 [CBI] ->              : src/cpp/core/02_Mandelbrot_Julia/moo/host/
 [CBI] ->              : src/cpp/core/02_Mandelbrot_Julia/provider/
-[CBI] ->              : src/cpp/core/03_RayTracing/moo/device/geometry/
 [CBI] ->              : src/cpp/core/03_RayTracing/moo/device/math/
 [CBI] ->              : src/cpp/core/03_RayTracing/moo/host/
 [CBI] ->              : src/cpp/core/03_RayTracing/provider/
@@ -372,14 +372,21 @@ Cuda compilation tools, release 8.0, V8.0.44
 [CBI] ->              : opencv_videoio_gcc484
 [CBI] ->              : opencv_videostab_gcc484
 
+[CBI] -> Create folder : /tmp/ramdrive/arc22/Targets/Student_Cuda_Image/bin
+[CBI] -> Create folder : /tmp/ramdrive/arc22/Targets/Student_Cuda_Image/obj
+[CBI] -> Create folder : /tmp/ramdrive/arc22/Targets/Student_Cuda_Image/cubin
 
+[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/main.cpp
+[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/mainAnimable.cpp
+[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/mainBarivox.cpp
 [Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/mainBruteForce.cpp
+[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/mainImage.cpp
 [Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/03_RayTracing/provider/RaytracingProvider.cpp
-src/cpp/core/03_RayTracing/provider/RaytracingProvider.cpp:8:38: fatal error: ../a_animable/Raytracing.h: No such file or directory
- #include "../a_animable/Raytracing.h"
-                                      ^
+src/cpp/core/03_RayTracing/provider/RaytracingProvider.cpp:1:27: fatal error: VagueProvider.h: No such file or directory
+ #include "VagueProvider.h"
+                           ^
 compilation terminated.
 make: *** [/tmp/ramdrive/arc22/Targets/Student_Cuda_Image/obj/RaytracingProvider.o] Error 1
 
-18:10:28 Build Finished (took 2s.235ms)
+17:15:00 Build Finished (took 4s.574ms)
 
