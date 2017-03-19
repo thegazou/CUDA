@@ -1,0 +1,108 @@
+#pragma once
+
+#include <math.h>
+#include "MathTools.h"
+#include "../geometry/Sphere.h"
+
+#include "Calibreur_GPU.h"
+#include "ColorTools_GPU.h"
+using namespace gpu;
+
+/*----------------------------------------------------------------------*\
+ |*			Declaration 					*|
+ \*---------------------------------------------------------------------*/
+
+/*--------------------------------------*\
+ |*		Public			*|
+ \*-------------------------------------*/
+
+class RaytracingMath
+    {
+
+	/*--------------------------------------*\
+	|*		Constructor		*|
+	 \*-------------------------------------*/
+
+    public:
+
+	RaytracingMath(uint t, Sphere* ptrTabSphere) :
+		calibreur(Interval<float>(0.f, t), Interval<float>(0.f, 1.f))
+	    {
+	    this->t = t;
+	    this->ptrTabSphere=ptrTabSphere;
+	    }
+
+
+	virtual ~RaytracingMath()
+	    {
+	    // rien
+	    }
+
+	/*--------------------------------------*\
+	|*		Methodes		*|
+	 \*-------------------------------------*/
+
+    public:
+
+	void colorXY(uchar4* ptrColor, float x, float y, int t)
+	    {
+	    //calibreur.calibrer(dz);
+	     float3 hsb;
+	     hsb.x=0.5; //jaune
+	     hsb.y=1.f;
+	     hsb.z=1.f;
+
+	    ColorTools::HSB_TO_RVB(hsb, ptrColor); // update color
+
+	    ptrColor->w = 255; // opaque
+	    }
+
+    private:
+
+	//Calcule la distance au centre de la sphère
+	float dz(float r, float h)
+	    {
+
+	    return sqrtf(r*r - h*h);
+	    }
+
+	//Calcule le point de la shère le plus proche du sol
+	float f(float2 xySol)
+	    {
+	    float hCarre;
+	    float dz;
+	    float distance;
+	    float brightness;
+
+	    for(int i =0; i<1;i++)
+		{
+		hCarre = ptrTabSphere->hCarre(xySol);
+		if(ptrTabSphere->isEnDessous(hCarre))
+		    {
+		    dz=ptrTabSphere->dz(hCarre);
+		    distance=ptrTabSphere->distance(dz);
+		    brightness=ptrTabSphere->brightness(dz);
+		    return brightness;
+		    }
+		}
+	    return -1;
+	    }
+
+	/*--------------------------------------*\
+	|*		Attributs		*|
+	 \*-------------------------------------*/
+
+    private:
+
+	// Input
+	uint t;
+	Sphere* ptrTabSphere;
+
+	// Tools
+	Calibreur<float> calibreur;
+
+    };
+
+/*----------------------------------------------------------------------*\
+ |*			End	 					*|
+ \*---------------------------------------------------------------------*/

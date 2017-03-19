@@ -1,0 +1,29 @@
+#pragma once
+#include "Sphere.h"
+class SphereCreator
+    {
+	/*--------------------------------------*\
+|* Constructor *|
+	 \*-------------------------------------*/
+    public:
+	SphereCreator(uint nbSpheres, uint w, uint h, uint bord = 200);
+	virtual ~SphereCreator(void);
+	/*--------------------------------------*\
+|* Methodes *|
+	 \*-------------------------------------*/
+    public:
+	Sphere* getTabSphere();
+    private:
+	void createSphere(void);
+	/*--------------------------------------*\
+|* Attributs *|
+	 \*-------------------------------------*/
+    private:
+// Inputs
+	uint nbSpheres;
+	uint w;
+	uint h;
+	uint bord;
+// Tools
+	Sphere* tabSphere;
+    };
