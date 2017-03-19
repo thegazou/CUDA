@@ -35,7 +35,6 @@ class Rippling: public Animable_I<uchar4>
 	|*   Override Animable_I   *|
 	 \*------------------------*/
 
-
 	/**
 	 * Call periodicly by the api
 	 * Image non zoomable : domaineMath pas use ici
@@ -61,7 +60,6 @@ class Rippling: public Animable_I<uchar4>
 
 	// Inputs
 	double dt;
-
     };
 
 /*----------------------------------------------------------------------*\

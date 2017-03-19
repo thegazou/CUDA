@@ -1,1 +1,1 @@
-/home/arc22/CUDA/toStudent/code/WCuda/Student_OMP_Image/src/core/04_Raytracing/a_animable/geometry/SphereCreator.h
+/home/arc22/CUDA/toStudent/code/WCuda/Student_OMP_Image/src/core/04_Raytracing/a_animable/SphereCreator.h

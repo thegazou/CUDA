@@ -51,8 +51,8 @@ int mainAnimable(Settings& settings)
     {
     cout << "\n[Animable] mode" << endl;
 
-    //rippling();
-    mandelbrot();
+    rippling();
+    //mandelbrot();
     //raytracing();
 
     cout << "\n[Animable] end" << endl;

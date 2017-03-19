@@ -7,6 +7,7 @@
 
 #include "RipplingProvider.h"
 #include "MandelbrotProvider.h"
+#include "RaytracingProvider.h"
 
 #include "Animateur_GPU.h"
 #include "Settings_GPU.h"
@@ -35,6 +36,8 @@ int mainBrutForce(Settings& settings);
 
 static void rippling();
 static void mandelbrot();
+static void raytracing();
+
 // tools
 template<typename T>
 static void bruteForce(Provider_I<T>* ptrProvider, string titre);
@@ -52,6 +55,8 @@ int mainBrutForce(Settings& settings)
     cout << "\n[BruteForce] mode" << endl;
 
     rippling();
+    //mandelbrot();
+    //raytracing();
 
     cout << "\n[BruteForce] end" << endl;
 
@@ -72,6 +77,12 @@ void mandelbrot()
     {
     MandelbrotProvider provider;
     bruteForce<uchar4>(&provider, "Mandelbrot_RGBA_uchar4");
+    }
+
+void raytracing()
+    {
+    RaytracingProvider provider;
+    bruteForce<uchar4>(&provider, "Raytracing_RGBA_uchar4");
     }
 
 /*--------------------------------------*\

@@ -42,20 +42,20 @@ __global__ void rippling(uchar4* ptrDevPixels, uint w, uint h, float t)
     {
     RipplingMath ripplingMath = RipplingMath(w);
 
-    // TODO pattern entrelacement
     int i, j;
     const int WH = w * h;
     const int NB_THREAD = Indice2D::nbThread();
     const int TID = Indice2D::tid();
     int s = TID;
+
     while (s < WH)
 	{
 	IndiceTools::toIJ(s, w, &i, &j);
-	ripplingMath.colorIJ(&ptrDevPixels[s], i, j, t);
+
+	ripplingMath.colorIJ(&ptrDevPixels[s], (float) i, (float) j, t);
 
 	s += NB_THREAD;
 	}
-
     }
 
 /*--------------------------------------*\

@@ -29,10 +29,7 @@ class RipplingProvider: public Provider_I<uchar4>
 	Animable_I<uchar4>* createAnimable(void);
 
 	Image_I* createImageGL(void);
-
     };
-
-
 
 /*----------------------------------------------------------------------*\
  |*			End	 					*|

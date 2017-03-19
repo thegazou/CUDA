@@ -5,8 +5,6 @@
 
 #include "RipplingProvider.h"
 
-
-
 /*----------------------------------------------------------------------*\
  |*			Declaration 					*|
  \*---------------------------------------------------------------------*/
@@ -44,9 +42,6 @@ Animable_I<uchar4>* RipplingProvider::createAnimable()
     int dh = 16 * 60;
 
     // Grid Cuda
-    int mp = Device::getMPCount();
-    int coreMP = Device::getCoreCountMP();
-
     dim3 dg = dim3(20, 1, 1);  		// disons, a optimiser selon le gpu, peut drastiqument ameliorer ou baisser les performances
     dim3 db = dim3(1024, 1, 1);   	// disons, a optimiser selon le gpu, peut drastiqument ameliorer ou baisser les performances
     Grid grid(dg, db);
@@ -62,8 +57,6 @@ Image_I* RipplingProvider::createImageGL(void)
     ColorRGB_01 colorTexte(0, 1, 0); // Green
     return new ImageAnimable_RGBA_uchar4(createAnimable(), colorTexte);
     }
-
-
 
 /*--------------------------------------*\
  |*		Private			*|

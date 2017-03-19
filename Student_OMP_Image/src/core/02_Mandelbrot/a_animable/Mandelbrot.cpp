@@ -17,7 +17,7 @@ using std::endl;
  \*-------------------------------------*/
 
 Mandelbrot::Mandelbrot(uint w, uint h, int tMin, int tMax, const DomaineMath& domaineMath) :
-	Animable_I<uchar4>(w, h, "Mandelbrot_OMP_rgba_uchar4",domaineMath), variateurAnimation(Interval<float>(tMin, tMax), 1)
+	Animable_I<uchar4>(w, h, "Mandelbrot_OMP_rgba_uchar4", domaineMath), variateurAnimation(Interval<float>(tMin, tMax), 1)
     {
     // Input
 
@@ -53,23 +53,22 @@ void Mandelbrot::animationStep()
 void Mandelbrot::processForAutoOMP(uchar4* ptrTabPixels, uint w, uint h, const DomaineMath& domaineMath)
     {
     MandelbrotMath mandelbrotMath(t);
+    int s;
 
 #pragma omp parallel for
     for (int j = 0; j < h; j++)
 	{
 	for (int i = 0; i < w; i++)
 	    {
-	    int s = IndiceTools::toS(w, i, j);   //1D to 2D
-
-	    workPixel(&ptrTabPixels[s],i,j,domaineMath,&mandelbrotMath);
+	    s = IndiceTools::toS(w, i, j);   //1D to 2D
+	    workPixel(&ptrTabPixels[s], i, j, domaineMath, &mandelbrotMath);
 	    }
 	}
     }
 
 void Mandelbrot::processEntrelacementOMP(uchar4* ptrTabPixels, uint w, uint h, const DomaineMath& domaineMath)
     {
-    MandelbrotMath mandelbrotMath(t);
-
+    MandelbrotMath mandelbrotMath((float) t);
     const int WH = w * h;
 
 #pragma omp parallel
@@ -77,15 +76,14 @@ void Mandelbrot::processEntrelacementOMP(uchar4* ptrTabPixels, uint w, uint h, c
 	const int NB_THREAD = OmpTools::getNbThread(); // dans region parallel
 	const int TID = OmpTools::getTid();
 
-	int i;
-	int j;
+	int i, j;
 
 	int s = TID;
 	while (s < WH)
 	    {
 	    IndiceTools::toIJ(s, w, &i, &j); // 1D -> 2D
 
-	    workPixel(&ptrTabPixels[s],i,j,domaineMath,&mandelbrotMath);
+	    workPixel(&ptrTabPixels[s], i, j, domaineMath, &mandelbrotMath);
 
 	    s += NB_THREAD;
 	    }
@@ -95,18 +93,14 @@ void Mandelbrot::processEntrelacementOMP(uchar4* ptrTabPixels, uint w, uint h, c
 /*--------------------------------------*\
  |*		Private			*|
  \*-------------------------------------*/
-/*
- * code commun a:
- * 	- entrelacementOMP
- * 	- forAutoOMP
- */
-void Mandelbrot::workPixel(uchar4* ptrColorIJ,int i, int j,const DomaineMath& domaineMath,MandelbrotMath* ptrMandelbrotMath)
+
+void Mandelbrot::workPixel(uchar4* ptrColorIJ, int i, int j, const DomaineMath& domaineMath, MandelbrotMath* ptrMandelbrotMath)
     {
     double x;
     double y;
     domaineMath.toXY(i, j, &x, &y); // écran -> math
 
-    ptrMandelbrotMath->colorXY(ptrColorIJ,x, y, t);
+    ptrMandelbrotMath->colorXY(ptrColorIJ, (float) x, (float) y, t);
     }
 
 /*----------------------------------------------------------------------*\

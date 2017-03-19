@@ -13,7 +13,6 @@ using namespace gpu;
  |*		Public			*|
  \*-------------------------------------*/
 
-
 class RipplingProvider: public Provider_I<uchar4>
     {
     public:
@@ -30,7 +29,6 @@ class RipplingProvider: public Provider_I<uchar4>
 	virtual Animable_I<uchar4>* createAnimable(void);
 
 	virtual Image_I* createImageGL(void);
-
     };
 
 /*----------------------------------------------------------------------*\

@@ -5,6 +5,7 @@
 
 #include "RipplingProvider.h"
 #include "MandelbrotProvider.h"
+#include "RaytracingProvider.h"
 
 #include "Settings_GPU.h"
 using namespace gpu;
@@ -33,6 +34,7 @@ int mainBarivox(Settings& settings);
 
 static void rippling();
 static void mandelbrot();
+static void raytracing();
 
 // Tools
 template<typename T>
@@ -53,6 +55,8 @@ int mainBarivox(Settings& settings)
     // Attention : Un a la fois seulement!
 
     rippling();
+    //mandelbrot();
+    //raytracing();
 
     cout << "\n[Barivox] end" << endl;
 
@@ -69,11 +73,16 @@ void rippling()
     barivox<uchar4>(&provider, "Rippling_RGBA_uchar4");
     }
 
-
 void mandelbrot()
     {
     MandelbrotProvider provider;
-        barivox<uchar4>(&provider, "Mandelbrot_RGBA_uchar4");
+    barivox<uchar4>(&provider, "Mandelbrot_RGBA_uchar4");
+    }
+
+void raytracing()
+    {
+    RaytracingProvider provider;
+    barivox<uchar4>(&provider, "Raytracing_RGBA_uchar4");
     }
 
 /*-----------------------------------*\
@@ -94,7 +103,7 @@ void barivox(Provider_I<T>* ptrProvider, string titre)
     int nbThreadBlockMax = Device::getMaxThreadPerBlock();
     int warpSize = Device::getWarpSize();
 
-    dim3 dgStart(mp*2, 1, 1);
+    dim3 dgStart(mp * 2, 1, 1);
     VariateurData variateurDg(mp, 8 * mp, mp); 				// (min,max,step)  Attention : A definir intelligement selon le GPU !
     VariateurData variateurDb(coreMp, nbThreadBlockMax, warpSize); 	// (min,max,step)  Attention : A definir intelligement selon le GPU !
 
@@ -107,9 +116,9 @@ void barivox(Provider_I<T>* ptrProvider, string titre)
     const BarivoxOutput output = barivox.run();
 
     // Result
-    	{
-    	cout << output<<endl;
-    	}
+	{
+	cout << output << endl;
+	}
 
     // Save
 	{

@@ -1,22 +1,32 @@
-16:38:01 **** Incremental Build of configuration GCC_parallel for project Student_OMP_Image ****
-cbicc gcc jall 
+17:37:59 **** Incremental Build of configuration GCC_ARM_parallel for project Student_OMP_Image ****
+cbicc gcc arm jall 
 
 --------------------------------------------------------
-[Runtime] : gcc x86
+Cross Compilation 		       
+--------------------------------------------------------
+
+PLATFORME = jetson
+API       = /opt/arm/jetson
+
+--------------------------------------------------------
+[Runtime] : gcc arm
 --------------------------------------------------------
 
 
-[cuda]        : /usr/local
 
-[jni]         : /usr/lib/jvm/java-8-oracle
+[cuda]        : /opt/api/ext/cuda
+
+[jni]         : /opt/api/ext/jni/java-8-oracle
 
 [X11]         : /usr/include/X11
+[X11]         : 
 
 [MKL]         : /opt/intel/mkl
 
 [boost]       : /opt/api/ext/boost
 
 [opencv]      : /opt/api/ext/opencv
+[opencv]      : RPATH_LINK : /opt/api/ext/cuda/cuda-6.5/lib/gcc_arm:/opt/arm/L4T_1404_2421/usr_lib
 
 [cpptest]     : /opt/api/ext/cpptest
 
@@ -25,6 +35,7 @@ cbicc gcc jall
 [urg]         : /opt/api/ext/urg
 
 [wic]         : /opt/api/ext/wic 
+
 
 [pleora]      : /opt/api/ext/pleora
 
@@ -62,309 +73,11 @@ cbicc gcc jall
      BILAT_PIPES_HOME                 = /opt/api/cbi/capteur/bilat_pipes
 
 --------------------------------------------------------
-[Runtime] : gcc x86 : Ready!
+[Runtime] : gcc arm : Ready!
+/usr/local/bin/g++ARM: line 19: /usr/bin/arm-linux-gnueabihf-g++-4.8: No such file or directory
 --------------------------------------------------------
 
 
-g++ (Ubuntu 4.8.4-2ubuntu1~14.04.3) 4.8.4
-Copyright (C) 2013 Free Software Foundation, Inc.
-This is free software; see the source for copying conditions.  There is NO
-warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-
-[Make] : GCC : jall
-
-==================================================================================
-[CBI] -> Target Name  : Student_OMP_Image_gcc_x86_64
-[CBI] ->
-[CBI] -> Build     	  : /tmp/ramdrive/arc22/Targets/Student_OMP_Image/bin/Student_OMP_Image_gcc_x86_64.run
-[CBI] -> Deploy       : ../RELEASE/bin
-[CBI] ->
-[CBI] -> Type	 	  : EXE
-[CBI] -> Arch	 	  : x86_64
-[CBI] -> OS	 		  : Linux
-[CBI] -> User	 	  : arc22
-[CBI] ->
-[CBI] -> Task		  : Compiling-Linking
-==================================================================================
-
-[CBI] -> SRC AUX (Recursif) :
-[CBI] ->
-
-[CBI] -> CXXFLAGS (Partial) :
-[CBI] ->
-[CBI] ->              : -O3
-[CBI] ->              : -fomit-frame-pointer
-[CBI] ->              : -fopenmp
-[CBI] ->              : -frerun-loop-opt
-[CBI] ->              : -march=native
-[CBI] ->              : -std=c++11
-
-[CBI] -> LDFLAGS (Partial) :
-[CBI] ->
-
-[CBI] -> INC_PATH (auto detect):
-[CBI] ->              : src/core/01_Rippling/a_animable/
-[CBI] ->              : src/core/01_Rippling/a_animable/math/
-[CBI] ->              : src/core/01_Rippling/b_provider/
-[CBI] ->              : src/core/02_Mandelbrot/a_animable/
-[CBI] ->              : src/core/02_Mandelbrot/a_animable/math/
-[CBI] ->              : src/core/02_Mandelbrot/b_Provider/
-[CBI] ->              : src/core/04_Raytracing/a_animable/
-[CBI] ->              : src/core/04_Raytracing/a_animable/geometry/
-[CBI] ->              : src/core/04_Raytracing/a_animable/math/
-[CBI] ->              : src/core/04_Raytracing/b_provider/
-
-[CBI] -> LIB_PATH (auto detect):
-
-[CBI] -> API_INC :
-[CBI] ->              : /opt/api/cbi/infographie/fenetrage/301/Bilat_Fenetrage_Displayable/INC
-[CBI] ->              : /opt/api/cbi/infographie/fenetrage/301/Bilat_Fenetrage_Displayable/INC/primitives
-[CBI] ->              : /opt/api/cbi/infographie/fenetrage/301/Bilat_Fenetrage_Displayable_GL/INC
-[CBI] ->              : /opt/api/cbi/infographie/fenetrage/301/Bilat_Fenetrage_Displayable_GL/INC/primitives
-[CBI] ->              : /opt/api/cbi/infographie/fenetrage/301/Bilat_Fenetrage_FreeGlut_Tools/INC
-[CBI] ->              : /opt/api/cbi/infographie/image/301/Bilat_Image_FreeGlut/INC
-[CBI] ->              : /opt/api/cbi/infographie/image/301/Bilat_Image_FreeGlut/INC/common
-[CBI] ->              : /opt/api/cbi/infographie/image/301/Bilat_Image_FreeGlut/INC/cpu
-[CBI] ->              : /opt/api/cbi/infographie/image/301/Bilat_Image_GL/INC
-[CBI] ->              : /opt/api/cbi/infographie/image/301/Bilat_Image_GL/INC/common
-[CBI] ->              : /opt/api/cbi/infographie/image/301/Bilat_Image_GL/INC/cpu
-[CBI] ->              : /opt/api/cbi/infographie/opengl/301/Bilat_OpenGL_Tools/INC
-[CBI] ->              : /opt/api/cbi/infographie/tools/301/Bilat_tools_dll/INC
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_cpp/301_004/INC
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_cpp/301_004/INC/namespace_cpu
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_image/301_004/INC
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_image/301_004/INC/imp
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_image/301_004/INC/imp/api_animateur
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_image/301_004/INC/imp/api_image_link
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_image/301_004/INC/imp/api_viewer
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_image/301_004/INC/spec
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_image_cv/301_004/INC
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_omp/301_004/INC
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_omp/301_004/INC/OMP_Tools
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_omp/301_004/INC/OMP_Tools/header
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_opencv/301_004/INC
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_opencv/301_004/INC/capture
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_opencv/301_004/INC/capture/video
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_opencv/301_004/INC/capture/webcam
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_opencv/301_004/INC/show
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_opencv/301_004/INC/show/shapeOverlay
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_opencv/301_004/INC/show/shapeOverlay/appearance
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_opencv/301_004/INC/show/shapeOverlay/drawer
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_opencv/301_004/INC/show/shapeOverlay/shape
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_opencv/301_004/INC/show/view
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_opencv/301_004/INC/show/view/viewer
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_opencv/301_004/INC/show/view/viewerMat
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_opencv/301_004/INC/tools
-[CBI] ->              : /opt/api/ext/opencv/310/include
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv2
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv2/calib3d
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv2/core
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv2/core/cuda
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv2/core/cuda/detail
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv2/core/hal
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv2/features2d
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv2/flann
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv2/highgui
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv2/imgcodecs
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv2/imgproc
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv2/imgproc/detail
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv2/ml
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv2/objdetect
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv2/photo
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv2/shape
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv2/stitching
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv2/stitching/detail
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv2/superres
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv2/video
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv2/videoio
-[CBI] ->              : /opt/api/ext/opencv/310/include/opencv2/videostab
-
-[CBI] -> API_BIN :
-[CBI] ->              : /opt/api/cbi/infographie/fenetrage/301/Bilat_Fenetrage_Displayable/BIN/gcc
-[CBI] ->              : /opt/api/cbi/infographie/fenetrage/301/Bilat_Fenetrage_Displayable_GL/BIN/gcc
-[CBI] ->              : /opt/api/cbi/infographie/fenetrage/301/Bilat_Fenetrage_FreeGlut_Tools/BIN/gcc
-[CBI] ->              : /opt/api/cbi/infographie/image/301/Bilat_Image_FreeGlut/BIN/gcc
-[CBI] ->              : /opt/api/cbi/infographie/image/301/Bilat_Image_GL/BIN/gcc
-[CBI] ->              : /opt/api/cbi/infographie/opengl/301/Bilat_OpenGL_Tools/BIN/gcc
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_cpp/301_004/BIN/gcc
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_image/301_004/BIN/gcc
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_image_cv/301_004/BIN/gcc
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_omp/301_004/BIN/gcc
-[CBI] ->              : /opt/api/cbi/tools/bilat_tools_opencv/301_004/BIN/gcc
-[CBI] ->              : /opt/api/ext/opencv/310/lib
-[CBI] ->              : /opt/api/ext/opencv/310/lib/pkgconfig
-
-[CBI] -> API_LIBRARIES_STATIC :
-
-[CBI] -> API_LIBRARIES :
-[CBI] ->              : BilatTools_CPP_301_004_gcc_x86_64
-[CBI] ->              : BilatTools_Image_301_004_gcc_x86_64
-[CBI] ->              : BilatTools_Image_OpenCV_301_004_gcc_x86_64
-[CBI] ->              : BilatTools_OMP_301_004_gcc_x86_64
-[CBI] ->              : BilatTools_OpenCV_301_004_gcc_x86_64
-[CBI] ->              : Bilat_Fenetrage_Displayable_301_gcc_x86_64
-[CBI] ->              : Bilat_Fenetrage_Displayable_GL_301_gcc_x86_64
-[CBI] ->              : Bilat_Fenetrage_FreeGlut_Tools_301_gcc_x86_64
-[CBI] ->              : Bilat_Image_FreeGlut_301_gcc_x86_64
-[CBI] ->              : Bilat_Image_GL_301_gcc_x86_64
-[CBI] ->              : Bilat_OpenGL_Tools_301_gcc_x86_64
-[CBI] ->              : GL
-[CBI] ->              : GLEW
-[CBI] ->              : GLU
-[CBI] ->              : glut
-[CBI] ->              : opencv_calib3d_gcc484
-[CBI] ->              : opencv_core_gcc484
-[CBI] ->              : opencv_features2d_gcc484
-[CBI] ->              : opencv_flann_gcc484
-[CBI] ->              : opencv_highgui_gcc484
-[CBI] ->              : opencv_imgcodecs_gcc484
-[CBI] ->              : opencv_imgproc_gcc484
-[CBI] ->              : opencv_ml_gcc484
-[CBI] ->              : opencv_objdetect_gcc484
-[CBI] ->              : opencv_photo_gcc484
-[CBI] ->              : opencv_shape_gcc484
-[CBI] ->              : opencv_stitching_gcc484
-[CBI] ->              : opencv_superres_gcc484
-[CBI] ->              : opencv_video_gcc484
-[CBI] ->              : opencv_videoio_gcc484
-[CBI] ->              : opencv_videostab_gcc484
-
-
-[CBI] -> Compilation parallel (32 threads)
-
-[Student_OMP_Image_gcc_x86_64] -> g++ compiling .cpp : src/core/04_Raytracing/a_animable/Raytracing.cpp
-[Student_OMP_Image_gcc_x86_64] -> g++ compiling .cpp : src/core/04_Raytracing/b_provider/RaytracingProvider.cpp
-In file included from src/core/04_Raytracing/a_animable/Raytracing.h:7:0,
-                 from src/core/04_Raytracing/a_animable/Raytracing.cpp:1:
-src/core/04_Raytracing/a_animable/math/RaytracingMath.h:27:25: error: ‘Sphere’ has not been declared
-  RaytracingMath(uint t, Sphere* ptrTabSphere) :
-                         ^
-src/core/04_Raytracing/a_animable/math/RaytracingMath.h:98:2: error: ‘Sphere’ does not name a type
-  Sphere* ptrTabSphere;
-  ^
-src/core/04_Raytracing/a_animable/math/RaytracingMath.h: In constructor ‘RaytracingMath::RaytracingMath(uint, int*)’:
-src/core/04_Raytracing/a_animable/math/RaytracingMath.h:31:12: error: ‘class RaytracingMath’ has no member named ‘ptrTabSphere’
-      this->ptrTabSphere=ptrTabSphere;
-            ^
-src/core/04_Raytracing/a_animable/math/RaytracingMath.h: In member function ‘float RaytracingMath::f(cpu::float2)’:
-src/core/04_Raytracing/a_animable/math/RaytracingMath.h:78:3: error: ‘hCarre’ was not declared in this scope
-   hCarre = ptrTabSphere->hCarre(xySol);
-   ^
-src/core/04_Raytracing/a_animable/math/RaytracingMath.h:78:12: error: ‘ptrTabSphere’ was not declared in this scope
-   hCarre = ptrTabSphere->hCarre(xySol);
-            ^
-src/core/04_Raytracing/a_animable/math/RaytracingMath.h:82:7: error: ‘distnace’ was not declared in this scope
-       distnace=ptrTabSphere->distance(dz);
-       ^
-In file included from src/core/04_Raytracing/a_animable/Raytracing.h:8:0,
-                 from src/core/04_Raytracing/a_animable/Raytracing.cpp:1:
-src/core/04_Raytracing/a_animable/geometry/Sphere.h: At global scope:
-src/core/04_Raytracing/a_animable/geometry/Sphere.h:13:1: error: ‘__host__’ does not name a type
- __host__
- ^
-src/core/04_Raytracing/a_animable/geometry/Sphere.h:26:1: error: ‘__host__’ does not name a type
- __host__
- ^
-src/core/04_Raytracing/a_animable/geometry/Sphere.h:31:1: error: ‘__device__’ does not name a type
- __device__
- ^
-src/core/04_Raytracing/a_animable/geometry/Sphere.h:38:1: error: ‘__device__’ does not name a type
- __device__
- ^
-src/core/04_Raytracing/a_animable/geometry/Sphere.h:43:1: error: ‘__device__’ does not name a type
- __device__
- ^
-src/core/04_Raytracing/a_animable/geometry/Sphere.h:48:1: error: ‘__device__’ does not name a type
- __device__
- ^
-src/core/04_Raytracing/a_animable/geometry/Sphere.h:53:1: error: ‘__device__’ does not name a type
- __device__
- ^
-src/core/04_Raytracing/a_animable/geometry/Sphere.h:58:1: error: ‘__device__’ does not name a type
- __device__
- ^
-src/core/04_Raytracing/a_animable/geometry/Sphere.h:63:1: error: ‘__device__’ does not name a type
- __device__
- ^
-src/core/04_Raytracing/a_animable/Raytracing.cpp: In constructor ‘Raytracing::Raytracing(uint, uint, uint, const cpu::DomaineMath&)’:
-src/core/04_Raytracing/a_animable/Raytracing.cpp:46:5: error: ‘ShereCreator’ was not declared in this scope
-     ShereCreator shereCreator(nbSphere, w, h); // sur la pile
-     ^
-src/core/04_Raytracing/a_animable/Raytracing.cpp:46:18: error: expected ‘;’ before ‘shereCreator’
-     ShereCreator shereCreator(nbSphere, w, h); // sur la pile
-                  ^
-src/core/04_Raytracing/a_animable/Raytracing.cpp:47:26: error: ‘shereCreator’ was not declared in this scope
-     this->ptrTabSphere = shereCreator.getTab();
-                          ^
-src/core/04_Raytracing/a_animable/Raytracing.cpp: At global scope:
-src/core/04_Raytracing/a_animable/Raytracing.cpp:55:1: error: ‘cout’ does not name a type
- cout << "\n[Raytracing] : OMP : nbThread = " << this->nbThread << endl;// protected dans super classe Animable
- ^
-src/core/04_Raytracing/a_animable/Raytracing.cpp:56:1: error: expected declaration before ‘}’ token
- }
- ^
-make[1]: *** [/tmp/ramdrive/arc22/Targets/Student_OMP_Image/obj/Raytracing.o] Error 1
-make[1]: *** Waiting for unfinished jobs....
-In file included from src/core/04_Raytracing/b_provider/../a_animable/Raytracing.h:7:0,
-                 from src/core/04_Raytracing/b_provider/RaytracingProvider.cpp:8:
-src/core/04_Raytracing/b_provider/../a_animable/math/RaytracingMath.h:27:25: error: ‘Sphere’ has not been declared
-  RaytracingMath(uint t, Sphere* ptrTabSphere) :
-                         ^
-src/core/04_Raytracing/b_provider/../a_animable/math/RaytracingMath.h:98:2: error: ‘Sphere’ does not name a type
-  Sphere* ptrTabSphere;
-  ^
-src/core/04_Raytracing/b_provider/../a_animable/math/RaytracingMath.h: In constructor ‘RaytracingMath::RaytracingMath(uint, int*)’:
-src/core/04_Raytracing/b_provider/../a_animable/math/RaytracingMath.h:31:12: error: ‘class RaytracingMath’ has no member named ‘ptrTabSphere’
-      this->ptrTabSphere=ptrTabSphere;
-            ^
-src/core/04_Raytracing/b_provider/../a_animable/math/RaytracingMath.h: In member function ‘float RaytracingMath::f(cpu::float2)’:
-src/core/04_Raytracing/b_provider/../a_animable/math/RaytracingMath.h:78:3: error: ‘hCarre’ was not declared in this scope
-   hCarre = ptrTabSphere->hCarre(xySol);
-   ^
-src/core/04_Raytracing/b_provider/../a_animable/math/RaytracingMath.h:78:12: error: ‘ptrTabSphere’ was not declared in this scope
-   hCarre = ptrTabSphere->hCarre(xySol);
-            ^
-src/core/04_Raytracing/b_provider/../a_animable/math/RaytracingMath.h:82:7: error: ‘distnace’ was not declared in this scope
-       distnace=ptrTabSphere->distance(dz);
-       ^
-In file included from src/core/04_Raytracing/b_provider/../a_animable/Raytracing.h:8:0,
-                 from src/core/04_Raytracing/b_provider/RaytracingProvider.cpp:8:
-src/core/04_Raytracing/b_provider/../a_animable/geometry/Sphere.h: At global scope:
-src/core/04_Raytracing/b_provider/../a_animable/geometry/Sphere.h:13:1: error: ‘__host__’ does not name a type
- __host__
- ^
-src/core/04_Raytracing/b_provider/../a_animable/geometry/Sphere.h:26:1: error: ‘__host__’ does not name a type
- __host__
- ^
-src/core/04_Raytracing/b_provider/../a_animable/geometry/Sphere.h:31:1: error: ‘__device__’ does not name a type
- __device__
- ^
-src/core/04_Raytracing/b_provider/../a_animable/geometry/Sphere.h:38:1: error: ‘__device__’ does not name a type
- __device__
- ^
-src/core/04_Raytracing/b_provider/../a_animable/geometry/Sphere.h:43:1: error: ‘__device__’ does not name a type
- __device__
- ^
-src/core/04_Raytracing/b_provider/../a_animable/geometry/Sphere.h:48:1: error: ‘__device__’ does not name a type
- __device__
- ^
-src/core/04_Raytracing/b_provider/../a_animable/geometry/Sphere.h:53:1: error: ‘__device__’ does not name a type
- __device__
- ^
-src/core/04_Raytracing/b_provider/../a_animable/geometry/Sphere.h:58:1: error: ‘__device__’ does not name a type
- __device__
- ^
-src/core/04_Raytracing/b_provider/../a_animable/geometry/Sphere.h:63:1: error: ‘__device__’ does not name a type
- __device__
- ^
-src/core/04_Raytracing/b_provider/RaytracingProvider.cpp: In member function ‘virtual cpu::Animable_I<cpu::uchar4>* RaytracingProvider::createAnimable()’:
-src/core/04_Raytracing/b_provider/RaytracingProvider.cpp:34:35: error: ‘nbShpere’ was not declared in this scope
-     return new Raytracing(dw, dh, nbShpere, domaineMath);
-                                   ^
-make[1]: *** [/tmp/ramdrive/arc22/Targets/Student_OMP_Image/obj/RaytracingProvider.o] Error 1
-make: *** [jall] Error 2
-
-16:38:02 Build Finished (took 777ms)
+17:37:59 Build Finished (took 76ms)
 

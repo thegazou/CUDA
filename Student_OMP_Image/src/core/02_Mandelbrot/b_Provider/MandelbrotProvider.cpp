@@ -5,7 +5,7 @@
 #include "ImageAnimable_CPU.h"
 #include "DomaineMath_CPU.h"
 
-#include "../a_animable/Mandelbrot.h"
+#include "Mandelbrot.h"
 using namespace cpu;
 
 /*--------------------------------------*\
@@ -24,12 +24,12 @@ Animable_I<uchar4>* MandelbrotProvider::createAnimable(void)
     DomaineMath domaineMath = DomaineMath(-2.1f, -1.3, 0.8f, 1.3f);
 
     // Animation;
-    int tMin = 30;
-    int tMax = 100;
+    uint tMin = 30;
+    uint tMax = 100;
 
     // Dimension
-    int dw = 16 * 60 * 2;
-    int dh = 16 * 60;
+    uint dw = 16 * 60 * 2;
+    uint dh = 16 * 60;
 
     return new Mandelbrot(dw, dh, tMin, tMax, domaineMath);
     }

@@ -4,7 +4,7 @@
 #include "Variateur_CPU.h"
 #include "Animable_I_CPU.h"
 
-#include "../a_animable/math/MandelbrotMath.h"
+#include "MandelbrotMath.h"
 using namespace cpu;
 
 /*--------------------------------------*\
@@ -51,14 +51,6 @@ class Mandelbrot: public Animable_I<uchar4>
 
     private:
 
-	/**
-	 * i in [0,h[
-	 * j in [0,w[
-	 *
-	 * code commun a:
-	 * 	- entrelacementOMP
-	 * 	- forAutoOMP
-	 */
 	void workPixel(uchar4* ptrColorIJ, int i, int j, const DomaineMath& domaineMath, MandelbrotMath* ptrMandelbrotMath);
 
 	/*--------------------------------------*\

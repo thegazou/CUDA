@@ -1,4 +1,4 @@
-15:18:38 **** Build of configuration CudaGCC_parallel for project Tuto_Image_Cuda ****
+14:30:15 **** Build of configuration CudaGCC_parallel for project Tuto_Image_Cuda ****
 cbicc cuda jall 
 
 --------------------------------------------------------
@@ -288,8 +288,8 @@ Cuda compilation tools, release 8.0, V8.0.44
 [Tuto_Image_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : src/core/03_advanced/02_overlay/01_image/ImageCustomOverlay.cpp
 [Tuto_Image_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : src/core/03_advanced/02_overlay/01_image/graphic2D/Drawer2D.cpp
 [Tuto_Image_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : src/core/03_advanced/01_event/03_provider/EventProvider.cpp
-[Tuto_Image_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : src/core/03_advanced/01_event/01_image/listener/key/SimpleKeyListener.cpp
 [Tuto_Image_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : src/core/03_advanced/01_event/01_image/ImageCustomEvent.cpp
+[Tuto_Image_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : src/core/03_advanced/01_event/01_image/listener/key/SimpleKeyListener.cpp
 [Tuto_Image_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : src/core/03_advanced/01_event/01_image/listener/mouse/SimpleMouseListener.cpp
 [Tuto_Image_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : src/core/03_advanced/04_opengl_pure/01_opengl/MyDisplayable.cpp
 [Tuto_Image_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : src/core/03_advanced/04_opengl_pure/03_provider/MyDisplayableProvider.cpp
@@ -388,5 +388,5 @@ Cuda compilation tools, release 8.0, V8.0.44
 [CBI] -> Tuto_Image_Cuda_cuda_80_x86_64 : End ALL!
 
 
-15:18:43 Build Finished (took 4s.843ms)
+14:30:20 Build Finished (took 4s.678ms)
 

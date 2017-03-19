@@ -20,8 +20,8 @@ class MandelbrotMath
 
     public:
 
-	MandelbrotMath(uint t) :
-		calibreur(Interval<float>(0, t), Interval<float>(0.f, 1.f))
+	MandelbrotMath(float t) :
+		calibreur(Interval<float>(0.f, (float) t), Interval<float>(0.f, 1.f))
 	    {
 	    this->t = t;
 	    }
@@ -37,35 +37,25 @@ class MandelbrotMath
 
     public:
 
-	void colorXY(uchar4* ptrColor, float x, float y, int t)
+	void colorXY(uchar4* ptrColor, float x, float y, float t)
 	    {
 	    float z = f(x, y, t);
-	    if (z != -1) //Vérifie la convergence
+	    if (z != -1.f) //Vérifie la convergence
 		{
 		calibreur.calibrer(z);
-		float hue01 = z;
-
-		ColorTools::HSB_TO_RVB(hue01, ptrColor); // update color
-
+		ColorTools::HSB_TO_RVB(z, ptrColor); // update color
 		}
-	    else
-		{
-		ptrColor->x = 0;//noir
-		ptrColor->y = 0;
-		ptrColor->z = 0;
-		}
-	    ptrColor->w = 255; // opaque
+	    //Si le point ne converge pas => noir
 	    }
 
     private:
 
-	float f(float x, float y, int t)
+	float f(float x, float y, float t)
 	    {
-	    int k;
-	    float a = 0;
-	    float b = 0;
+	    float a = 0.f;
+	    float b = 0.f;
 	    float aCopy;
-	    for (k = 0; k <= t; k++) //check k appartient à [0,N]
+	    for (float k = 0; k <= t; k++) //check k appartient à [0,N]
 		{
 		aCopy = a;
 		a = (a * a - b * b) + x;
@@ -76,7 +66,7 @@ class MandelbrotMath
 		    }
 		k++;
 		}
-	    return -1; //noir car convergent
+	    return -1.f; //noir car convergent
 	    }
 
 	bool isDivergent(float a, float b)
@@ -91,7 +81,7 @@ class MandelbrotMath
     private:
 
 	// Input
-	uint t;
+	float t;
 
 	// Tools
 	Calibreur<float> calibreur;
