@@ -1,8 +1,21 @@
-#include "RaytracingProvider.h"
-#include "Raytracing.h"
+#include <iostream>
+#include <stdlib.h>
+#include <string.h>
 
-#include "MathTools.h"
-#include "Grid.h"
+#include "Device.h"
+#include "cudaTools.h"
+
+#include "RipplingProvider.h"
+#include "MandelbrotProvider.h"
+#include "RaytracingProvider.h"
+
+#include "Settings_GPU.h"
+#include "Viewer_GPU.h"
+using namespace gpu;
+
+using std::cout;
+using std::endl;
+using std::string;
 
 /*----------------------------------------------------------------------*\
  |*			Declaration 					*|
@@ -16,6 +29,8 @@
  |*		Public			*|
  \*-------------------------------------*/
 
+int mainImage(Settings& settings);
+
 /*--------------------------------------*\
  |*		Private			*|
  \*-------------------------------------*/
@@ -28,36 +43,26 @@
  |*		Public			*|
  \*-------------------------------------*/
 
-/**
- * Override
- */
-Animable_I<uchar4>* RaytracingProvider::createAnimable()
+int mainImage(Settings& settings)
     {
-    // Raytracing
-    int nbSphere = 50;
+    cout << "\n[Image] mode" << endl;
 
-    // Animation;
-    float dt = 2.f * PI_FLOAT / 1000.f;
+    GLUTImageViewers::init(settings.getArgc(), settings.getArgv()); //only once
 
-    // Dimension
-    int dw = 16 * 60 * 2 ;
-    int dh = 16 * 60;
+    // ImageOption : (boolean,boolean) : (isSelection,isAnimation)
+    ImageOption zoomable(true, true, true, true);
+    ImageOption nozoomable(false, true, true, true);
 
-    // Grid Cuda
-    dim3 dg = dim3(48, 1, 1);  		// disons, a optimiser selon le gpu, peut drastiqument ameliorer ou baisser les performances
-    dim3 db = dim3(384, 1, 1);   	// disons, a optimiser selon le gpu, peut drastiqument ameliorer ou baisser les performances
-    Grid grid(dg, db);
+//    Viewer<RipplingProvider> rippling(nozoomable, 25, 25); // imageOption px py
+    //Viewer<MandelbrotProvider> mandelbrot(zoomable, 25, 25);
+    Viewer<RaytracingProvider> raytracing(nozoomable, 25, 25);
 
-    return new Raytracing(grid, dw, dh, dt, nbSphere);
-    }
+    // Common
+    GLUTImageViewers::runALL(); // Bloquant, Tant qu'une fenetre est ouverte
 
-/**
- * Override
- */
-Image_I* RaytracingProvider::createImageGL(void)
-    {
-    ColorRGB_01 colorTexte(0, 0, 1); // red
-    return new ImageAnimable_RGBA_uchar4(createAnimable(), colorTexte);
+    cout << "\n[Image] end" << endl;
+
+    return EXIT_SUCCESS;
     }
 
 /*--------------------------------------*\
@@ -67,3 +72,4 @@ Image_I* RaytracingProvider::createImageGL(void)
 /*----------------------------------------------------------------------*\
  |*			End	 					*|
  \*---------------------------------------------------------------------*/
+

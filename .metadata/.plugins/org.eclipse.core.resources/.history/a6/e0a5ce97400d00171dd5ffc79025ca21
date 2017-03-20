@@ -49,7 +49,7 @@ Raytracing::Raytracing(const Grid& grid, uint w, uint h, float dt, uint nbSphere
     // Tools
     this->t = 0; // protected dans Animable
     SphereCreator sphereCreator = SphereCreator(nbSphere, w, h);
-    Sphere* ptrTabSphere = sphereCreator.getTabSphere();
+    this->ptrTabSphere = sphereCreator.getTabSphere();
 
     //MemoryManagement
     this->sizeOctet = nbSphere * sizeof(Sphere);

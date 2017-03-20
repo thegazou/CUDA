@@ -1,10 +1,7 @@
 #pragma once
-
-#include "cudaTools.h"
+#include <math.h>
 #include "MathTools.h"
-#include "Sphere.h"
-
-#include "Animable_I_GPU.h"
+#include "ColorTools_GPU.h"
 using namespace gpu;
 
 /*----------------------------------------------------------------------*\
@@ -15,7 +12,7 @@ using namespace gpu;
  |*		Public			*|
  \*-------------------------------------*/
 
-class Raytracing: public Animable_I<uchar4>
+class RaytracingMath
     {
 	/*--------------------------------------*\
 	|*		Constructor		*|
@@ -23,42 +20,54 @@ class Raytracing: public Animable_I<uchar4>
 
     public:
 
-	Raytracing(const Grid& grid, uint w, uint h, float dt, uint nbSphere);
-	virtual ~Raytracing(void);
+	__device__ RaytracingMath(Sphere* ptrDevTabSphere, uint nbSphere)
+	    {
+	    this->ptrDevTabSphere = ptrDevTabSphere;
+	    this->nbSphere = nbSphere;
+	    }
+
+	// constructeur copie automatique car pas pointeur dans VagueMath
+
+	__device__
+	         virtual ~RaytracingMath()
+	    {
+	    // rien
+	    }
 
 	/*--------------------------------------*\
-	 |*		Methodes		*|
+	|*		Methodes		*|
 	 \*-------------------------------------*/
 
     public:
 
-	/*-------------------------*\
-	|*   Override Animable_I   *|
-	 \*------------------------*/
+	__device__
+	void colorIJ(uchar4* ptrColor, float i, float j, float t)
+	    {
+	    float hCarre;
+	    Sphere s = ptrDevTabSphere[0];
+	    for (uint index = 0; index < nbSphere; index++)
+		{
+		s = ptrDevTabSphere[index];
+		hCarre = s.hCarre(i, j);
+		if (s.isEnDessous(hCarre))
+		    {
+		    ColorTools::HSB_TO_RVB(s.hue(t), 1.f, s.brightness(s.dz(hCarre)), ptrColor);
+		    }
+		}
+	    //Si le point n'est pas sous une sphere => noir
+	    }
 
-	/**
-	 * Call periodicly by the api
-	 */
-	virtual void process(uchar4* ptrDevPixels, uint w, uint h, const DomaineMath& domaineMath);
-
-	/**
-	 * Call periodicly by the api
-	 */
-	virtual void animationStep();
+    private:
 
 	/*--------------------------------------*\
-	 |*		Attributs		*|
+	|*		Attributs		*|
 	 \*-------------------------------------*/
 
     private:
 
 	// Inputs
-	float dt;
-	uint nbSphere;
-
-	// Tools
 	Sphere* ptrDevTabSphere;
-	size_t sizeOctet;
+	uint nbSphere;
     };
 
 /*----------------------------------------------------------------------*\

@@ -49,20 +49,20 @@ Raytracing::Raytracing(const Grid& grid, uint w, uint h, float dt, uint nbSphere
     // Tools
     this->t = 0; // protected dans Animable
     SphereCreator sphereCreator = SphereCreator(nbSphere, w, h);
-    Sphere* ptrTabSphere = sphereCreator.getTabSphere();
+    this->ptrTabSphere = sphereCreator.getTabSphere();
 
     //MemoryManagement
     this->sizeOctet = nbSphere * sizeof(Sphere);
     Device::malloc(&ptrDevTabSphere, sizeOctet);
     Device::memclear(ptrDevTabSphere, sizeOctet);
     Device::memcpyHToD(ptrDevTabSphere, ptrTabSphere, sizeOctet);
-    //Device::lastCudaError("Raytracing MM (end allocation)");
+    Device::lastCudaError("Raytracing MM (end allocation)");
     }
 
 Raytracing::~Raytracing()
     {
     Device::free(ptrDevTabSphere);
-    //Device::lastCudaError("Raytracing MM (end deallocation)");
+    Device::lastCudaError("Raytracing MM (end deallocation)");
     }
 
 /*-------------------------*\

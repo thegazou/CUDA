@@ -31,7 +31,7 @@ class MandelbrotMath
 	    }
 
 	__device__
-		     virtual ~MandelbrotMath()
+		   virtual ~MandelbrotMath()
 	    {
 	    // rien
 	    }
@@ -53,13 +53,6 @@ class MandelbrotMath
 		ColorTools::HSB_TO_RVB(z, ptrColor); // update color
 		}
 	    //Si le point ne converge pas => noir
-	    else
-		{
-		ptrColor->x = 0;
-		ptrColor->y = 0;
-		ptrColor->z = 0;
-		ptrColor->w = 255;
-		}
 	    }
 
     private:

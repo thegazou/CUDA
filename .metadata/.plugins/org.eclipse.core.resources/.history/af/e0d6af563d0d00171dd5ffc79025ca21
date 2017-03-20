@@ -5,6 +5,7 @@
 #include "cudaTools.h"
 #include "MathTools.h"
 
+using namespace gpu;
 
 class Sphere
     {
