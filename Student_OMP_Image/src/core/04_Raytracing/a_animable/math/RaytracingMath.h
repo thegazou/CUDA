@@ -20,9 +20,9 @@ class RaytracingMath
 
     public:
 
-	RaytracingMath(Sphere* ptrDevTabSphere, uint nbSphere)
+	RaytracingMath(Sphere* ptrTabSphere, uint nbSphere)
 	    {
-	    this->ptrDevTabSphere = ptrDevTabSphere;
+	    this->ptrTabSphere = ptrTabSphere;
 	    this->nbSphere = nbSphere;
 	    }
 
@@ -41,15 +41,18 @@ class RaytracingMath
 
 	void colorIJ(uchar4* ptrColor, float i, float j, float t)
 	    {
+	    ptrColor->x = 0;
+	    ptrColor->y = 0;
+	    ptrColor->z = 0;
+	    ptrColor->w = 255;
 	    float hCarre;
-	    Sphere s = ptrDevTabSphere[0];
 	    for (uint index = 0; index < nbSphere; index++)
 		{
-		s = ptrDevTabSphere[index];
-		hCarre = s.hCarre(i, j);
-		if (s.isEnDessous(hCarre))
+		hCarre = ptrTabSphere[index].hCarre(i, j);
+		if (ptrTabSphere[index].isEnDessous(hCarre))
 		    {
-		    ColorTools::HSB_TO_RVB(s.hue(t), 1.f, s.brightness(s.dz(hCarre)), ptrColor);
+		    ColorTools::HSB_TO_RVB(ptrTabSphere[index].hue(t), 1.f, ptrTabSphere[index].brightness(ptrTabSphere[index].dz(hCarre)), ptrColor);
+		    break;
 		    }
 		}
 	    //Si le point n'est pas sous une sphere => noir
@@ -64,7 +67,7 @@ class RaytracingMath
     private:
 
 	// Inputs
-	Sphere* ptrDevTabSphere;
+	Sphere* ptrTabSphere;
 	uint nbSphere;
     };
 

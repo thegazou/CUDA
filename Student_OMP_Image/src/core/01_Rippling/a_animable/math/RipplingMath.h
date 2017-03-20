@@ -24,7 +24,7 @@ class RipplingMath
 
 	RipplingMath(uint w)
 	    {
-	    this->dim2 = w / 2.f;
+	    this->dim2 = (float) w / 2.f;
 	    }
 
 	// constructeur copie: pas besoin car pas attribut ptr
@@ -65,14 +65,10 @@ class RipplingMath
 
 	void dij(float i, float j, float* ptrResult)
 	    {
-	    *ptrResult = sqrtf(f(i) * f(i) + f(j) * f(j));
+	    float iDim = i - dim2;
+	    float jDim = j - dim2;
+	    *ptrResult = sqrtf(iDim * iDim + jDim * jDim);
 	    }
-
-	float f(float i)
-	    {
-	    return i - dim2;
-	    }
-
 
 	/*--------------------------------------*\
 	|*		Attribut		*|
@@ -81,8 +77,7 @@ class RipplingMath
     private:
 
 	// Tools
-	double dim2;
-
+	float dim2;
     };
 
 /*----------------------------------------------------------------------*\

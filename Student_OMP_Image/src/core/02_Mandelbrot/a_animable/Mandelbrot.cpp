@@ -100,7 +100,7 @@ void Mandelbrot::workPixel(uchar4* ptrColorIJ, int i, int j, const DomaineMath& 
     double y;
     domaineMath.toXY(i, j, &x, &y); // écran -> math
 
-    ptrMandelbrotMath->colorXY(ptrColorIJ, (float) x, (float) y, t);
+    ptrMandelbrotMath->colorXY(ptrColorIJ, (float) x, (float) y);
     }
 
 /*----------------------------------------------------------------------*\

@@ -2,11 +2,12 @@
 #include <stdlib.h>
 
 #include "RipplingProvider.h"
-#include "MandelbrotProvider.h"
 #include "RaytracingProvider.h"
 
 #include "Animateur_GPU.h"
 #include "Settings_GPU.h"
+
+#include "02_Mandelbrot/provider/MandelbrotProvider.h"
 using namespace gpu;
 
 using std::cout;

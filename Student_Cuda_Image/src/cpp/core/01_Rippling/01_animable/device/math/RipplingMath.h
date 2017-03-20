@@ -23,12 +23,12 @@ class RipplingMath
     public:
 	__device__ RipplingMath(uint w)
 	    {
-	    this->dim2 = w / 2.f;
+	    this->dim2 = (float) w / 2.f;
 	    }
 
 	// constructeur copie: pas besoin car pas attribut ptr
 	__device__
-	 virtual ~RipplingMath(void)
+	   virtual ~RipplingMath(void)
 	    {
 	    // rien
 	    }
@@ -43,7 +43,7 @@ class RipplingMath
 	    {
 	    uchar levelGris;
 
-	    f(j, i, t, &levelGris);
+	    f(i, j, t, &levelGris);
 
 	    ptrColorIJ->x = levelGris;
 	    ptrColorIJ->y = levelGris;
@@ -59,19 +59,14 @@ class RipplingMath
 	    float d;
 	    dij(i, j, &d);
 	    *ptrlevelGris = 128.f + 127.f * cosf((d / 10.f) - t / 7.f) / ((d / 10.f) + 1.f);
-
 	    }
 	__device__
 	void dij(float i, float j, float* ptrResult)
 	    {
-	    *ptrResult = sqrtf(f(i) * f(i) + f(j) * f(j));
+	    float iDim = i - dim2;
+	    float jDim = j - dim2;
+	    *ptrResult = sqrtf(iDim * iDim + jDim * jDim);
 	    }
-	__device__
-	float f(float i)
-	    {
-	    return i - dim2;
-	    }
-
 	/*--------------------------------------*\
 	|*		Attribut		*|
 	 \*-------------------------------------*/

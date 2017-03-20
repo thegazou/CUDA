@@ -38,7 +38,7 @@ static int use(Settings& settings);
 
 int main(int argc, char** argv)
     {
-    LaunchMode launchMode = LaunchMode::ANIMABLE; // IMAGE ANIMABLE
+    LaunchMode launchMode = LaunchMode::IMAGE; // IMAGE ANIMABLE
     Settings settings(launchMode, argc, argv);
 
     return use(settings);

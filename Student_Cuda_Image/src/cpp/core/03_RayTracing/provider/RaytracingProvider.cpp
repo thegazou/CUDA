@@ -44,8 +44,8 @@ Animable_I<uchar4>* RaytracingProvider::createAnimable()
     int dh = 16 * 60;
 
     // Grid Cuda
-    dim3 dg = dim3(48, 1, 1);  		// disons, a optimiser selon le gpu, peut drastiqument ameliorer ou baisser les performances
-    dim3 db = dim3(384, 1, 1);   	// disons, a optimiser selon le gpu, peut drastiqument ameliorer ou baisser les performances
+    dim3 dg = dim3(24, 1, 1);  		// disons, a optimiser selon le gpu, peut drastiqument ameliorer ou baisser les performances
+    dim3 db = dim3(512, 1, 1);   	// disons, a optimiser selon le gpu, peut drastiqument ameliorer ou baisser les performances
     Grid grid(dg, db);
 
     return new Raytracing(grid, dw, dh, dt, nbSphere);
