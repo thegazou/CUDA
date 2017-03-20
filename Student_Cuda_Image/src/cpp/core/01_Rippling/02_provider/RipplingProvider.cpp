@@ -35,14 +35,14 @@
 Animable_I<uchar4>* RipplingProvider::createAnimable()
     {
     // Animation;
-    float dt = 2 * PI / 10;
+    float dt = 2.f * PI_FLOAT / 10.f;
 
     // Dimension
-    int dw = 16 * 60;
-    int dh = 16 * 60;
+    int dw = 1000;
+    int dh = 1000;
 
     // Grid Cuda
-    dim3 dg = dim3(20, 1, 1);  		// disons, a optimiser selon le gpu, peut drastiqument ameliorer ou baisser les performances
+    dim3 dg = dim3(24, 1, 1);  		// disons, a optimiser selon le gpu, peut drastiqument ameliorer ou baisser les performances
     dim3 db = dim3(1024, 1, 1);   	// disons, a optimiser selon le gpu, peut drastiqument ameliorer ou baisser les performances
     Grid grid(dg, db);
 

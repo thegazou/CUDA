@@ -31,7 +31,7 @@ class MandelbrotMath
 	    }
 
 	__device__
-		         virtual ~MandelbrotMath()
+		              virtual ~MandelbrotMath()
 	    {
 	    // rien
 	    }
@@ -57,10 +57,11 @@ class MandelbrotMath
 		aCopy = a;
 		a = (a * a - b * b) + x;
 		b = 2.f * aCopy * b + y;
-		if ((a * a + b * b) > 4.f)
+		if (isDivergent(a, b))
 		    {
-		    calibreur.calibrer(k);
-		    ColorTools::HSB_TO_RVB(k, ptrColor);
+		    float z = k;
+		    calibreur.calibrer(z);
+		    ColorTools::HSB_TO_RVB(z, ptrColor);
 		    break;
 		    }
 		}
@@ -69,6 +70,11 @@ class MandelbrotMath
 
     private:
 
+	__device__
+	bool isDivergent(float a, float b)
+	    {
+	    return (a * a + b * b) > 4.f;
+	    }
 	/*--------------------------------------*\
 	|*		Attributs		*|
 	 \*-------------------------------------*/

@@ -7,11 +7,10 @@
 
 #include "RipplingProvider.h"
 #include "RaytracingProvider.h"
+#include "MandelbrotProvider.h"
 
 #include "Animateur_GPU.h"
 #include "Settings_GPU.h"
-
-#include "02_Mandelbrot/provider/MandelbrotProvider.h"
 using namespace gpu;
 
 using std::cout;
@@ -55,9 +54,9 @@ int mainBrutForce(Settings& settings)
     {
     cout << "\n[BruteForce] mode" << endl;
 
-    rippling();
-    //mandelbrot();
-    //raytracing();
+//    rippling();
+//    mandelbrot();
+    raytracing();
 
     cout << "\n[BruteForce] end" << endl;
 
@@ -95,9 +94,9 @@ void bruteForce(Provider_I<T>* ptrProvider, string titre)
     {
     cout << "\n[BruteForce] : " << titre << endl;
 
-    const bool IS_ANIMATOR_VERBOSITY = false;
+    const bool IS_ANIMATOR_VERBOSITY = true;
     const bool IS_FORCE_BRUT_VERBOSITY = true;
-    const int NB_ITERATION_ANIMATOR = 1000;
+    const int NB_ITERATION_ANIMATOR = 100;
 
     // Define Grid
     int mp = Device::getMPCount();
@@ -106,7 +105,7 @@ void bruteForce(Provider_I<T>* ptrProvider, string titre)
     int warpSize = Device::getWarpSize();
 
     VariateurData variateurDg(mp, 8 * mp, mp); 				// (min,max,step) 	Attention : A definir intelligement selon le GPU !
-    VariateurData variateurDb(coreMp, nbThreadBlockMax, warpSize); 	// (min,max,step) 	Attention : A definir intelligement selon le GPU !
+    VariateurData variateurDb(coreMp, nbThreadBlockMax, 128); 	// (min,max,step) 	Attention : A definir intelligement selon le GPU !
 
     // Run
     BruteForce<T> bruteForce(ptrProvider, variateurDg, variateurDb, NB_ITERATION_ANIMATOR, IS_FORCE_BRUT_VERBOSITY, IS_ANIMATOR_VERBOSITY);

@@ -3,11 +3,10 @@
 
 #include "RipplingProvider.h"
 #include "RaytracingProvider.h"
+#include "MandelbrotProvider.h"
 
 #include "Animateur_GPU.h"
 #include "Settings_GPU.h"
-
-#include "02_Mandelbrot/provider/MandelbrotProvider.h"
 using namespace gpu;
 
 using std::cout;
@@ -53,9 +52,9 @@ int mainAnimable(Settings& settings)
 
     // Attention : pas tous a la fois
 
-    //rippling();
-    //mandelbrot();
-    raytracing();
+    rippling();
+//    mandelbrot();
+//    raytracing();
 
     cout << "\n[Animable] end" << endl;
 
