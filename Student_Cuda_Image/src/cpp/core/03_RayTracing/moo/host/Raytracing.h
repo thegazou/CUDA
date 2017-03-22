@@ -59,6 +59,7 @@ class Raytracing: public Animable_I<uchar4>
 	// Tools
 	Sphere* ptrDevTabSphere;
 	size_t sizeOctet;
+	int i;
     };
 
 /*----------------------------------------------------------------------*\

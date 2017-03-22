@@ -1,5 +1,6 @@
 #include "SphereCreator.h"
 #include "AleaTools.h"
+#include <assert.h>
 /*--------------------------------------*\
 |* Constructeur *|
  \*-------------------------------------*/
@@ -38,8 +39,10 @@ void SphereCreator::createSphere(void)
     for (int i = 0; i < nbSpheres; i++)
 	{
 	float3 centre;
-	centre.x = aleaTools.uniformeAB(0 + bord, h - bord);
-	centre.y = aleaTools.uniformeAB(0 + bord, w - bord);
+	centre.x = aleaTools.uniformeAB(0 + bord, w - bord);
+	centre.y = aleaTools.uniformeAB(0 + bord, h - bord);
+//	assert(centre.y>=0 && centre.y<h);
+//	assert(centre.x>=0 && centre.x<w);
 	centre.z = aleaTools.uniformeAB(10, 2 * w);
 	float rayon = aleaTools.uniformeAB(20, w / 10);
 	float hue01 = aleaTools.uniforme01();

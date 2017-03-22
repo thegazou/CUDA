@@ -36,7 +36,7 @@ using namespace cpu;
 Animable_I<uchar4>* RaytracingProvider::createAnimable()
     {
     // Raytracing
-    int nbSphere = 50;
+    int nbSphere = 100;
 
     // Animation;
     float dt = 2.f * PI_FLOAT / 1000.f;

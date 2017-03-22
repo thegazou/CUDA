@@ -17,7 +17,10 @@ using std::endl;
  |*		Imported	 	*|
  \*-------------------------------------*/
 
-extern __global__ void raytracing(uchar4* ptrDevPixels, uint w, uint h, float t, Sphere* ptrSphere, uint nbSphere);
+extern __global__ void raytracingGM(uchar4* ptrDevPixels, uint w, uint h, float t, Sphere* ptrSphere, uint nbSphere);
+extern __global__ void raytracingCM(uchar4* ptrDevPixels, uint w, uint h, float t);
+extern __global__ void raytracingSM(uchar4* ptrDevPixels, uint w, uint h, float t, Sphere* ptrSphere, uint nbSphere);
+extern __host__ void uploadGPU(Sphere* ptrTabSphere);
 
 /*--------------------------------------*\
  |*		Public			*|
@@ -50,13 +53,15 @@ Raytracing::Raytracing(const Grid& grid, uint w, uint h, float dt, uint nbSphere
     this->t = 0; // protected dans Animable
     SphereCreator sphereCreator = SphereCreator(nbSphere, w, h);
     Sphere* ptrTabSphere = sphereCreator.getTabSphere();
+    this->sizeOctet = nbSphere * sizeof(Sphere);
+    this->i = 0;
 
     //MemoryManagement
-    this->sizeOctet = nbSphere * sizeof(Sphere);
     Device::malloc(&ptrDevTabSphere, sizeOctet);
     Device::memclear(ptrDevTabSphere, sizeOctet);
     Device::memcpyHToD(ptrDevTabSphere, ptrTabSphere, sizeOctet);
-    //Device::lastCudaError("Raytracing MM (end allocation)");
+//    uploadGPU(ptrTabSphere);
+
     }
 
 Raytracing::~Raytracing()
@@ -79,19 +84,32 @@ void Raytracing::process(uchar4* ptrDevPixels, uint w, uint h, const DomaineMath
     {
     //Device::lastCudaError("Raytracing rgba uchar4 (before)"); // facultatif, for debug only, remove for release
 
-    raytracing<<<dg,db>>>(ptrDevPixels,w,h,t, ptrDevTabSphere, nbSphere);
-
-    //Device::lastCudaError("Raytracing rgba uchar4 (after)"); // facultatif, for debug only, remove for release
+    i = 3;
+//i++;
+    if (i % 3 == 0)
+	{
+    raytracingGM<<<dg,db>>>(ptrDevPixels,w,h,t, ptrDevTabSphere, nbSphere);
     }
+else if (i % 3 == 1)
+    {
+raytracingCM<<<dg,db>>>(ptrDevPixels,w,h,t);
+}
+else if (i % 3 == 2)
+{
+raytracingSM<<<dg,db, sizeOctet>>>(ptrDevPixels,w,h,t,ptrDevTabSphere,nbSphere);
+}
+
+//Device::lastCudaError("Raytracing rgba uchar4 (after)"); // facultatif, for debug only, remove for release
+}
 
 /**
  * Override
  * Call periodicly by the API
  */
 void Raytracing::animationStep()
-    {
-    t += dt;
-    }
+{
+t += dt;
+}
 
 /*--------------------------------------*\
  |*		Private			*|

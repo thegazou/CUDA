@@ -28,8 +28,7 @@ class RaytracingMath
 
 	// constructeur copie automatique car pas pointeur dans VagueMath
 
-	__device__
-	                     virtual ~RaytracingMath()
+	__device__           virtual ~RaytracingMath()
 	    {
 	    // rien
 	    }
@@ -43,68 +42,37 @@ class RaytracingMath
 	__device__
 	void colorIJ(uchar4* ptrColor, float i, float j, float t)
 	    {
-	    //Version joli mais plus lente
-//	    if (!isEndessous(ptrColor, i, j, t))
-//		{
-//		ptrColor->x = 0;
-//		ptrColor->y = 0;
-//		ptrColor->z = 0;
-//		ptrColor->w = 255;
-//		}
-	    //14 registres
-	    ptrColor->x = 0;
-	    ptrColor->y = 0;
-	    ptrColor->z = 0;
-	    ptrColor->w = 255;
-	    float hCarre;
+	    float hCarre, dz, minDz, distance;
+	    int minIndex = -1;
+	    float minDistance = 3.4028235E38f;
 	    for (uint index = 0; index < nbSphere; index++)
 		{
-		hCarre = ptrDevTabSphere[index].hCarre(i, j);
-		if (ptrDevTabSphere[index].isEnDessous(hCarre))
-		    {
-		    ColorTools::HSB_TO_RVB(ptrDevTabSphere[index].hue(t), 1.f, ptrDevTabSphere[index].brightness(ptrDevTabSphere[index].dz(hCarre)), ptrColor);
-		    break;
-		    }
-		}
-	    //Si le point n'est pas sous une sphere => noir
-	    }
-
-    private:
-// 16 registres, 170fps
-	__device__
-	bool isEndessous(uchar4* ptrColor, float i, float j, float t)
-	    {
-	    float hCarre;
-	    Sphere s = ptrDevTabSphere[0];
-	    for (uint index = 0; index < nbSphere; index++)
-		{
-		s = ptrDevTabSphere[index];
+		Sphere s = ptrDevTabSphere[index];
 		hCarre = s.hCarre(i, j);
 		if (s.isEnDessous(hCarre))
 		    {
-		    ColorTools::HSB_TO_RVB(s.hue(t), 1.f, s.brightness(s.dz(hCarre)), ptrColor);
-		    return true;
+		    dz = s.dz(hCarre);
+		    distance = s.distance(dz);
+		    if (distance < minDistance)
+			{
+			minDistance = distance;
+			minDz = dz;
+			minIndex = index;
+			}
 		    }
 		}
-	    return false;
-	    }
-// 17 registres, 270fps
-	__device__
-	bool isEndessous_sans_objet_sphere(uchar4* ptrColor, float i, float j, float t)
-	    {
-	    float hCarre;
-//		    Sphere s = ptrDevTabSphere[0];
-	    for (uint index = 0; index < nbSphere; index++)
+	    if (minIndex != -1)
 		{
-//			s = ptrDevTabSphere[index];
-		hCarre = ptrDevTabSphere[index].hCarre(i, j);
-		if (ptrDevTabSphere[index].isEnDessous(hCarre))
-		    {
-		    ColorTools::HSB_TO_RVB(ptrDevTabSphere[index].hue(t), 1.f, ptrDevTabSphere[index].brightness(ptrDevTabSphere[index].dz(hCarre)), ptrColor);
-		    return true;
-		    }
+		Sphere s = ptrDevTabSphere[minIndex];
+		ColorTools::HSB_TO_RVB(s.hue(t), 1.f, s.brightness(minDz), ptrColor);
 		}
-	    return false;
+	    else // Si le point n'est pas sous une sphere => noir
+		{
+		ptrColor->x = 0;
+		ptrColor->y = 0;
+		ptrColor->z = 0;
+		ptrColor->w = 255;
+		}
 	    }
 	/*--------------------------------------*\
 	|*		Attributs		*|
@@ -112,7 +80,7 @@ class RaytracingMath
 
     private:
 
-	// Inputs
+// Inputs
 	Sphere* ptrDevTabSphere;
 	uint nbSphere;
     };

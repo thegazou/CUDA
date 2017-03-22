@@ -1,5 +1,6 @@
 #include "SphereCreator.h"
 #include "AleaTools.h"
+#include <iostream>
 /*--------------------------------------*\
 |* Constructeur *|
  \*-------------------------------------*/
@@ -17,7 +18,7 @@ SphereCreator::SphereCreator(int nbSpheres, int w, int h, int bord)
     }
 SphereCreator::~SphereCreator()
     {
-    delete[] tabSphere;
+    //delete[] tabSphere;
     }
 /*--------------------------------------*\
 |* Methode *|
@@ -38,12 +39,12 @@ void SphereCreator::createSphere(void)
     for (int i = 0; i < nbSpheres; i++)
 	{
 	float3 centre;
-	centre.x = aleaTools.uniformeAB(0 + bord, h - bord);
-	centre.y = aleaTools.uniformeAB(0 + bord, w - bord);
+	centre.x = aleaTools.uniformeAB(0 + bord, w - bord);
+	centre.y = aleaTools.uniformeAB(0 + bord, h - bord);
 	centre.z = aleaTools.uniformeAB(10, 2 * w);
 	float rayon = aleaTools.uniformeAB(20, w / 10);
 	float hue01 = aleaTools.uniforme01();
-	tabSphere[i] = Sphere(centre, rayon, hue01);
+	tabSphere[i] = Sphere(centre, rayon, hue01, w, h);
 // Warning : sphere stack copier dans sphere heap, // ok car pas ptr dans Sphere }
 	}
     }

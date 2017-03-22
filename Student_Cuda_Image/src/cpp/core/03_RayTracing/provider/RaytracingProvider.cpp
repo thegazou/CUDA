@@ -1,5 +1,6 @@
 #include "RaytracingProvider.h"
 #include "Raytracing.h"
+#include "length_cm.h"
 
 #include "MathTools.h"
 #include "Grid.h"
@@ -34,7 +35,7 @@
 Animable_I<uchar4>* RaytracingProvider::createAnimable()
     {
     // Raytracing
-    int nbSphere = 50;
+    int nbSphere = LENGTH_CM;
 
     // Animation;
     float dt = 2.f * PI_FLOAT / 1000.f;

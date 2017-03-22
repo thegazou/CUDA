@@ -52,8 +52,8 @@ int mainAnimable(Settings& settings)
     cout << "\n[Animable] mode" << endl;
 
     //rippling();
-    mandelbrot();
-    //raytracing();
+//    mandelbrot();
+    raytracing();
 
     cout << "\n[Animable] end" << endl;
 
@@ -82,7 +82,7 @@ void mandelbrot()
 
 void raytracing()
     {
-    const int NB_ITERATION = 1000;
+    const int NB_ITERATION = 100;
 
     RaytracingProvider provider;
     animer<uchar4>(&provider, NB_ITERATION);

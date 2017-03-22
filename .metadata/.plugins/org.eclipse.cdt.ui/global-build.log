@@ -1,4 +1,4 @@
-17:21:43 **** Incremental Build of configuration CudaGCC_parallel for project Student_Cuda_Image ****
+09:32:33 **** Incremental Build of configuration CudaGCC_parallel for project Student_Cuda_Image ****
 cbicc cuda jall 
 
 --------------------------------------------------------
@@ -374,8 +374,18 @@ Cuda compilation tools, release 8.0, V8.0.44
 
 [CBI] -> Compilation parallel (32 threads)
 
-[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/main.cpp
-[Student_Cuda_Image_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/mainImage.cpp
+[Student_Cuda_Image_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/03_RayTracing/moo/device/RaytracingDevice.cu
+src/cpp/core/03_RayTracing/moo/device/RaytracingDevice.cu(60): warning: function "syncthreads"
+/usr/local/cuda-8.0/include/device_functions.hpp(168): here was declared deprecated ("Please use __syncthreads() instead.")
+
+src/cpp/core/03_RayTracing/moo/device/RaytracingDevice.cu(29): warning: function "copyGMtoSM" was declared but never referenced
+
+src/cpp/core/03_RayTracing/moo/device/RaytracingDevice.cu(22): warning: function "uploadGPU" was declared but never referenced
+
+src/cpp/core/03_RayTracing/moo/device/RaytracingDevice.cu(29): warning: function "copyGMtoSM" was declared but never referenced
+
+src/cpp/core/03_RayTracing/moo/device/RaytracingDevice.cu(22): warning: function "uploadGPU" was declared but never referenced
+
 
 [CBI] -> Linking to   : /tmp/ramdrive/arc22/Targets/Student_Cuda_Image/bin/Student_Cuda_Image_cuda_80_x86_64.run
 
@@ -502,27 +512,8 @@ Cuda compilation tools, release 8.0, V8.0.44
 [CBI] ->              : -lopencv_videoio_gcc484
 [CBI] ->              : -lopencv_videostab_gcc484
 
-
-==================================================================================
-[CBI] -> Target Name  : Student_Cuda_Image_cuda_80_x86_64
-[CBI] -> Location     : /tmp/ramdrive/arc22/Targets/Student_Cuda_Image/bin/Student_Cuda_Image_cuda_80_x86_64.run
-[CBI] -> Deploy 	  : ../RELEASE/bin
-[CBI] ->
-[CBI] -> Type	 	  : EXE
-[CBI] -> Arch	 	  : x86_64
-[CBI] -> OS	 	      : Linux
-[CBI] -> User	 	  : arc22
-[CBI] ->
-[CBI] -> Compilateur  : g++ && nvcc
-[CBI] -> Task		  : End Compiling-Linking !
-[CBI] -> Time		  : 1 (s)
-==================================================================================
-
-
-[CBI] -> Deploying      : ../RELEASE/bin/Student_Cuda_Image_cuda_80_x86_64.run
-
-[CBI] -> Symlink Project Inc
-[CBI] -> To update code completion : ctrl-shift-s   or   gui/index/rebuild
-
-[CBI] -> Student_Cuda_Image_cuda_80_x86_64 : End ALL!
-
+/tmp/ramdrive/arc22/Targets/Student_Cuda_Image/obj/Raytracing.o: In function `Raytracing::Raytracing(Grid const&, unsigned int, unsigned int, float, unsigned int)':
+tmpxft_0000525a_00000000-4_Raytracing.cudafe1.cpp:(.text+0x3a0): undefined reference to `uploadGPU(Sphere*)'
+collect2: error: ld returned 1 exit status
+make[1]: *** [/tmp/ramdrive/arc22/Targets/Student_Cuda_Image/bin/Student_Cuda_Image_cuda_80_x86_64.run] Error 1
+make: *** [jall] Error 2

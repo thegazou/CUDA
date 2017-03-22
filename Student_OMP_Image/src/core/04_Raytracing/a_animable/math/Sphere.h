@@ -4,15 +4,18 @@
 #include <math.h>
 #include "MathTools.h"
 #include "cudaType_CPU.h"
+#include <assert.h>
 using namespace cpu;
 
 class Sphere
     {
     public:
-	Sphere(float3 centre, float rayon, float hue)
+	Sphere(float3 centre, float rayon, float hue, int w, int h)
 	    {
 // Inputs
 	    this->centre = centre;
+//	    assert(centre.y>=0 && centre.y<h);
+//	    assert(centre.x>=0 && centre.x<w);
 	    this->r = rayon;
 	    this->hueStart = hue;
 // Tools
@@ -23,16 +26,21 @@ class Sphere
 	 */
 	Sphere()
 	    {
-//	    this->centre = float3();
-//	    this->r = 0.f;
-//	    this->hueStart = 0.f;
-//	    // Tools
-//	    this->rCarre = 0.f;
+	    this->centre = float3();
+	    this->r = 0.f;
+	    this->hueStart = 0.f;
+	    // Tools
+	    this->rCarre = 0.f;
+	    }
+
+	float3 getCentre()
+	    {
+	    return centre;
 	    }
 	float hCarre(float i, float j)
 	    {
-	    float a = (centre.x - i);
-	    float b = (centre.y - j);
+	    float a = (centre.y - i);
+	    float b = (centre.x - j);
 	    return a * a + b * b;
 	    }
 	bool isEnDessous(float hCarre)

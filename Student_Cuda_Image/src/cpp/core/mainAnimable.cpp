@@ -52,9 +52,9 @@ int mainAnimable(Settings& settings)
 
     // Attention : pas tous a la fois
 
-    rippling();
+//    rippling();
 //    mandelbrot();
-//    raytracing();
+    raytracing();
 
     cout << "\n[Animable] end" << endl;
 
