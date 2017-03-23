@@ -44,8 +44,8 @@ Animable_I<uchar4>* MandelbrotProvider::createAnimable()
     uint tMax = 100;
 
     // Dimension
-    int dw = 1000;
-    int dh = 1000;
+    int dw = 16 * 60 * 2;
+    int dh = 16 * 60;
 
     // grid cuda
     dim3 dg = dim3(24, 1, 1);  		// disons, a optimiser selon le gpu, peut drastiqument ameliorer ou baisser les performances

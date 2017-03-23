@@ -44,7 +44,7 @@ Raytracing::Raytracing(uint w, uint h, float dt, uint nbSphere) :
     SphereCreator sphereCreator = SphereCreator(nbSphere, w, h);
     this->ptrTabSphere = sphereCreator.getTabSphere();
 
-    this->parallelPatern = ParallelPatern::OMP_ENTRELACEMENT; // protected dans super classe Animable
+    this->parallelPatern = ParallelPatern::OMP_MIXTE; // protected dans super classe Animable
 
     // OMP
     cout << "\n[Raytracing] : OMP : nbThread = " << this->nbThread << endl; // protected dans super classe Animable

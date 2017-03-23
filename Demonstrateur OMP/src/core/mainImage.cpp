@@ -49,11 +49,11 @@ int mainImage(Settings& settings)
     ImageOption zoomable(true, true, false, false);
     ImageOption nozoomable(false, true, false, false);
 
-    Viewer < RipplingProvider > rippling = Viewer < RipplingProvider > (nozoomable, 0, 0);
+    Viewer < MandelbrotProvider > mandelbrot = Viewer < MandelbrotProvider > (zoomable, 25, 0);
+        mandelbrot.setSize(800, 450);
+    Viewer < RipplingProvider > rippling = Viewer < RipplingProvider > (nozoomable, 25, 45);
     rippling.setSize(450, 450);
-    Viewer < MandelbrotProvider > mandelbrot = Viewer < MandelbrotProvider > (zoomable, 500, 0);
-    mandelbrot.setSize(800, 450);
-    Viewer < RaytracingProvider > raytracing = Viewer < RaytracingProvider > (nozoomable, 0, 450);
+    Viewer < RaytracingProvider > raytracing = Viewer < RaytracingProvider > (nozoomable, 100, 0);
     raytracing.setSize(1250, 450);
 
     // Common

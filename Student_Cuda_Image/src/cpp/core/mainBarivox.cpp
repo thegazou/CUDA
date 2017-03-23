@@ -110,7 +110,7 @@ void barivox(Provider_I<T>* ptrProvider, string titre)
     // Run
     const bool IS_ANIMATOR_VERBOSITY_ENABLE = false;
     const bool IS_BARIVOX_VERBOSITY_ENABLE = true;
-    const int NB_ITERATION = 1000;
+    const int NB_ITERATION = 100;
 
     Barivox<T> barivox(ptrProvider, dgStart, variateurDg, variateurDb, NB_ITERATION, IS_BARIVOX_VERBOSITY_ENABLE, IS_ANIMATOR_VERBOSITY_ENABLE);
     const BarivoxOutput output = barivox.run();
