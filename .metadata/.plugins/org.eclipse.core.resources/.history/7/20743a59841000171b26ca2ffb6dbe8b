@@ -53,12 +53,13 @@ int mainImage(Settings& settings)
     ImageOption nozoomable(false, true, false, false);
 
     GLUTWindowManagers* windowManager = GLUTWindowManagers::getInstance();
-    Viewer < RaytracingProvider > raytracing(nozoomable, 0, 0);
-    raytracing.setSize(1920, 960);
-    Viewer < MandelbrotProvider > mandelbrot(zoomable, 0, 0);
-    mandelbrot.setSize(1100, 960);
-    Viewer < RipplingProvider > rippling(nozoomable, 0, 0);
-    rippling.setSize(960, 960);
+
+    Viewer < RipplingProvider > rippling (nozoomable, 25, 0);
+    rippling.setSize(450, 450);
+    Viewer < MandelbrotProvider > mandelbrot (zoomable, 500, 0);
+//    mandelbrot.setSize(800, 450);
+    Viewer < RaytracingProvider > raytracing (nozoomable, 0, 100);
+    raytracing.setSize(1250, 450);
 
     windowManager->addWindow(rippling.getGLUTWindowImage());
     windowManager->addWindow(mandelbrot.getGLUTWindowImage());

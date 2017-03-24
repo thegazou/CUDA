@@ -56,7 +56,7 @@ int mainImage(Settings& settings)
     Viewer < RaytracingProvider > raytracing(nozoomable, 0, 0);
     raytracing.setSize(1920, 960);
     Viewer < MandelbrotProvider > mandelbrot(zoomable, 0, 0);
-    mandelbrot.setSize(1100, 960);
+    mandelbrot.setSize(1200, 960);
     Viewer < RipplingProvider > rippling(nozoomable, 0, 0);
     rippling.setSize(960, 960);
 

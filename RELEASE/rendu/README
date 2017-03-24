@@ -1,3 +1,13 @@
-Le dossier Doc contient l'évalutation individuelle.
+Le dossier Doc le script gitClone
 Les speedups sont dans les dossiers des tp respectifs.
+
+Cuda: 			- Rippling
+			- Mandelbrot
+			- Raytracing
+			- Demo
+
+Omp (gcc et intel):	- Rippling
+			- Mandelbrot
+			- Raytracing
+			- Demo
 
