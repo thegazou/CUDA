@@ -3,7 +3,6 @@
 #include "Device.h"
 #include "MathTools.h"
 #include "limits.h"
-#include "Variateur_CPU.h"
 
 using std::cout;
 using std::endl;
@@ -17,6 +16,7 @@ using std::endl;
  \*-------------------------------------*/
 
 #include "Slice.h"
+#include "SliceVariateur.h"
 
 /*--------------------------------------*\
  |*		Public			*|
@@ -28,6 +28,9 @@ bool useSlice(void);
  |*		Private			*|
  \*-------------------------------------*/
 
+bool useSingleSlice(void);
+bool useVariateur(void);
+
 /*----------------------------------------------------------------------*\
  |*			Implementation 					*|
  \*---------------------------------------------------------------------*/
@@ -38,22 +41,9 @@ bool useSlice(void);
 
 bool useSlice()
     {
-    uint nbSlice = INT_MAX - 1;
-    nbSlice *= 2;
-    float result;
-
-    // Grid cuda
-
-    dim3 dg = dim3(24, 1, 1);
-    dim3 db = dim3(1024, 1, 1);  //faire varier
-    Grid grid(dg, db);
-
-    Slice slice(grid, nbSlice); // on passse la grille à AddVector pour pouvoir facilement la faire varier de l'extérieur (ici) pour trouver l'optimum
-    slice.run();
-    result = slice.getResult();
-    printf("Result = %f\n", result);
-
-    bool isOk = MathTools::isEquals(result, PI_FLOAT, 0.0001f);
+    bool isOk = true;
+//    isOk &= useSingleSlice();
+    isOk &= useVariateur();
 
     return isOk;
     }
@@ -61,6 +51,28 @@ bool useSlice()
 /*--------------------------------------*\
  |*		Private			*|
  \*-------------------------------------*/
+
+bool useSingleSlice()
+    {
+    uint nbSlice = INT_MAX - 1;
+    nbSlice *= 2;
+    float result;
+
+    dim3 dg = dim3(24, 1, 1);
+    dim3 db = dim3(1024, 1, 1);
+    Grid grid(dg, db);
+    Slice slice(grid, nbSlice);
+    slice.run();
+    result = slice.getResult();
+    printf("Result = %f\n", result);
+    return MathTools::isEquals(result, PI_FLOAT, 0.0001f);
+    }
+
+bool useVariateur()
+    {
+    SliceVariateur sliceVariateur(1024, 1024, 1, 1000, 10000, 100);
+    return sliceVariateur.run();
+    }
 
 /*----------------------------------------------------------------------*\
  |*			End	 					*|

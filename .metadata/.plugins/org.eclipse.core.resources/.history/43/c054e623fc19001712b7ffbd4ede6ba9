@@ -1,0 +1,98 @@
+#include <iostream>
+#include "Grid.h"
+#include "Device.h"
+#include "MathTools.h"
+#include "limits.h"
+#include "Chrono.h"
+
+using std::cout;
+using std::endl;
+
+/*----------------------------------------------------------------------*\
+ |*			Declaration 					*|
+ \*---------------------------------------------------------------------*/
+
+/*--------------------------------------*\
+ |*		Imported	 	*|
+ \*-------------------------------------*/
+
+#include "Montecarlo.h"
+#include "Montecarlo2.h"
+
+/*--------------------------------------*\
+ |*		Public			*|
+ \*-------------------------------------*/
+
+bool useMontecarlo(void);
+
+/*--------------------------------------*\
+ |*		Private			*|
+ \*-------------------------------------*/
+bool useMontecarlo1(void);
+bool useMontecarlo2(void);
+/*----------------------------------------------------------------------*\
+ |*			Implementation 					*|
+ \*---------------------------------------------------------------------*/
+
+/*--------------------------------------*\
+ |*		Public			*|
+ \*-------------------------------------*/
+bool useMontecarlo()
+    {
+    bool isOk
+    dim3 dg = dim3(2, 1, 1); //
+    dim3 db = dim3(1024, 1, 1);  //faire varier puissance de 2
+    Grid grid(dg, db);
+
+    isOk &= useMontecarlo1(grid);
+    isOk &= useMontecarlo2(grid);
+
+    return isOk;
+    }
+
+/*--------------------------------------*\
+ |*		Private			*|
+ \*-------------------------------------*/
+
+bool useMontecarlo1(Grid grid)
+    {
+    float result;
+    Chrono chrono = Chrono("Time:");
+    //uint nbFlecheByThread = INT_MAX - 1;
+    //nbFlecheByThread *= 2;
+    int nbFlecheTotal = INT_MAX;
+
+    Montecarlo montecarlo(grid, nbFlecheTotal);
+    chrono.start();
+    montecarlo.run();
+    result = montecarlo.getResult();
+    chrono.stop();
+    chrono.print();
+    printf("Result = %f\n", result);
+
+    return MathTools::isEquals(result, PI_FLOAT, 0.001f);
+    }
+
+bool useMontecarlo2(Grid grid)
+    {
+    float result;
+    Chrono chrono = Chrono("Time:");
+
+    //uint nbFlecheByThread = INT_MAX - 1;
+    //nbFlecheByThread *= 2;
+    int nbFlecheTotal = INT_MAX;
+
+    Montecarlo montecarlo(grid, nbFlecheTotal);
+    chrono.start();
+    montecarlo.run();
+    result = montecarlo.getResult();
+    chrono.stop();
+    chrono.print();
+    printf("Result = %f\n", result);
+
+    return MathTools::isEquals(result, PI_FLOAT, 0.001f);
+    }
+/*----------------------------------------------------------------------*\
+ |*			End	 					*|
+ \*---------------------------------------------------------------------*/
+

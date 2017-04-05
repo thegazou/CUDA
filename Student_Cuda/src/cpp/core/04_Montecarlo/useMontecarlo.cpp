@@ -3,6 +3,7 @@
 #include "Device.h"
 #include "MathTools.h"
 #include "limits.h"
+#include "Chrono.h"
 
 using std::cout;
 using std::endl;
@@ -16,6 +17,7 @@ using std::endl;
  \*-------------------------------------*/
 
 #include "Montecarlo.h"
+#include "Montecarlo2.h"
 
 /*--------------------------------------*\
  |*		Public			*|
@@ -26,7 +28,8 @@ bool useMontecarlo(void);
 /*--------------------------------------*\
  |*		Private			*|
  \*-------------------------------------*/
-
+bool useMontecarlo_basic(Grid grid);
+bool useMontecarlo_advanced(Grid grid);
 /*----------------------------------------------------------------------*\
  |*			Implementation 					*|
  \*---------------------------------------------------------------------*/
@@ -37,23 +40,14 @@ bool useMontecarlo(void);
 
 bool useMontecarlo()
     {
-    //uint nbFlecheByThread = INT_MAX - 1;
-    //nbFlecheByThread *= 2;
-    int nbFlecheTotal = INT_MAX;
-    float result;
-
-    // Grid cuda
-
-    dim3 dg = dim3(2, 1, 1); //
-    dim3 db = dim3(64, 1, 1);  //faire varier puissance de 2
+    bool isOk = true;
+    dim3 dg = dim3(2, 1, 1);
+    dim3 db = dim3(1024, 1, 1); //Can be ANY number. If it is not a power of 2 it is andle later.
     Grid grid(dg, db);
 
-    Montecarlo montecarlo(grid, nbFlecheTotal);
-    montecarlo.run();
-    result = montecarlo.getResult();
-    printf("Result = %f\n", result);
-
-    bool isOk = MathTools::isEquals(result, PI_FLOAT, 0.01f);
+    //Useful if you want to compare several implementations.
+    isOk &= useMontecarlo_basic(grid);
+    isOk &= useMontecarlo_advanced(grid);
 
     return isOk;
     }
@@ -62,6 +56,41 @@ bool useMontecarlo()
  |*		Private			*|
  \*-------------------------------------*/
 
+bool useMontecarlo_basic(Grid grid)
+    {
+    float result;
+    Chrono chrono = Chrono("Time:");
+    int nbFlecheTotal = INT_MAX;
+
+    Montecarlo montecarlo(grid, nbFlecheTotal);
+    chrono.start();
+    montecarlo.run();
+    chrono.stop();
+    result = montecarlo.getResult();
+    printf("Basic: ");
+    chrono.print();
+    printf(", Result = %f\n", result);
+
+    return MathTools::isEquals(result, PI_FLOAT, 0.001f);
+    }
+
+bool useMontecarlo_advanced(Grid grid)
+    {
+    float result;
+    Chrono chrono = Chrono("Time:");
+    int nbFlecheTotal = INT_MAX;
+
+    Montecarlo2 montecarlo(grid, nbFlecheTotal);
+    chrono.start();
+    montecarlo.run();
+    chrono.stop();
+    result = montecarlo.getResult();
+    printf("Advanced: ");
+    chrono.print();
+    printf(", Result = %f\n", result);
+
+    return MathTools::isEquals(result, PI_FLOAT, 0.001f);
+    }
 /*----------------------------------------------------------------------*\
  |*			End	 					*|
  \*---------------------------------------------------------------------*/

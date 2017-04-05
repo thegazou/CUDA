@@ -19,8 +19,8 @@ class SliceVariateur
 
     public:
 
-	SliceVariateur(const Grid& grid, const uint nbSlice);
-	SliceVariateur();
+	SliceVariateur(const uint nbThreadMin, const uint nbThreadMax, const uint threadIncrement, const uint nbSliceMin, const uint nbSliceMax,
+		const uint sliceIncrement);
 
 	virtual ~SliceVariateur(void);
 
@@ -30,7 +30,7 @@ class SliceVariateur
 
     public:
 
-	void run();
+	bool run();
 
 	/*--------------------------------------*\
 	|*		Attributs		*|
@@ -43,7 +43,8 @@ class SliceVariateur
 	uint nbSliceMax;
 	uint nbThreadMin;
 	uint nbThreadMax;
-
+	uint threadIncrement;
+	uint sliceIncrement;
 
 	// Outputs
 

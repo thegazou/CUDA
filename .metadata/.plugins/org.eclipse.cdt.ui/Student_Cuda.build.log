@@ -1,4 +1,4 @@
-10:40:34 **** Incremental Build of configuration CudaGCC_parallel for project Student_Cuda ****
+15:54:37 **** Incremental Build of configuration CudaGCC_parallel for project Student_Cuda ****
 cbicc cuda jall 
 
 --------------------------------------------------------
@@ -127,7 +127,8 @@ Cuda compilation tools, release 8.0, V8.0.44
 [CBI] ->              : src/cpp/core/02_Hello_add_vector/01_objet/host/
 [CBI] ->              : src/cpp/core/03_Slice/00_variateur/
 [CBI] ->              : src/cpp/core/03_Slice/01_objet/host/
-[CBI] ->              : src/cpp/core/04_Montecarlo/host/
+[CBI] ->              : src/cpp/core/04_Montecarlo/Advanced/host/
+[CBI] ->              : src/cpp/core/04_Montecarlo/Basic/host/
 [CBI] ->              : src/cpp/test/junit/01_Test_Hello/
 [CBI] ->              : src/cpp/test/junit/02_Test_Vector/
 
@@ -269,17 +270,11 @@ Cuda compilation tools, release 8.0, V8.0.44
 
 [CBI] -> Compilation parallel (32 threads)
 
-[Student_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/04_Montecarlo/useMontecarlo.cpp
-[Student_Cuda_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/04_Montecarlo/device/Montecarlo_device.cu
-[Student_Cuda_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/04_Montecarlo/host/Montecarlo.cu
-src/cpp/core/04_Montecarlo/device/Montecarlo_device.cu(58): warning: variable "xAlea" was declared but never referenced
-
-src/cpp/core/04_Montecarlo/device/Montecarlo_device.cu(59): warning: variable "yAlea" was declared but never referenced
-
-src/cpp/core/04_Montecarlo/device/Montecarlo_device.cu(58): warning: variable "xAlea" was declared but never referenced
-
-src/cpp/core/04_Montecarlo/device/Montecarlo_device.cu(59): warning: variable "yAlea" was declared but never referenced
-
+[Student_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/03_Slice/00_variateur/SliceVariateur.cpp
+[Student_Cuda_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/04_Montecarlo/Basic/device/Montecarlo_device.cu
+[Student_Cuda_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/04_Montecarlo/Advanced/device/CreateGenerator_device2.cu
+[Student_Cuda_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/04_Montecarlo/Advanced/device/Montecarlo_device2.cu
+[Student_Cuda_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/04_Montecarlo/Advanced/host/Montecarlo2.cu
 
 [CBI] -> Linking to   : /tmp/ramdrive/arc22/Targets/Student_Cuda/bin/Student_Cuda_cuda_80_x86_64.run
 
@@ -401,5 +396,5 @@ src/cpp/core/04_Montecarlo/device/Montecarlo_device.cu(59): warning: variable "y
 [CBI] -> Student_Cuda_cuda_80_x86_64 : End ALL!
 
 
-10:40:39 Build Finished (took 4s.496ms)
+15:54:41 Build Finished (took 4s.242ms)
 

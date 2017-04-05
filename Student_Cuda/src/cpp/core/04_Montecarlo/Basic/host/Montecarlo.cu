@@ -1,0 +1,69 @@
+#include <iostream>
+#include "Device.h"
+#include "Montecarlo.h"
+
+/*----------------------------------------------------------------------*\
+ |*			Declaration 					*|
+ \*---------------------------------------------------------------------*/
+
+/*--------------------------------------*\
+ |*		Imported	 	*|
+ \*-------------------------------------*/
+
+extern __global__ void montecarlo(curandState* ptrDevGeneratorGM, int* ptrDevNxTotalGM, int nbFlecheByThread);
+extern __global__ void createGenerator(curandState* tabDevGeneratorGM, int deviceId);
+
+/*----------------------------------------------------------------------*\
+ |*			Implementation 					*|
+ \*---------------------------------------------------------------------*/
+
+/*--------------------------------------*\
+ |*		Constructeur			*|
+ \*-------------------------------------*/
+
+Montecarlo::Montecarlo(const Grid& grid, const int nbFlecheTotal) :
+	dg(grid.dg), db(grid.db), sizeOctetSM(db.x * sizeof(int)), result(0.f)
+    {
+
+    this->sizeOctetResultGM = sizeof(int);
+    this->sizeOctetTabGenerator = grid.threadCounts() * sizeof(curandState);
+
+    Device::malloc(&ptrDevGMResult, sizeOctetResultGM);
+    Device::memclear(ptrDevGMResult, sizeOctetResultGM);
+
+    Device::malloc(&ptrDevGMTabGenerator, sizeOctetTabGenerator);
+    Device::memclear(ptrDevGMTabGenerator, sizeOctetTabGenerator);
+
+    const int DEVICE_ID = Device::getDeviceId();
+    createGenerator<<<dg,db>>>(ptrDevGMTabGenerator, DEVICE_ID);
+
+    this->nbFlecheParThread = nbFlecheTotal / grid.threadCounts();
+    this->nbFlecheTotal = grid.threadCounts() * nbFlecheParThread;
+    }
+
+Montecarlo::~Montecarlo(void)
+    {
+    Device::free(ptrDevGMResult);
+    Device::free(ptrDevGMTabGenerator);
+    }
+
+/*--------------------------------------*\
+ |*		Methode			*|
+ \*-------------------------------------*/
+
+void Montecarlo::run()
+    {
+    montecarlo<<<dg,db, sizeOctetSM>>>(ptrDevGMTabGenerator, ptrDevGMResult, nbFlecheParThread);
+    int result_device;
+    Device::memcpyDToH(&result_device, ptrDevGMResult, sizeOctetResultGM);
+    this->result = 4.f * result_device / nbFlecheTotal;
+    }
+
+float Montecarlo::getResult()
+    {
+    return this->result;
+    }
+
+/*----------------------------------------------------------------------*\
+ |*			End	 					*|
+ \*---------------------------------------------------------------------*/

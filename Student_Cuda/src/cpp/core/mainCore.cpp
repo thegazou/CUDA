@@ -40,8 +40,8 @@ int mainCore()
     bool isOk = true;
 //    isOk &= useHello();
 //    isOk &= useAddVecteur();
-//    isOk &= useSlice();
-    isOk &= useMontecarlo();
+    isOk &= useSlice();
+//    isOk &= useMontecarlo();
     cout << "\nisOK = " << isOk << endl;
     cout << "\nEnd : mainCore" << endl;
 

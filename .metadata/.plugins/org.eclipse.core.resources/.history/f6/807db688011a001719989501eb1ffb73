@@ -1,0 +1,66 @@
+#include "SliceVariateur.h"
+
+#include <iostream>
+
+#include "Device.h"
+
+using std::cout;
+using std::endl;
+
+/*----------------------------------------------------------------------*\
+ |*			Declaration 					*|
+ \*---------------------------------------------------------------------*/
+
+/*--------------------------------------*\
+ |*		Imported	 	*|
+ \*-------------------------------------*/
+
+extern __global__ void slice(float* ptrDevGMResult, uint nbSlice);
+
+/*--------------------------------------*\
+ |*		Public			*|
+ \*-------------------------------------*/
+
+/*--------------------------------------*\
+ |*		Private			*|
+ \*-------------------------------------*/
+
+/*----------------------------------------------------------------------*\
+ |*			Implementation 					*|
+ \*---------------------------------------------------------------------*/
+
+/*--------------------------------------*\
+ |*		Constructeur			*|
+ \*-------------------------------------*/
+
+SliceVariateur::SliceVariateur(const Grid& grid, const uint nbThreadMin, const uint nbThreadMax, const uint nbSliceMin, const uint nbSliceMax,
+	const uint increment)
+    {
+    uint UINT_MAX = INT_MAX - 1;
+    UINT_MAX *= 2;
+    for (uint nbSlice = 0; nbSlice <= UINT_MAX; nbSlice = nbSlice + increment)
+	{
+
+	}
+    }
+
+SliceVariateur::~SliceVariateur(void)
+    {
+    }
+
+/*--------------------------------------*\
+ |*		Methode			*|
+ \*-------------------------------------*/
+
+void SliceVariateur::run()
+    {
+    // for(uint nbThread = nbThreadMin; )
+    }
+
+/*--------------------------------------*\
+ |*		Private			*|
+ \*-------------------------------------*/
+
+/*----------------------------------------------------------------------*\
+ |*			End	 					*|
+ \*---------------------------------------------------------------------*/

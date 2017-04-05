@@ -1,0 +1,58 @@
+#pragma once
+
+#include "cudaTools.h"
+#include "Grid.h"
+
+/*----------------------------------------------------------------------*\
+ |*			Declaration 					*|
+ \*---------------------------------------------------------------------*/
+
+/*--------------------------------------*\
+ |*		Public			*|
+ \*-------------------------------------*/
+
+class SliceVariateur
+    {
+	/*--------------------------------------*\
+	|*		Constructor		*|
+	 \*-------------------------------------*/
+
+    public:
+
+	SliceVariateur::SliceVariateur(const Grid& grid, const uint nbThreadMin, const uint nbThreadMax, const uint threadIncrement, const uint nbSliceMin,
+		const uint nbSliceMax, const uint sliceIncrement);
+	SliceVariateur();
+
+	virtual ~SliceVariateur(void);
+
+	/*--------------------------------------*\
+	|*		Methodes		*|
+	 \*-------------------------------------*/
+
+    public:
+
+	void run();
+
+	/*--------------------------------------*\
+	|*		Attributs		*|
+	 \*-------------------------------------*/
+
+    private:
+
+	// Inputs
+	uint nbSliceMin;
+	uint nbSliceMax;
+	uint nbThreadMin;
+	uint nbThreadMax;
+	uint threadIncrement;
+	uint SliceIncrement;
+
+	// Outputs
+
+	// Tools
+
+    };
+
+/*----------------------------------------------------------------------*\
+ |*			End	 					*|
+ \*---------------------------------------------------------------------*/
