@@ -1,0 +1,78 @@
+#include "Indice2D.h"
+#include "Indice1D.h"
+#include "cudaTools.h"
+#include <curand_kernel.h>
+
+#include <stdio.h>
+#include <reductionADD.h>
+
+/*----------------------------------------------------------------------*\
+ |*			Declaration 					*|
+ \*---------------------------------------------------------------------*/
+
+/*--------------------------------------*\
+ |*		Imported	 	*|
+ \*-------------------------------------*/
+
+/*--------------------------------------*\
+ |*		Public			*|
+ \*-------------------------------------*/
+
+__global__ void montecarlo(curandState* ptrDevGeneratorGM, int* ptrDevNxTotalGM, uint nbFlecheByThread);
+
+/*--------------------------------------*\
+ |*		Private			*|
+ \*-------------------------------------*/
+__device__ void reductionIntraThread(int* tabSM, curandState* ptrDevGeneratorGM, uint nbFlecheByThread);
+/*----------------------------------------------------------------------*\
+ |*			Implementation 					*|
+ \*---------------------------------------------------------------------*/
+
+/*--------------------------------------*\
+ |*		Public			*|
+ \*-------------------------------------*/
+
+/**
+ * output : void required !!
+ */
+__global__ void montecarlo(curandState* ptrDevGeneratorGM, int* ptrDevNxTotalGM, uint nbFlecheByThread)
+    {
+    extern __shared__ int tabSM[]; //extern signifie que la taille est définit par le host.
+    reductionIntraThread(tabSM, ptrDevGeneratorGM, nbFlecheByThread);
+    __syncthreads();
+    reductionADD<int>(tabSM, ptrDevNxTotalGM);
+    }
+
+/*--------------------------------------*\
+ |*		Private			*|
+ \*-------------------------------------*/
+
+__device__ void reductionIntraThread(int* tabSM, curandState* ptrDevGeneratorGM, uint nbFlecheByThread)
+    {
+
+    const int TID = Indice1D::tid();
+    const int TID_LOCAL = Indice1D::tidLocalBlock();
+    // Global Memory -> Register (optimization)
+    curandState localGenerator = ptrDevGeneratorGM[TID];
+    uint nx = 0;
+    float xAlea;
+    float yAlea;
+//    for (uint i = 1; i <= nbFlecheByThread; i++)
+//	{
+	xAlea = curand_uniform(&localGenerator);
+	yAlea = curand_uniform(&localGenerator);
+	nx = 1;
+//	nx = (uint) 4.f / (1.f + xAlea * xAlea) < yAlea;
+//	}
+//Register -> Global Memory
+//Necessaire si on veut utiliser notre generator
+// - dans dautre kernel
+// - avec dautres nombres aleatoires !
+    ptrDevGeneratorGM[TID] = localGenerator;
+    tabSM[TID_LOCAL] = (int) nx;
+    }
+
+/*----------------------------------------------------------------------*\
+ |*			End	 					*|
+ \*---------------------------------------------------------------------*/
+

@@ -1,0 +1,61 @@
+#pragma once
+
+#include "cudaTools.h"
+#include "Grid.h"
+#include <curand_kernel.h>
+
+/*----------------------------------------------------------------------*\
+ |*			Declaration 					*|
+ \*---------------------------------------------------------------------*/
+
+/*--------------------------------------*\
+ |*		Public			*|
+ \*-------------------------------------*/
+
+class Slice
+    {
+	/*--------------------------------------*\
+	|*		Constructor		*|
+	 \*-------------------------------------*/
+
+    public:
+
+	Montecarlo(const Grid& grid, const uint nbFlecheParThread);
+
+	virtual ~Montecarlo(void);
+
+	/*--------------------------------------*\
+	|*		Methodes		*|
+	 \*-------------------------------------*/
+
+    public:
+
+	void run();
+	float getResult();
+
+	/*--------------------------------------*\
+	|*		Attributs		*|
+	 \*-------------------------------------*/
+
+    private:
+
+	// Inputs
+	const dim3 dg;
+	const dim3 db;
+	const uint nbFlecheParThread;
+
+	// Outputs
+	float result;
+
+	// Tools
+	int* ptrDevGMResult;
+	curandState* ptrDevGMTabGenerator;
+	const size_t sizeOctetSM;
+	const size_t sizeOctetResultGM;
+	const size_t sizeOctetTabGenerator;
+
+    };
+
+/*----------------------------------------------------------------------*\
+ |*			End	 					*|
+ \*---------------------------------------------------------------------*/

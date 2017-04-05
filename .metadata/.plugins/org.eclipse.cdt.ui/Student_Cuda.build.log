@@ -1,4 +1,4 @@
-14:30:00 **** Incremental Build of configuration CudaGCC_parallel for project Student_Cuda ****
+10:40:34 **** Incremental Build of configuration CudaGCC_parallel for project Student_Cuda ****
 cbicc cuda jall 
 
 --------------------------------------------------------
@@ -113,7 +113,6 @@ Cuda compilation tools, release 8.0, V8.0.44
 [CBI] -> NVCCFLAGS (Partial) :
 [CBI] ->
 [CBI] ->              : --fmad=true
-[CBI] ->              : --ptxas-options=-v
 [CBI] ->              : -arch=sm_52
 [CBI] ->              : -m64
 [CBI] ->              : -std=c++11
@@ -126,6 +125,9 @@ Cuda compilation tools, release 8.0, V8.0.44
 [CBI] -> INC_PATH (auto detect):
 [CBI] ->              : src/cpp/core/02_Hello_add_vector/00_tools/
 [CBI] ->              : src/cpp/core/02_Hello_add_vector/01_objet/host/
+[CBI] ->              : src/cpp/core/03_Slice/00_variateur/
+[CBI] ->              : src/cpp/core/03_Slice/01_objet/host/
+[CBI] ->              : src/cpp/core/04_Montecarlo/host/
 [CBI] ->              : src/cpp/test/junit/01_Test_Hello/
 [CBI] ->              : src/cpp/test/junit/02_Test_Vector/
 
@@ -264,40 +266,20 @@ Cuda compilation tools, release 8.0, V8.0.44
 [CBI] ->              : nvrtc
 [CBI] ->              : nvrtc-builtins
 
-[CBI] -> Create folder : /tmp/ramdrive/arc22/Targets/Student_Cuda/bin
-[CBI] -> Create folder : /tmp/ramdrive/arc22/Targets/Student_Cuda/obj
-[CBI] -> Create folder : /tmp/ramdrive/arc22/Targets/Student_Cuda/cubin
 
 [CBI] -> Compilation parallel (32 threads)
 
-[Student_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/main.cpp
-[Student_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/test/mainTest.cpp
-[Student_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/test/junit/01_Test_Hello/TestHello.cpp
-[Student_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/test/junit/02_Test_Vector/TestVector.cpp
-[Student_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/mainCore.cpp
-[Student_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/02_Hello_add_vector/00_tools/VectorTools.cpp
-[Student_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/02_Hello_add_vector/01_objet/useAddVector.cpp
-[Student_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/01_Hello/useHello.cpp
-[Student_Cuda_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/02_Hello_add_vector/01_objet/device/addVector_device.cu
-[Student_Cuda_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/02_Hello_add_vector/01_objet/host/AddVector.cu
-[Student_Cuda_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/01_Hello/01_helloCuda.cu
-[Student_Cuda_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/01_Hello/02_hello_add.cu
-ptxas info    : 0 bytes gmem
-ptxas info    : Compiling entry function '_Z9addVectorPfS_S_i' for 'sm_52'
-ptxas info    : Function properties for _Z9addVectorPfS_S_i
-    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
-ptxas info    : Used 12 registers, 348 bytes cmem[0]
-ptxas info    : 0 bytes gmem
-ptxas info    : Compiling entry function '_Z11kernelHellov' for 'sm_52'
-ptxas info    : Function properties for _Z11kernelHellov
-    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
-ptxas info    : Used 2 registers, 320 bytes cmem[0]
-ptxas info    : 19 bytes gmem
-ptxas info    : Compiling entry function '_Z9addScalariiPi' for 'sm_52'
-ptxas info    : Function properties for _Z9addScalariiPi
-    16 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
-ptxas info    : Used 11 registers, 336 bytes cmem[0]
-ptxas info    : 32 bytes gmem
+[Student_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/04_Montecarlo/useMontecarlo.cpp
+[Student_Cuda_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/04_Montecarlo/device/Montecarlo_device.cu
+[Student_Cuda_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/04_Montecarlo/host/Montecarlo.cu
+src/cpp/core/04_Montecarlo/device/Montecarlo_device.cu(58): warning: variable "xAlea" was declared but never referenced
+
+src/cpp/core/04_Montecarlo/device/Montecarlo_device.cu(59): warning: variable "yAlea" was declared but never referenced
+
+src/cpp/core/04_Montecarlo/device/Montecarlo_device.cu(58): warning: variable "xAlea" was declared but never referenced
+
+src/cpp/core/04_Montecarlo/device/Montecarlo_device.cu(59): warning: variable "yAlea" was declared but never referenced
+
 
 [CBI] -> Linking to   : /tmp/ramdrive/arc22/Targets/Student_Cuda/bin/Student_Cuda_cuda_80_x86_64.run
 
@@ -407,7 +389,7 @@ ptxas info    : 32 bytes gmem
 [CBI] ->
 [CBI] -> Compilateur  : g++ && nvcc
 [CBI] -> Task		  : End Compiling-Linking !
-[CBI] -> Time		  : 2 (s)
+[CBI] -> Time		  : 4 (s)
 ==================================================================================
 
 
@@ -419,5 +401,5 @@ ptxas info    : 32 bytes gmem
 [CBI] -> Student_Cuda_cuda_80_x86_64 : End ALL!
 
 
-14:30:03 Build Finished (took 2s.934ms)
+10:40:39 Build Finished (took 4s.496ms)
 

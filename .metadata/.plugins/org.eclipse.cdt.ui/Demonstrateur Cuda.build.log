@@ -1,4 +1,4 @@
-15:53:01 **** Incremental Build of configuration CudaGCC_parallel for project Demonstrateur Cuda ****
+15:29:10 **** Build of configuration CudaGCC_parallel for project Demonstrateur Cuda ****
 cbicc cuda jall 
 
 --------------------------------------------------------
@@ -374,165 +374,54 @@ Cuda compilation tools, release 8.0, V8.0.44
 [CBI] ->              : opencv_videoio_gcc484
 [CBI] ->              : opencv_videostab_gcc484
 
+[CBI] -> Create folder : /tmp/ramdrive/arc22/Targets/Demo_Cuda/bin
+[CBI] -> Create folder : /tmp/ramdrive/arc22/Targets/Demo_Cuda/obj
+[CBI] -> Create folder : /tmp/ramdrive/arc22/Targets/Demo_Cuda/cubin
 
 [CBI] -> Compilation parallel (32 threads)
 
+[Demo_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/main.cpp
 [Demo_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : src/cpp/core/mainImage.cpp
+[Demo_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : /home/arc22/CUDA/toStudent/code/WCuda/Student_Cuda_Image/src/cpp/core/01_Rippling/02_provider/RipplingProvider.cpp
+[Demo_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : /home/arc22/CUDA/toStudent/code/WCuda/Student_Cuda_Image/src/cpp/core/02_Mandelbrot/provider/MandelbrotProvider.cpp
+[Demo_Cuda_cuda_80_x86_64] -> g++ compiling .cpp : /home/arc22/CUDA/toStudent/code/WCuda/Student_Cuda_Image/src/cpp/core/03_RayTracing/provider/RaytracingProvider.cpp
+[Demo_Cuda_cuda_80_x86_64] -> nvcc compiling .cu : /home/arc22/CUDA/toStudent/code/WCuda/Student_Cuda_Image/src/cpp/core/01_Rippling/01_animable/device/ripplingDevice.cu
+[Demo_Cuda_cuda_80_x86_64] -> nvcc compiling .cu : /home/arc22/CUDA/toStudent/code/WCuda/Student_Cuda_Image/src/cpp/core/01_Rippling/01_animable/host/Rippling.cu
+[Demo_Cuda_cuda_80_x86_64] -> nvcc compiling .cu : /home/arc22/CUDA/toStudent/code/WCuda/Student_Cuda_Image/src/cpp/core/02_Mandelbrot/moo/device/MandelbrotDevice.cu
+[Demo_Cuda_cuda_80_x86_64] -> nvcc compiling .cu : /home/arc22/CUDA/toStudent/code/WCuda/Student_Cuda_Image/src/cpp/core/02_Mandelbrot/moo/host/Mandelbrot.cu
+[Demo_Cuda_cuda_80_x86_64] -> nvcc compiling .cu : /home/arc22/CUDA/toStudent/code/WCuda/Student_Cuda_Image/src/cpp/core/03_RayTracing/moo/device/RaytracingDevice.cu
+[Demo_Cuda_cuda_80_x86_64] -> nvcc compiling .cu : /home/arc22/CUDA/toStudent/code/WCuda/Student_Cuda_Image/src/cpp/core/03_RayTracing/moo/host/Raytracing.cu
+[Demo_Cuda_cuda_80_x86_64] -> nvcc compiling .cu : /home/arc22/CUDA/toStudent/code/WCuda/Student_Cuda_Image/src/cpp/core/03_RayTracing/moo/host/SphereCreator.cu
+/home/arc22/CUDA/toStudent/code/WCuda/Student_Cuda_Image/src/cpp/core/03_RayTracing/moo/device/RaytracingDevice.cu(60): warning: function "syncthreads"
+/usr/local/cuda-8.0/include/device_functions.hpp(168): here was declared deprecated ("Please use __syncthreads() instead.")
 
-[CBI] -> Linking to   : /tmp/ramdrive/arc22/Targets/Demo_Cuda/bin/Demo_Cuda_cuda_80_x86_64.run
+/home/arc22/CUDA/toStudent/code/WCuda/Student_Cuda_Image/src/cpp/core/03_RayTracing/moo/device/RaytracingDevice.cu(29): warning: function "copyGMtoSM" was declared but never referenced
 
-[CBI] -> Library Link :
-[CBI] ->
-[CBI] ->              : -lBilatTools_CPP_301_004_gcc_x86_64
-[CBI] ->              : -lBilatTools_Cuda_301_004_cuda_80_x86_64
-[CBI] ->              : -lBilatTools_Cuda_Image_301_004_cuda_80_x86_64
-[CBI] ->              : -lBilatTools_Image_OpenCV_Cuda_301_004_cuda_80_x86_64
-[CBI] ->              : -lBilatTools_OMP_301_004_gcc_x86_64
-[CBI] ->              : -lBilatTools_OpenCV_301_004_gcc_x86_64
-[CBI] ->              : -lBilat_Fenetrage_Displayable_301_gcc_x86_64
-[CBI] ->              : -lBilat_Fenetrage_Displayable_GL_301_gcc_x86_64
-[CBI] ->              : -lBilat_Fenetrage_FreeGlut_Tools_301_gcc_x86_64
-[CBI] ->              : -lBilat_Image_FreeGlut_301_gcc_x86_64
-[CBI] ->              : -lBilat_Image_FreeGlut_Cuda_301_cuda_80_x86_64
-[CBI] ->              : -lBilat_Image_GL_301_gcc_x86_64
-[CBI] ->              : -lBilat_Image_GL_Cuda_301_cuda_80_x86_64
-[CBI] ->              : -lBilat_OpenGL_Tools_301_gcc_x86_64
-[CBI] ->              : -lGL
-[CBI] ->              : -lGLEW
-[CBI] ->              : -lGLU
-[CBI] ->              : -lOpenCL
-[CBI] ->              : -lboost_atomic-gcc484
-[CBI] ->              : -lboost_atomic-icc17
-[CBI] ->              : -lboost_chrono-gcc484
-[CBI] ->              : -lboost_chrono-icc17
-[CBI] ->              : -lboost_container-gcc484
-[CBI] ->              : -lboost_container-icc17
-[CBI] ->              : -lboost_date_time-gcc484
-[CBI] ->              : -lboost_date_time-icc17
-[CBI] ->              : -lboost_filesystem-gcc484
-[CBI] ->              : -lboost_filesystem-icc17
-[CBI] ->              : -lboost_graph-gcc484
-[CBI] ->              : -lboost_graph-icc17
-[CBI] ->              : -lboost_locale-gcc484
-[CBI] ->              : -lboost_locale-icc17
-[CBI] ->              : -lboost_log-gcc484
-[CBI] ->              : -lboost_log-icc17
-[CBI] ->              : -lboost_log_setup-gcc484
-[CBI] ->              : -lboost_log_setup-icc17
-[CBI] ->              : -lboost_math_c99-gcc484
-[CBI] ->              : -lboost_math_c99-icc17
-[CBI] ->              : -lboost_math_c99f-gcc484
-[CBI] ->              : -lboost_math_c99f-icc17
-[CBI] ->              : -lboost_math_c99l-gcc484
-[CBI] ->              : -lboost_math_c99l-icc17
-[CBI] ->              : -lboost_math_tr1-gcc484
-[CBI] ->              : -lboost_math_tr1-icc17
-[CBI] ->              : -lboost_math_tr1f-gcc484
-[CBI] ->              : -lboost_math_tr1f-icc17
-[CBI] ->              : -lboost_math_tr1l-gcc484
-[CBI] ->              : -lboost_math_tr1l-icc17
-[CBI] ->              : -lboost_prg_exec_monitor-gcc484
-[CBI] ->              : -lboost_prg_exec_monitor-icc17
-[CBI] ->              : -lboost_program_options-gcc484
-[CBI] ->              : -lboost_program_options-icc17
-[CBI] ->              : -lboost_random-gcc484
-[CBI] ->              : -lboost_random-icc17
-[CBI] ->              : -lboost_regex-gcc484
-[CBI] ->              : -lboost_regex-icc17
-[CBI] ->              : -lboost_serialization-gcc484
-[CBI] ->              : -lboost_serialization-icc17
-[CBI] ->              : -lboost_signals-gcc484
-[CBI] ->              : -lboost_signals-icc17
-[CBI] ->              : -lboost_system-gcc484
-[CBI] ->              : -lboost_system-icc17
-[CBI] ->              : -lboost_thread-gcc484
-[CBI] ->              : -lboost_thread-icc17
-[CBI] ->              : -lboost_timer-gcc484
-[CBI] ->              : -lboost_timer-icc17
-[CBI] ->              : -lboost_type_erasure-gcc484
-[CBI] ->              : -lboost_type_erasure-icc17
-[CBI] ->              : -lboost_unit_test_framework-gcc484
-[CBI] ->              : -lboost_unit_test_framework-icc17
-[CBI] ->              : -lboost_wave-gcc484
-[CBI] ->              : -lboost_wave-icc17
-[CBI] ->              : -lboost_wserialization-gcc484
-[CBI] ->              : -lboost_wserialization-icc17
-[CBI] ->              : -lcublas
-[CBI] ->              : -lcuda
-[CBI] ->              : -lcudart
-[CBI] ->              : -lcufft
-[CBI] ->              : -lcufftw
-[CBI] ->              : -lcuinj64
-[CBI] ->              : -lcurand
-[CBI] ->              : -lcusolver
-[CBI] ->              : -lcusparse
-[CBI] ->              : -lglut
-[CBI] ->              : -lgomp
-[CBI] ->              : -lnppc
-[CBI] ->              : -lnppi
-[CBI] ->              : -lnppial
-[CBI] ->              : -lnppicc
-[CBI] ->              : -lnppicom
-[CBI] ->              : -lnppidei
-[CBI] ->              : -lnppif
-[CBI] ->              : -lnppig
-[CBI] ->              : -lnppim
-[CBI] ->              : -lnppist
-[CBI] ->              : -lnppisu
-[CBI] ->              : -lnppitc
-[CBI] ->              : -lnpps
-[CBI] ->              : -lnvToolsExt
-[CBI] ->              : -lnvblas
-[CBI] ->              : -lnvgraph
-[CBI] ->              : -lnvidia-ml
-[CBI] ->              : -lnvrtc
-[CBI] ->              : -lnvrtc-builtins
-[CBI] ->              : -lopencv_calib3d_gcc484
-[CBI] ->              : -lopencv_core_gcc484
-[CBI] ->              : -lopencv_features2d_gcc484
-[CBI] ->              : -lopencv_flann_gcc484
-[CBI] ->              : -lopencv_highgui_gcc484
-[CBI] ->              : -lopencv_imgcodecs_gcc484
-[CBI] ->              : -lopencv_imgproc_gcc484
-[CBI] ->              : -lopencv_ml_gcc484
-[CBI] ->              : -lopencv_objdetect_gcc484
-[CBI] ->              : -lopencv_photo_gcc484
-[CBI] ->              : -lopencv_shape_gcc484
-[CBI] ->              : -lopencv_stitching_gcc484
-[CBI] ->              : -lopencv_superres_gcc484
-[CBI] ->              : -lopencv_video_gcc484
-[CBI] ->              : -lopencv_videoio_gcc484
-[CBI] ->              : -lopencv_videostab_gcc484
+/home/arc22/CUDA/toStudent/code/WCuda/Student_Cuda_Image/src/cpp/core/03_RayTracing/moo/device/RaytracingDevice.cu(22): warning: function "uploadGPU" was declared but never referenced
 
 
-==================================================================================
-[CBI] -> Target Name  : Demo_Cuda_cuda_80_x86_64
-[CBI] -> Location     : /tmp/ramdrive/arc22/Targets/Demo_Cuda/bin/Demo_Cuda_cuda_80_x86_64.run
-[CBI] -> Deploy 	  : ../RELEASE/bin
-[CBI] ->
-[CBI] -> Type	 	  : EXE
-[CBI] -> Arch	 	  : x86_64
-[CBI] -> OS	 	      : Linux
-[CBI] -> User	 	  : arc22
-[CBI] ->
-[CBI] -> Compilateur  : g++ && nvcc
-[CBI] -> Task		  : End Compiling-Linking !
-[CBI] -> Time		  : 2 (s)
-==================================================================================
 
 
-[CBI] -> Deploying      : ../RELEASE/bin/Demo_Cuda_cuda_80_x86_64.run
+Compilation terminated.
+Compilation terminated.
+Compilation terminated.
 
-[CBI] -> Symlink Project Inc
-[CBI] -> To update code completion : ctrl-shift-s   or   gui/index/rebuild
+Compilation terminated.
 
-Missing 2 input: SOURCE DESTINATION SOURCE_FILE_EXTENSION(*.h or *.so)
-Abord
+Compilation terminated.
 
-/home/arc22/CUDA/toStudent/code/WCuda/Demonstrateur Cuda//src INC_SYMLINK/PROJECT .h
+Compilation terminated.
+make[1]: *** [/tmp/ramdrive/arc22/Targets/Demo_Cuda/obj/Rippling.o] Terminated
+make[1]: *** [/tmp/ramdrive/arc22/Targets/Demo_Cuda/obj/MandelbrotDevice.o] Terminated
+make[1]: *** [/tmp/ramdrive/arc22/Targets/Demo_Cuda/obj/Mandelbrot.o] Terminated
+make[1]: *** [/tmp/ramdrive/arc22/Targets/Demo_Cuda/obj/RaytracingDevice.o] Terminated
+make[1]: *** [/tmp/ramdrive/arc22/Targets/Demo_Cuda/obj/Raytracing.o] Terminated
+make[1]: *** [/tmp/ramdrive/arc22/Targets/Demo_Cuda/obj/SphereCreator.o] Terminated
+make[1]: *** wait: No child processes.  Stop.
+make[1]: *** Waiting for unfinished jobs....
+make[1]: *** wait: No child processes.  Stop.
+make: *** [jall] Error 2
+Command canceled
 
-[CBI] -> Demo_Cuda_cuda_80_x86_64 : End ALL!
-
-
-15:53:03 Build Finished (took 1s.876ms)
+15:29:12 Build Cancelled (took 1s.886ms)
 

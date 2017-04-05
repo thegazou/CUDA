@@ -1,4 +1,4 @@
-#include "../../../02_Mandelbrot/moo/host/Mandelbrot.h"
+#include "Mandelbrot.h"
 
 #include <iostream>
 #include <assert.h>
