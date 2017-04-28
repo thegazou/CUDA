@@ -1,0 +1,55 @@
+
+package ch.arc.cours.lamda.interfacefonctionelle.neu.custom;
+
+public class FunctionTools
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	/**
+	 * (h 0 g)(x) = g(h(x))
+	 *
+	 * classe interne anonyme
+	 */
+	public static Function_I composition1(Function_I h, Function_I g)
+		{
+		return new Function_I()
+			{
+
+			@Override
+			public double f(double x)
+				{
+				return h.f(g.f(x));
+				}
+			};
+		}
+
+	/**
+	 * (h 0 g)(x) = g(h(x))
+	 *
+	 * lamda dans variable
+	 */
+	public static Function_I composition2(Function_I h, Function_I g)
+		{
+		Function_I function = x -> h.f(g.f(x));
+
+		return function;
+		}
+
+	/**
+	 * (h 0 g)(x) = g(h(x))
+	 *
+	 * lamda
+	 */
+	public static Function_I composition3(Function_I h, Function_I g)
+		{
+		return x -> h.f(g.f(x));
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	}

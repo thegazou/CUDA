@@ -1,0 +1,62 @@
+
+package ch.arc.cours.a_intro.comparator;
+
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class UseComparator
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		int n = 10;
+
+		version1(n);
+		version2(n);
+		version3(n);
+		version4(n);
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private static void version1(int n)
+		{
+		double[] tab = ComparatorTools.createTab(n);
+
+		Comparator<Double> comparator = new ComparatorSeparer();
+
+		Arrays.sort(tab,comparator); // sur place
+
+		ComparatorTools.print(tab);
+		}
+
+	private static void version2(int n)
+		{
+		// TODO Auto-generated method stub
+
+		}
+
+	private static void version3(int n)
+		{
+		// TODO Auto-generated method stub
+
+		}
+
+	private static void version4(int n)
+		{
+		// TODO Auto-generated method stub
+
+		}
+
+	}

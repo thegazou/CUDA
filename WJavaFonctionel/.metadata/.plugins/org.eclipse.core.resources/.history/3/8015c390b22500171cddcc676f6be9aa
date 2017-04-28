@@ -1,0 +1,28 @@
+
+package ch.arc.cours.a_intro;
+
+public class UseIntro
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		Runnable runnable=new RunnableHello();
+		
+		Thread thread=new Thread(runnable);
+		thread.start();
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	}

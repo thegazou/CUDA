@@ -32,6 +32,7 @@ class Montecarlo
 
 	void run();
 	float getResult();
+	int getNbFlecheSousLaCourbe();
 
 	/*--------------------------------------*\
 	|*		Attributs		*|
@@ -54,6 +55,7 @@ class Montecarlo
 	size_t sizeOctetSM;
 	size_t sizeOctetResultGM;
 	size_t sizeOctetTabGenerator;
+	int nbFlecheSousLaCourbe;
     };
 /*----------------------------------------------------------------------*\
  |*			End	 					*|

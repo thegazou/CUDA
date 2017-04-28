@@ -1,0 +1,83 @@
+#include <iostream>
+#include "Grid.h"
+#include "Device.h"
+#include "MathTools.h"
+#include "limits.h"
+#include "Chrono.h"
+
+using std::cout;
+using std::endl;
+
+/*----------------------------------------------------------------------*\
+ |*			Declaration 					*|
+ \*---------------------------------------------------------------------*/
+
+/*--------------------------------------*\
+ |*		Imported	 	*|
+ \*-------------------------------------*/
+
+#include "Slice.h"
+#include "SliceVariateur.h"
+
+/*--------------------------------------*\
+ |*		Public			*|
+ \*-------------------------------------*/
+
+bool useSlice(void);
+
+/*--------------------------------------*\
+ |*		Private			*|
+ \*-------------------------------------*/
+
+bool useSingleSlice(void);
+bool useVariateur(void);
+
+/*----------------------------------------------------------------------*\
+ |*			Implementation 					*|
+ \*---------------------------------------------------------------------*/
+
+/*--------------------------------------*\
+ |*		Public			*|
+ \*-------------------------------------*/
+
+bool useSlice()
+    {
+    bool isOk = true;
+    isOk &= useSingleSlice();
+//    isOk &= useVariateur();
+
+    return isOk;
+    }
+
+/*--------------------------------------*\
+ |*		Private			*|
+ \*-------------------------------------*/
+
+bool useSingleSlice()
+    {
+    uint nbSlice = UINT_MAX;
+    float result;
+    Chrono chrono = Chrono("Time:");
+    dim3 dg = dim3(24, 1, 1);
+    dim3 db = dim3(1024, 1, 1);
+    Grid grid(dg, db);
+    Slice slice(grid, nbSlice);
+    chrono.start();
+    slice.run();
+    chrono.stop();
+    result = slice.getResult();
+    cout << "    \t" << chrono << "    \t";
+    printf("Result = %f\n", result);
+    return MathTools::isEquals(result, PI_FLOAT, 0.0001f);
+    }
+
+bool useVariateur()
+    {
+    SliceVariateur sliceVariateur(1024, 1024, 1, UINT_MAX / 10, UINT_MAX - 10000, UINT_MAX / 12);
+    return sliceVariateur.run();
+    }
+
+/*----------------------------------------------------------------------*\
+ |*			End	 					*|
+ \*---------------------------------------------------------------------*/
+

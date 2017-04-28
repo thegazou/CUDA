@@ -4,6 +4,7 @@
 #include "Indice2D.h"
 #include "Indice1D.h"
 #include "cudaTools.h"
+// no offset
 __global__ void createGenerator(curandState* tabDevGeneratorGM, int deviceId)
     {
     const int TID = Indice1D::tid();

@@ -1,0 +1,36 @@
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
+#include "Histogram.h"
+#include "DataCreator.h"
+
+bool useHistogram(void);
+
+bool useHistogram()
+    {
+    int dataMax = 255;
+    DataCreator dataCreator(dataMax);
+    int* dataCreator
+    .getTabData();
+    int n = dataCreator.getLength();
+    const int SIZE_TAB = 256;
+    int repetition = 3;
+    int tabSize = SIZE_TAB * repetition;
+    int* tabResult;
+    bool isOk = true;
+
+    Histogram histogram(tabSize);
+    tabResult = histogram.run();
+
+    cout << "Tab result:" << endl;
+    for (int i = 0; i < SIZE_TAB; i++)
+	{
+	isOk &= (tabResult[i] == repetition);
+	cout << tabResult[i] << ", ";
+	}
+    cout << endl;
+
+    return isOk;
+    }

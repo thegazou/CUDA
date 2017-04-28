@@ -1,0 +1,94 @@
+
+package ch.arc.cours.lamda.interfacefonctionelle.neu.existant;
+
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+
+import ch.arc.cours.lamda.interfacefonctionelle.neu.existant.tools.Homme;
+
+public class UseBoth
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		int n = 5;
+
+		version1(n);
+
+		// lamda
+			{
+			version2(n);
+			version3(n);
+			}
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private static void version1(int n)
+		{
+		Iterable<Homme> iterable = HommeTools.create(n);
+
+		Predicate<Homme> predicate = new Predicate<Homme>()
+			{
+
+			@Override
+			public boolean test(Homme h)
+				{
+				return h.getHauteur() > 50;
+				}
+			};
+
+		Consumer<Homme> consumer = new Consumer<Homme>()
+			{
+
+			@Override
+			public void accept(Homme h)
+				{
+				h.opposePoids();
+				}
+			};
+
+		HommeTools.filterModify(iterable, predicate, consumer);
+
+		System.out.println(iterable);
+		}
+
+	/*------------------------------*\
+	|*				lamda			*|
+	\*------------------------------*/
+
+	private static void version2(int n)
+		{
+		Iterable<Homme> iterable = HommeTools.create(n);
+
+		//HommeTools.filterModify(iterable,h -> {return h.getHauteur() > 50;}, h -> h.setPoids(h.getPoids() * -1));  // return required {}
+		HommeTools.filterModify(iterable,h -> h.getHauteur() > 50, h -> h.opposePoids());
+
+		System.out.println(iterable);
+		}
+
+	private static void version3(int n)
+		{
+		Iterable<Homme> iterable = HommeTools.create(n);
+
+		//Predicate<Homme> predicate =h -> {return h.getHauteur() > 50;};  // return required {}
+		Predicate<Homme> predicate =h -> h.getHauteur() > 50;
+		Consumer<Homme> consumer=h -> h.opposePoids();
+
+		HommeTools.filterModify(iterable,predicate,consumer);
+
+		System.out.println(iterable);
+		}
+
+	}

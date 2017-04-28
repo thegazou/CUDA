@@ -46,10 +46,6 @@ class SliceVariateur
 	uint threadIncrement;
 	uint sliceIncrement;
 
-	// Outputs
-
-	// Tools
-
     };
 
 /*----------------------------------------------------------------------*\

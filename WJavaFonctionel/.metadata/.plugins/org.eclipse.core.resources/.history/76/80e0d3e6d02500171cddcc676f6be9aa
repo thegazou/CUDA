@@ -1,0 +1,83 @@
+
+package ch.arc.cours.lamda.interfacefonctionelle.neu.consumer;
+
+import java.util.function.Consumer;
+
+import ch.arc.cours.lamda.interfacefonctionelle.neu.tools.Homme;
+import ch.arc.cours.lamda.interfacefonctionelle.neu.tools.HommeTools;
+
+public class UseConsumer
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		int n = 5;
+
+		version1(n);
+
+		// lamda
+			{
+			version2(n);
+			version3(n);
+			version4(n);
+			}
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private static void version1(int n)
+		{
+		Iterable<Homme> iterable = HommeTools.create(n);
+
+		System.out.println("Before : "+iterable);
+
+		HommeTools.modify(iterable, new Consumer<Homme>()
+			{
+
+			@Override
+			public void accept(Homme t)
+				{
+				t.setPoids(t.getPoids()*-1);
+				}
+			});
+
+		System.out.println("After  : "+iterable);
+		}
+
+	/*------------------------------*\
+	|*				lamda			*|
+	\*------------------------------*/
+
+	private static void version2(int n)
+		{
+		Iterable<Homme> iterable = HommeTools.create(n);
+
+		HommeTools.modify(iterable,t -> t.setPoids(t.getPoids()*-1));
+
+		System.out.println("After  : "+iterable);
+		}
+
+	private static void version3(int n)
+		{
+		// TODO Auto-generated method stub
+
+		}
+
+	private static void version4(int n)
+		{
+		// TODO Auto-generated method stub
+
+		}
+
+	}

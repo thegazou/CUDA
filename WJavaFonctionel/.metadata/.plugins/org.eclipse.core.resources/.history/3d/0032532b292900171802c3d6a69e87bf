@@ -1,0 +1,40 @@
+
+package ch.arc.cours.lamda.interfacefonctionelle.neu.existant.function;
+
+import java.util.List;
+
+import ch.arc.cours.lamda.interfacefonctionelle.neu.existant.function.tools.Maison;
+import ch.arc.cours.lamda.interfacefonctionelle.neu.existant.function.tools.MaisonTools;
+
+public class UseFunctionCombined
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		System.out.println("Function binaryOperator");
+
+		int n = 5;
+		List<Maison> list = MaisonTools.create(n);
+		version1(list);
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private static void version1(List<Maison> list)
+		{
+		
+
+		}
+
+	}

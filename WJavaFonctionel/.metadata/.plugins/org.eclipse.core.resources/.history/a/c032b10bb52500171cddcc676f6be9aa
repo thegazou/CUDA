@@ -1,0 +1,57 @@
+
+package ch.arc.cours.a_intro.comparator.tools;
+
+public class Banane
+	{
+	
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+	
+	public Banane(int poids, double prix)
+		{
+		this.poids = poids;
+		this.prix = prix;
+		}
+		
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+	
+	@Override public String toString()
+		{
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("Banane [poids=");
+		stringBuilder.append(this.poids);
+		stringBuilder.append(", prix=");
+		stringBuilder.append(this.prix);
+		stringBuilder.append("]");
+		return stringBuilder.toString();
+		}
+		
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+	
+	public int getPoids()
+		{
+		return this.poids;
+		}
+		
+	public double getPrix()
+		{
+		return this.prix;
+		}
+		
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+	
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+	
+	private int poids;
+	
+	private double prix;
+	}

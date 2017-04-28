@@ -1,0 +1,51 @@
+
+package ch.arc.cours.lamda.interfacefonctionelle.neu.consumer;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.function.Predicate;
+
+public class HommeTools
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------*\
+	|*			  Static			*|
+	\*------------------------------*/
+
+	public static Iterable<Homme> create(int n)
+		{
+		long seed = 1;
+		Random random = new Random(seed);
+
+		List<Homme> list = new ArrayList<Homme>(n);
+
+		for(int i = 0; i < n; i++)
+			{
+			Homme homme = new Homme(random.nextInt(10), random.nextInt(100));
+			list.add(homme);
+			}
+
+		return list;
+		}
+
+	public static void print(Iterable<Homme> iterable, Predicate<Homme> predicat)
+		{
+		for(Homme homme:iterable)
+			{
+			if (predicat.test(homme))
+				{
+				System.out.println(homme);
+				}
+			}
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	}

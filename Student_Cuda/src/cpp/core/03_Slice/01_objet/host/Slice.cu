@@ -37,32 +37,19 @@ Slice::Slice(const Grid& grid, const uint nbSlice) :
     {
     Device::malloc(&ptrDevGMResult, sizeOctetGM);
     Device::memclear(ptrDevGMResult, sizeOctetGM);
-
-    // MM (copy Host->Device)
-	{
-	//Device::memcpyHToD(ptrDevV1, ptrV1, sizeOctet);
-	}
-
-//    Device::lastCudaError("Slice MM (end allocation)"); // temp debug, facultatif
     }
 
 Slice::~Slice(void)
     {
     Device::free(ptrDevGMResult);
-//    Device::lastCudaError("Slice MM (end deallocation)"); // temp debug, facultatif
     }
-
 /*--------------------------------------*\
  |*		Methode			*|
  \*-------------------------------------*/
 
 void Slice::run()
     {
-//    Device::lastCudaError("Slice (before)"); // temp debug
-    slice<<<dg,db, sizeOctetSM>>>(ptrDevGMResult, nbSlice);// assynchrone
-//    Device::lastCudaError("Slice (after)"); // temp debug
-
-//Device::synchronize(); // Temp,debug, only for printf in  GPU
+    slice<<<dg,db, sizeOctetSM>>>(ptrDevGMResult, nbSlice); // assynchrone
 
 // MM (Device -> Host)
 	{

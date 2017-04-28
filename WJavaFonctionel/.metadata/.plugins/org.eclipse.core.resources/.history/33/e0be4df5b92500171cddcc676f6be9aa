@@ -1,0 +1,139 @@
+
+package ch.arc.cours.a_intro.actionlistener;
+
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+public class JFrameIntro extends JFrame
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+
+	public JFrameIntro()
+		{
+		geometry();
+		control();
+		appearance();
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private void geometry()
+		{
+		// JComponent : Instanciation
+		button0 = new JButton("0");
+		button1 = new JButton("1");
+		button2 = new JButton("2");
+		button3 = new JButton("3");
+		button4 = new JButton("4");
+		button5 = new JButton("5");
+		button6 = new JButton("6");
+		button7 = new JButton("7");
+
+		// Layout : Specification
+			{
+			FlowLayout layout = new FlowLayout();
+			setLayout(layout);
+			}
+
+		// JComponent : add
+		add(button0);
+		add(button1);
+		add(button2);
+		add(button3);
+		add(button4);
+		add(button5);
+		add(button6);
+		add(button7);
+		}
+
+	private void control()
+		{
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+		// Version0
+			{
+			ActionListener actionListener=new ActionListenerSeparer();
+			button0.addActionListener(actionListener);
+			}
+
+		// version1
+			{
+			ActionListener actionListener = new ActionListener()
+				{
+
+				@Override public void actionPerformed(ActionEvent e)
+					{
+					// TODO Auto-generated method stub
+
+					}
+				};
+
+			button0.addActionListener(actionListener);
+			}
+
+			// Version3
+				{
+		button1.addActionListener(new ActionListener()
+			{
+
+			@Override public void actionPerformed(ActionEvent evt)
+				{
+				System.out.println("click 1");
+				}
+			});
+				}
+
+				// Versions expression lamda
+					{
+
+		button2.addActionListener((ActionEvent evt) -> {
+		System.out.println("click 2");
+		});
+
+		button3.addActionListener((evt) -> {
+		System.out.println("click 3");
+		});
+
+		button4.addActionListener(evt -> {
+		System.out.println("click 4");
+		});
+
+		button5.addActionListener(evt -> System.out.println("click 5"));
+					}
+		}
+
+	private void appearance()
+		{
+		setSize(600, 400);
+		setLocationRelativeTo(null); // frame centrer
+		setVisible(true); // last!
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+
+	// Tools
+	private JButton button0;
+	private JButton button1;
+	private JButton button2;
+	private JButton button3;
+	private JButton button4;
+	private JButton button5;
+	private JButton button6;
+	private JButton button7;
+
+	}

@@ -1,0 +1,191 @@
+
+package ch.arc.cours.lamda.interfacefonctionelle.neu.custom;
+
+import org.junit.Assert;
+
+public class UseCustom
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		// add
+			{
+			useAdd1();
+			useAdd2();
+			useAdd3();
+			}
+
+		// composition
+			{
+			useComposition1();
+			useComposition2();
+			useComposition3();
+			}
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------*\
+	|*		add						*|
+	\*------------------------------*/
+
+	/**
+	 *
+	 * x -> x*x+1
+	 *
+	 * h(x)=x+1
+	 * g(x)= x*x
+	 * (g + h) (x)= h(x)+g(x)
+	 *
+	 * Classe interne anonyme
+	 */
+	private static void useAdd1()
+		{
+		Function_I h = new Function_I()
+			{
+
+			@Override
+			public double f(double x)
+				{
+				return x + 1;
+				}
+			};
+
+		Function_I g = new Function_I()
+			{
+
+			@Override
+			public double f(double x)
+				{
+				return x + x;
+				}
+			};
+
+		Function_I u1 = FunctionTools.add1(h, g);
+		Function_I u2 = FunctionTools.add2(h, g);
+		Function_I u3 = FunctionTools.add3(h, g);
+
+		System.out.println(u1.f(2));
+		System.out.println(u2.f(2));
+		System.out.println(u3.f(2));
+
+		Assert.assertTrue(u1.f(2) == 2 * 2 + 1);
+		Assert.assertTrue(u2.f(2) == 2 * 2 + 1);
+		Assert.assertTrue(u3.f(2) == 2 * 2 + 1);
+		}
+
+	/*------------------------------*\
+	|*		composition				*|
+	\*------------------------------*/
+
+	/**
+	 *
+	 * x -> x*x+1
+	 *
+	 * h(x)=x+1
+	 * g(x)= x*x
+	 * (g o h) (x)= h(g(x))
+	 *
+	 * Classe interne anonyme
+	 */
+	private static void useComposition1()
+		{
+		Function_I g = new Function_I()
+			{
+
+			@Override
+			public double f(double x)
+				{
+				return x + 1;
+				}
+			};
+
+		Function_I h = new Function_I()
+			{
+
+			@Override
+			public double f(double x)
+				{
+				return x * x;
+				}
+			};
+
+		Function_I u1 = FunctionTools.composition1(h, g);
+		Function_I u2 = FunctionTools.composition2(h, g);
+		Function_I u3 = FunctionTools.composition3(h, g);
+
+		System.out.println(u1.f(2));
+		System.out.println(u2.f(2));
+		System.out.println(u3.f(2));
+
+		Assert.assertTrue(u1.f(2) == 2 * 2 + 1);
+		Assert.assertTrue(u2.f(2) == 2 * 2 + 1);
+		Assert.assertTrue(u3.f(2) == 2 * 2 + 1);
+		}
+
+	/**
+	 * x -> x*x+1
+	 *
+	 * h(x)=x+1
+	 * g(x)= x*x
+	 * (g o h) (x)= h(g(x))
+	 *
+	 * lamda dans variable
+	 */
+	private static void useComposition2()
+		{
+		Function_I g = x -> x + 1;
+		Function_I h = x -> x * x;
+
+		Function_I u1 = FunctionTools.composition1(h, g);
+		Function_I u2 = FunctionTools.composition2(h, g);
+		Function_I u3 = FunctionTools.composition3(h, g);
+
+		System.out.println(u1.f(2));
+		System.out.println(u2.f(2));
+		System.out.println(u3.f(2));
+
+		Assert.assertTrue(u1.f(2) == 2 * 2 + 1);
+		Assert.assertTrue(u2.f(2) == 2 * 2 + 1);
+		Assert.assertTrue(u3.f(2) == 2 * 2 + 1);
+		}
+
+	/**
+	 * x -> x*x+1
+	 *
+	 * h(x)=x+1
+	 * g(x)= x*x
+	 * (g o h) (x)= h(g(x))
+	 *
+	 * lamda
+	 */
+	private static void useComposition3()
+		{
+		Function_I g = x -> x + 1;
+		Function_I h = x -> x * x;
+
+		Function_I u1 = FunctionTools.composition1(x -> x * x, x -> x + 1);
+		Function_I u2 = FunctionTools.composition2(x -> x * x, x -> x + 1);
+		Function_I u3 = FunctionTools.composition3(x -> x * x, x -> x + 1);
+
+		System.out.println(u1.f(2));
+		System.out.println(u2.f(2));
+		System.out.println(u3.f(2));
+
+		Assert.assertTrue(u1.f(2) == 2 * 2 + 1);
+		Assert.assertTrue(u2.f(2) == 2 * 2 + 1);
+		Assert.assertTrue(u3.f(2) == 2 * 2 + 1);
+		}
+
+	}

@@ -1,0 +1,58 @@
+
+package ch.arc.cours.lamda.interfacefonctionelle.neu.tools;
+
+public class Homme
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+
+	public Homme(int poids, int hauteur)
+		{
+		this.poids = poids;
+		this.hauteur = hauteur;
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	@Override
+	public String toString()
+		{
+		StringBuilder builder = new StringBuilder();
+		builder.append("Homme [poids=");
+		builder.append(this.poids);
+		builder.append(", hauteur=");
+		builder.append(this.hauteur);
+		builder.append("]");
+		return builder.toString();
+		}
+
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+
+	public int getPoids()
+		{
+		return this.poids;
+		}
+
+	public int getHauteur()
+		{
+		return this.hauteur;
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+
+	// Inputs/Outputs
+	private int poids;
+	private int hauteur;
+	}

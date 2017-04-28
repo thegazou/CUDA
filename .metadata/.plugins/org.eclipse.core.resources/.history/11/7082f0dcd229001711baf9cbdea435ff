@@ -1,0 +1,24 @@
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
+#include "Histogram.h"
+#include "DataCreator.h"
+
+bool useHistogram(void);
+
+bool useHistogram()
+    {
+    const int dataMax = 255;
+    DataCreator dataCreator(dataMax);
+    int* tabData = dataCreator.getTabData();
+    int n = dataCreator.getLength();
+    unsigned char* tabFrequence;
+    bool isOk = true;
+
+    Histogram histogram(tabData,n);
+    tabFrequence = histogram.run();
+
+    return isOk;
+    }

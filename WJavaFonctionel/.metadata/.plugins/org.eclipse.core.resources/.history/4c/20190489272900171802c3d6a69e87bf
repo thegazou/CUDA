@@ -1,0 +1,88 @@
+
+package ch.arc.cours.lamda.interfacefonctionelle.neu.existant.function.simple;
+
+import java.util.function.Function;
+
+public class UseFunctionSimple
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		System.out.println("Function");
+		
+		int prix = 1;
+		int nbPiece = 2;
+		int surface = 3;
+		Maison maison = new Maison(prix, nbPiece, surface);
+
+		printSurface(maison);
+		printPrix(maison);
+		printPiece(maison);
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private static void print(Maison maison, Function<Maison, Integer> function)
+		{
+		Integer value = function.apply(maison);
+
+		System.out.println(value);
+		}
+
+	private static void printSurface(Maison maison)
+		{
+		// version : classe interne anonyme
+			{
+			Function<Maison, Integer> function = new Function<Maison, Integer>()
+				{
+
+				@Override
+				public Integer apply(Maison maison)
+					{
+					return maison.getSurface();
+					}
+				};
+
+			print(maison, function);
+			}
+
+		// Version : lamda dans variable
+			{
+			Function<Maison, Integer> function = casa -> casa.getSurface();
+			print(maison, function);
+			}
+
+		// Version : lamda
+			{
+			print(maison, casa -> casa.getSurface());
+			}
+		}
+
+	private static void printPiece(Maison maison)
+		{
+		// Version : lamda
+			{
+			print(maison, casa -> casa.getNbPiece());
+			}
+		}
+
+	private static void printPrix(Maison maison)
+		{
+		// Version : lamda
+			{
+			print(maison, casa -> casa.getPrix());
+			}
+		}
+
+	}

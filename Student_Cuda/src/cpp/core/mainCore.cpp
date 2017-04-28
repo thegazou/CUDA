@@ -16,6 +16,8 @@ extern bool useHello(void);
 extern bool useAddVecteur(void);
 extern bool useSlice(void);
 extern bool useMontecarlo(void);
+extern bool useMontecarlo_multiGPU(void);
+extern bool useHistogram(void);
 
 /*--------------------------------------*\
  |*		Public			*|
@@ -40,10 +42,14 @@ int mainCore()
     bool isOk = true;
 //    isOk &= useHello();
 //    isOk &= useAddVecteur();
-    isOk &= useSlice();
+//    isOk &= useSlice();
 //    isOk &= useMontecarlo();
+//    isOk &= useMontecarlo_multiGPU();
+    isOk &= useHistogram();
     cout << "\nisOK = " << isOk << endl;
     cout << "\nEnd : mainCore" << endl;
+    cout << "Press Enter to quit." << endl;
+    getchar();
 
     return isOk ? EXIT_SUCCESS : EXIT_FAILURE;
     }

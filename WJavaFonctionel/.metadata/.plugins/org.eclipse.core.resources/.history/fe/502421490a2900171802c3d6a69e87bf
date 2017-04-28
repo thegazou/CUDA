@@ -1,0 +1,10 @@
+
+package ch.arc.cours.lamda.interfacefonctionelle.neu.custom;
+
+
+
+public interface Fonction_I
+	{
+	
+	}
+

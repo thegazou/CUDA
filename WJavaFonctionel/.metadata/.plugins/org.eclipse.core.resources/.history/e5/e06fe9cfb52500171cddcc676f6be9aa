@@ -1,0 +1,66 @@
+
+package ch.arc.cours.a_intro.comparator;
+
+import java.util.Arrays;
+import java.util.Comparator;
+
+import ch.arc.cours.a_intro.comparator.tools.Banane;
+import ch.arc.cours.a_intro.comparator.tools.ComparatorTools;
+
+public class UseComparator
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		int n = 10;
+
+		version1(n);
+		version2(n);
+		version3(n);
+		version4(n);
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private static void version1(int n)
+		{
+		Banane[] tab = ComparatorTools.createTab(n);
+
+		Comparator<Banane> comparator = new ComparatorSeparer();
+
+		ComparatorTools.print("Before",tab);
+
+		Arrays.sort(tab,comparator); // sur place
+		ComparatorTools.print(""After",tab);
+		}
+
+	private static void version2(int n)
+		{
+		// TODO Auto-generated method stub
+
+		}
+
+	private static void version3(int n)
+		{
+		// TODO Auto-generated method stub
+
+		}
+
+	private static void version4(int n)
+		{
+		// TODO Auto-generated method stub
+
+		}
+
+	}

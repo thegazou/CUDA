@@ -1,0 +1,22 @@
+
+package ch.arc.cours.lamda.interfacefonctionelle.neu.existant.binaryoperator;
+
+import java.util.function.BinaryOperator;
+
+public class NumberManipulator
+	{
+	
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+	
+	public static int reduce(int[] tab, BinaryOperator<Integer> operator)
+		{
+		
+		}
+		
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+	
+	}

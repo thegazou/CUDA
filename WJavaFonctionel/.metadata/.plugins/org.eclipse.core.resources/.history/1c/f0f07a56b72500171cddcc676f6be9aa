@@ -1,0 +1,29 @@
+
+package ch.arc.cours.a_intro.actionlistener;
+
+
+
+public class UseJFrameHello
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		new UseJFrameHello();
+		System.out.println("ici");
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	}
+

@@ -1,0 +1,83 @@
+#include <iostream>
+#include <cmath>
+
+#include "Device.h"
+
+#include "DataCreator.h"
+#include "Histogram.h"
+
+using std::cout;
+using std::endl;
+
+extern __global__ void histogram_kernel(int* ptrDevData, int dataMax, int dataSize);
+
+Histogram::Histogram(const Grid& grid, int dataMax) :
+	dataMax(dataMax), dg(grid.dg), db(grid.db), sizeOctetSM(dataMax * sizeof(int)), tabResult(nullptr)
+    {
+
+    DataCreator dataCreator(dataMax);
+    dataSize = dataCreator.getLength();
+    tabData = dataCreator.getTabData();
+    sizeOctetGM = dataSize * sizeof(int);
+
+    // MM (malloc Device)
+	{
+	Device::malloc(&ptrDevGMData, sizeOctetGM);
+	Device::memclear(ptrDevGMData, sizeOctetGM);
+	Device::memcpyHToD(ptrDevGMData, tabData, sizeOctetGM);
+	}
+    }
+
+Histogram::~Histogram(void)
+    {
+    //MM (device free)
+	{
+	Device::free(ptrDevGMData);
+
+	Device::lastCudaError("Histogram MM (end deallocation)"); // temp debug, facultatif
+	}
+    }
+
+void Histogram::run()
+    {
+    Device::lastCudaError("Histogram (before)"); // temp debug
+    histogram_kernel<<<dg, db, sizeOctetSM>>>(ptrDevGMData, dataMax, dataSize); // assynchrone
+    Device::lastCudaError("Histogram (after)"); // temp debug
+
+    int* result = new int[dataMax]();
+
+    Device::memcpyDToH(result, ptrDevGMData, dataMax * sizeof(int));
+
+    histogram = result;
+    }
+
+void Histogram::display()
+    {
+    cout << "///////////////////////" << endl;
+    cout << "//////TP histogram/////" << endl;
+    cout << "///////////////////////" << endl;
+
+    cout << "The Histogram : " << endl;
+    for (int i = 0; i < dataMax; i++)
+	{
+	cout << "frequency of " << i << " : " << histogram[i] << endl;
+	}
+
+    cout << "///////////////////////" << endl;
+    cout << "//////////END//////////" << endl;
+    cout << "///////////////////////" << endl;
+    }
+
+bool Histogram::check()
+    {
+    bool isOk = true;
+    int val = 0;
+    for (int i = 0; i < dataMax; i++)
+	{
+	isOk &= (i + 1 == histogram[i]);
+	val += histogram[i];
+	}
+
+    isOk &= (val == dataSize);
+    return isOk;
+    }

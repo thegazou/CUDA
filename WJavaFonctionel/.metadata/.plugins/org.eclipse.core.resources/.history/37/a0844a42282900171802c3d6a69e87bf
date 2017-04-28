@@ -1,0 +1,37 @@
+
+package ch.arc.cours.lamda.interfacefonctionelle.neu.existant.function.tools;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class MaisonTools
+	{
+	
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+	
+	public static List<Maison> create(int n)
+		{
+		int seed = 1;
+		Random random = new Random(seed);
+		
+		List<Maison> list = new ArrayList<Maison>(n);
+		
+		for(int i = 0; i < n; i++)
+			{
+			Maison maison = new Maison(random.nextInt(), random.nextInt(), random.nextInt());
+			
+			list.add(maison);
+			}
+			
+		return list;
+		
+		}
+		
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+	
+	}

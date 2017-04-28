@@ -1,0 +1,39 @@
+
+package ch.arc.cours.lamda.stream.tools;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class PersonneTools
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------*\
+	|*			  Static			*|
+	\*------------------------------*/
+
+	public static Iterable<Personne> create(int n)
+		{
+		long seed = 1;
+		Random random = new Random(seed);
+
+		List<Personne> list = new ArrayList<Personne>(n);
+
+		for(int i = 0; i < n; i++)
+			{
+			Personne homme = new Personne(random.nextInt(10), random.nextInt(100));
+			list.add(homme);
+			}
+
+		return list;
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	}

@@ -1,0 +1,31 @@
+
+package ch.arc.cours.a_intro.comparator;
+
+
+
+public class UseComparator
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		version1();
+		version2();
+		version3();
+		version4();
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	}
+

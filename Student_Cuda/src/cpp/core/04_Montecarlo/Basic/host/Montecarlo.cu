@@ -1,6 +1,7 @@
+#include "Montecarlo.h"
+
 #include <iostream>
 #include "Device.h"
-#include "Montecarlo.h"
 
 /*----------------------------------------------------------------------*\
  |*			Declaration 					*|
@@ -22,7 +23,7 @@ extern __global__ void createGenerator(curandState* tabDevGeneratorGM, int devic
  \*-------------------------------------*/
 
 Montecarlo::Montecarlo(const Grid& grid, const int nbFlecheTotal) :
-	dg(grid.dg), db(grid.db), sizeOctetSM(db.x * sizeof(int)), result(0.f)
+	dg(grid.dg), db(grid.db), sizeOctetSM(db.x * sizeof(int)), result(0.f), nbFlecheSousLaCourbe(0)
     {
 
     this->sizeOctetResultGM = sizeof(int);
@@ -56,12 +57,18 @@ void Montecarlo::run()
     montecarlo<<<dg,db, sizeOctetSM>>>(ptrDevGMTabGenerator, ptrDevGMResult, nbFlecheParThread);
     int result_device;
     Device::memcpyDToH(&result_device, ptrDevGMResult, sizeOctetResultGM);
+    this->nbFlecheSousLaCourbe = result_device;
     this->result = 4.f * result_device / nbFlecheTotal;
     }
 
 float Montecarlo::getResult()
     {
     return this->result;
+    }
+
+int Montecarlo::getNbFlecheSousLaCourbe()
+    {
+    return this->nbFlecheSousLaCourbe;
     }
 
 /*----------------------------------------------------------------------*\

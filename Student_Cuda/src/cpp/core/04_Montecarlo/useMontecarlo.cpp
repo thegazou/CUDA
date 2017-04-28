@@ -47,7 +47,7 @@ bool useMontecarlo()
 
     //Useful if you want to compare several implementations.
     isOk &= useMontecarlo_basic(grid);
-    isOk &= useMontecarlo_advanced(grid);
+//    isOk &= useMontecarlo_advanced(grid);
 
     return isOk;
     }
@@ -60,7 +60,7 @@ bool useMontecarlo_basic(Grid grid)
     {
     float result;
     Chrono chrono = Chrono("Time:");
-    int nbFlecheTotal = INT_MAX;
+    long nbFlecheTotal = INT_MAX;
 
     Montecarlo montecarlo(grid, nbFlecheTotal);
     chrono.start();
@@ -94,4 +94,3 @@ bool useMontecarlo_advanced(Grid grid)
 /*----------------------------------------------------------------------*\
  |*			End	 					*|
  \*---------------------------------------------------------------------*/
-

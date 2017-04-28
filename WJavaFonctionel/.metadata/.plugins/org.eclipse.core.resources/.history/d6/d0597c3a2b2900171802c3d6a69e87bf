@@ -1,0 +1,107 @@
+
+package ch.arc.cours.lamda.interfacefonctionelle.neu.existant.function;
+
+import java.util.List;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
+import org.junit.Assert;
+
+import ch.arc.cours.lamda.interfacefonctionelle.neu.existant.function.tools.Maison;
+import ch.arc.cours.lamda.interfacefonctionelle.neu.existant.function.tools.MaisonManipulator;
+import ch.arc.cours.lamda.interfacefonctionelle.neu.existant.function.tools.MaisonTools;
+
+public class UseFunctionCombined
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		System.out.println("Function binaryOperator ");
+
+		int n = 5;
+		List<Maison> list = MaisonTools.create(n);
+
+		version1(list);
+		version2(list);
+		version3(list);
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	/**
+	 * somme des prix des maisons
+	 */
+	private static void version1(List<Maison> list)
+		{
+		Function<Maison, Integer> prix = new Function<Maison, Integer>()
+			{
+
+			@Override
+			public Integer apply(Maison maison)
+				{
+				return maison.getPrix();
+				}
+			};
+
+		BinaryOperator<Integer> add = new BinaryOperator<Integer>()
+			{
+
+			@Override
+			public Integer apply(Integer x1, Integer x2)
+				{
+				return x1 + x2;
+				}
+			};
+
+		int sum = MaisonManipulator.mapReduce(list, prix, add, 0);
+
+		check(list, sum);
+		}
+
+	/**
+	 * lamda dans variable
+	 */
+	private static void version2(List<Maison> list)
+		{
+		Function<Maison, Integer> prix = maison -> maison.getPrix();
+		BinaryOperator<Integer> add = (x1, x2) -> x1 + x2;
+
+		int sum = MaisonManipulator.mapReduce(list, prix, add, 0);
+
+		check(list, sum);
+		}
+
+	/**
+	 * lamda
+	 */
+	private static void version3(List<Maison> list)
+		{
+		int sum = MaisonManipulator.mapReduce(list, maison -> maison.getPrix(), (x1, x2) -> x1 + x2, 0);
+
+		check(list, sum);
+		}
+
+	/*------------------------------*\
+	|*				Tools			*|
+	\*------------------------------*/
+
+	private static void check(List<Maison> list, int sum)
+		{
+		System.out.println("sum prix = " + sum);
+
+		int n = list.size();
+		Assert.assertTrue(sum == n * (n + 1) / 2);
+		}
+
+	}

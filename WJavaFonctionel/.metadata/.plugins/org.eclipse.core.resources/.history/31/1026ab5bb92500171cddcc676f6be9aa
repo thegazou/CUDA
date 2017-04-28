@@ -1,0 +1,81 @@
+
+package ch.arc.cours.a_intro.actionlistener;
+
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+public class JFrameIntro extends JFrame
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+
+	public JFrameIntro()
+		{
+		geometry();
+		control();
+		appearance();
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private void geometry()
+		{
+		// JComponent : Instanciation
+		button1 = new JButton("1");
+		button2 = new JButton("2");
+
+		// Layout : Specification
+			{
+			FlowLayout layout = new FlowLayout();
+			setLayout(layout);
+			}
+
+		// JComponent : add
+		add(button1);
+		add(button2);
+		}
+
+	private void control()
+		{
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+		button1.addActionListener(new ActionListener()
+			{
+
+			@Override public void actionPerformed(ActionEvent evt)
+				{
+				System.out.println("click 1");
+				}
+			});
+
+		button2.addActionListener((evt)-> {System.out.println("click 2");});
+		}
+
+	private void appearance()
+		{
+		setSize(600, 400);
+		setLocationRelativeTo(null); // frame centrer
+		setVisible(true); // last!
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+
+	// Tools
+	private JButton button1;
+	private JButton button2;
+
+	}

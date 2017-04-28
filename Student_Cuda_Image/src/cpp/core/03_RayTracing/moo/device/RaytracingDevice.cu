@@ -9,11 +9,12 @@
 #include "IndiceTools_GPU.h"
 using namespace gpu;
 
-__constant__ Sphere TAB_CM[LENGTH_CM];
-
 static __device__ void copyGMtoSM(Sphere* ptrDevTabGM, Sphere* ptrDevTabSM, uint nbSphere);
 static __device__ void raytracing(uchar4* ptrDevPixels, uint w, uint h, float t, Sphere* ptrDevTabSphere, uint nbSphere);
-static __host__ void uploadGPU(Sphere* ptrTabSphere);
+__host__ void uploadGPU(Sphere* ptrTabSphere);
+
+__constant__ Sphere TAB_CM[LENGTH_CM];
+__constant__ Sphere TAB_SM[LENGTH_CM];
 
 /*----------------------------------------------------------------------*\
  |*			Implementation 					*|
@@ -50,14 +51,14 @@ __global__ void raytracingGM(uchar4* ptrDevPixels, uint w, uint h, float t, Sphe
 
 __global__ void raytracingCM(uchar4* ptrDevPixels, uint w, uint h, float t)
     {
-    raytracing(ptrDevPixels, w, h, t, nullptr, LENGTH_CM);
+    raytracing(ptrDevPixels, w, h, t, TAB_CM, LENGTH_CM);
     }
 
 __global__ void raytracingSM(uchar4* ptrDevPixels, uint w, uint h, float t, Sphere* ptrDevTabSphere, uint nbSphere)
     {
-//    extern __shared__ Sphere ptrDevTabSM[LENGTH_CM];
-//    copyGMtoSM(ptrDevTabSphere, ptrDevTabSM, nbSphere);
-    syncthreads();
+extern __shared__ Sphere ptrDevTabSM[];
+copyGMtoSM(ptrDevTabSphere, ptrDevTabSM, nbSphere);
+    __syncthreads();
     raytracing(ptrDevPixels, w, h, t, ptrDevTabSphere, nbSphere);
     }
 

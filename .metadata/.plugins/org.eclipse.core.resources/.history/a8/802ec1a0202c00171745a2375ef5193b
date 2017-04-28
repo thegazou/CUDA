@@ -1,0 +1,71 @@
+#include <iostream>
+
+#include "Device.h"
+#include "Slice.h"
+
+using std::cout;
+using std::endl;
+
+/*----------------------------------------------------------------------*\
+ |*			Declaration 					*|
+ \*---------------------------------------------------------------------*/
+
+/*--------------------------------------*\
+ |*		Imported	 	*|
+ \*-------------------------------------*/
+
+extern __global__ void slice(float* ptrDevGMResult, uint nbSlice);
+
+/*--------------------------------------*\
+ |*		Public			*|
+ \*-------------------------------------*/
+
+/*--------------------------------------*\
+ |*		Private			*|
+ \*-------------------------------------*/
+
+/*----------------------------------------------------------------------*\
+ |*			Implementation 					*|
+ \*---------------------------------------------------------------------*/
+
+/*--------------------------------------*\
+ |*		Constructeur			*|
+ \*-------------------------------------*/
+
+Slice::Slice(const Grid& grid, const uint nbSlice) :
+	nbSlice(nbSlice), dg(grid.dg), db(grid.db), sizeOctetSM(db.x * sizeof(float)), sizeOctetGM(sizeof(float)), result(0.f)
+    {
+    Device::malloc(&ptrDevGMResult, sizeOctetGM);
+    Device::memclear(ptrDevGMResult, sizeOctetGM);
+
+Slice::~Slice(void)
+    {
+    Device::free(ptrDevGMResult);    }
+
+/*--------------------------------------*\
+ |*		Methode			*|
+ \*-------------------------------------*/
+
+void Slice::run()
+    {
+    slice<<<dg,db, sizeOctetSM>>>(ptrDevGMResult, nbSlice);// assynchrone
+
+
+// MM (Device -> Host)
+	{
+	Device::memcpyDToH(&result, ptrDevGMResult, sizeOctetGM); // barriere synchronisation implicite
+	}
+    this->result *= 4.f / (float) nbSlice;
+    }
+
+float Slice::getResult()
+    {
+    return this->result;
+    }
+/*--------------------------------------*\
+ |*		Private			*|
+ \*-------------------------------------*/
+
+/*----------------------------------------------------------------------*\
+ |*			End	 					*|
+ \*---------------------------------------------------------------------*/

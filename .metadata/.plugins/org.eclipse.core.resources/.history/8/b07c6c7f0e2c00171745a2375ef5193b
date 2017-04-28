@@ -1,0 +1,67 @@
+#include <iostream>
+#include <cmath>
+
+#include "Device.h"
+
+#include "DataCreator.h"
+#include "Histogram.h"
+
+using std::cout;
+using std::endl;
+
+extern __global__ void histogram_kernel(int* ptrDevData, int dataMax, int dataSize);
+
+Histogram::Histogram(const Grid& grid, int dataMax) :
+	dataMax(dataMax), dg(grid.dg), db(grid.db), sizeOctetSM(dataMax * sizeof(int)), tabResult(nullptr)
+    {
+
+    DataCreator dataCreator(dataMax);
+    dataSize = dataCreator.getLength();
+    tabData = dataCreator.getTabData();
+    sizeOctetGM = dataSize * sizeof(int);
+
+    // MM (malloc Device)
+	{
+	Device::malloc(&ptrDevGMData, sizeOctetGM);
+	Device::memclear(ptrDevGMData, sizeOctetGM);
+	Device::memcpyHToD(ptrDevGMData, tabData, sizeOctetGM);
+	}
+    }
+
+Histogram::~Histogram(void)
+    {
+    //MM (device free)
+	{
+	Device::free(ptrDevGMData);
+
+	Device::lastCudaError("Histogram MM (end deallocation)"); // temp debug, facultatif
+	}
+    }
+
+void Histogram::run()
+    {
+    histogram_kernel<<<dg, db, sizeOctetSM>>>(ptrDevGMData, dataMax, dataSize); // assynchrone
+    int* result_device = new int[dataMax]();
+    Device::memcpyDToH(result_device, ptrDevGMData, sizeOctetSM);
+
+    tabResult = result_device;
+    }
+
+bool Histogram::checkResult()
+    {
+    cout << "TP Histogram" << endl;
+    bool isOk = true;
+    int count = 0;
+    int currentFrequency;
+
+    cout << "The Histogram : " << endl;
+    for (int i = 0; i < dataMax; i++)
+	{
+	currentFrequency = tabResult[i];
+	cout << "color of" << i << "appears " << currentFrequency << " times." << endl;
+	count += currentFrequency;
+	isOk &= currentFrequency == i + 1;
+	};
+    return isOk &= count == dataSize;
+    }
+

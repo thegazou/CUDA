@@ -1,0 +1,37 @@
+
+package ch.arc.cours.lamda.interfacefonctionelle.neu.existant.binaryoperator;
+
+import java.util.Arrays;
+import java.util.function.BinaryOperator;
+
+import org.junit.Assert;
+
+import ch.arc.cours.lamda.interfacefonctionelle.neu.existant.binaryoperator.NumberManipulator;
+
+public class NumberTools
+	{
+	
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+	
+	/**
+	 * [1,n]
+	 */
+	private static int[] create(int n)
+		{
+		int[] tab = new int[n];
+		
+		for(int i = 0; i < n; i++)
+			{
+			tab[i] = i + 1;
+			}
+			
+		return tab;
+		}
+		
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+	
+	}

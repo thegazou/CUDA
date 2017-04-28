@@ -1,0 +1,8 @@
+Le dossier Doc le script gitClone.
+Les speedups sont dans les dossiers des tp respectifs.
+
+Cuda: 			- Raytracing_Advanced
+						- Slice
+						- Montecarlo
+						- Montecarlo_multi_GPU
+						- Histogram

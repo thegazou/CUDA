@@ -1,0 +1,78 @@
+
+package ch.arc.cours.lamda.interfacefonctionelle.neu.predicate;
+
+import java.util.function.Predicate;
+
+import ch.arc.cours.lamda.interfacefonctionelle.neu.tools.Homme;
+import ch.arc.cours.lamda.interfacefonctionelle.neu.tools.HommeTools;
+
+public class UsePredicate
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		int n = 10;
+
+		version1(n);
+
+		// lamda
+			{
+			version2(n);
+			version3(n);
+			version4(n);
+			}
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private static void version1(int n)
+		{
+		Iterable<Homme> iterable = HommeTools.create(n);
+
+		Iterable<Homme> iterableFiltrer = HommeTools.filter(iterable, new Predicate<Homme>()
+			{
+
+			@Override
+			public boolean test(Homme h)
+				{
+				return h.getHauteur()>50;
+				}
+			});
+		
+		System.out.println(iterableFiltrer);
+		}
+
+	/*------------------------------*\
+	|*				lamda			*|
+	\*------------------------------*/
+
+	private static void version2(int n)
+		{
+		// TODO Auto-generated method stub
+
+		}
+
+	private static void version3(int n)
+		{
+		// TODO Auto-generated method stub
+
+		}
+
+	private static void version4(int n)
+		{
+		// TODO Auto-generated method stub
+
+		}
+
+	}

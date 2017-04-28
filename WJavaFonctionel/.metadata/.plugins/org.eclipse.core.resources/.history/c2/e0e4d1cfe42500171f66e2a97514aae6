@@ -1,0 +1,166 @@
+
+package ch.arc.cours.lamda.stream;
+
+import java.util.List;
+import java.util.function.BinaryOperator;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.ToIntFunction;
+import java.util.stream.Collectors;
+
+import ch.arc.cours.lamda.stream.tools.Personne;
+import ch.arc.cours.lamda.stream.tools.PersonneTools;
+
+public class UseStream
+	{
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		int n = 5;
+
+		use1(n);
+		use2(n);
+		use3(n);
+		use4(n);
+		use5(n);
+		use6(n);
+		use7(n);
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private static void use1(int n)
+		{
+		List<Personne> list = PersonneTools.create(n);
+
+		System.out.println("Original : " + list + "\n");
+
+		System.out.println("size : " + list.stream().count()); // count :  terminal
+		}
+
+	private static void use2(int n)
+		{
+		List<Personne> list = PersonneTools.create(n);
+
+		Predicate<Personne> ageBigger50 = p ->
+			{
+			p.getAge() > 50;
+			};
+
+		System.out.println("age > 50 : " + list.stream().filter(ageBigger50).count()); // count : terminal
+		}
+
+	private static void use3(int n)
+		{
+		List<Personne> list = PersonneTools.create(n);
+
+		Consumer<Personne> incAge = p -> p.incAge();
+
+		list.stream().forEach(incAge);// forEach : terminal  &sur place
+
+		System.out.println("age +1 : " + list);
+		}
+
+	private static void use4(int n)
+		{
+		List<Personne> list = PersonneTools.create(n);
+
+		Predicate<Personne> ageBigger50 = p -> p.getAge() > 50;
+		Consumer<Personne> incAge = p -> p.incAge();
+
+		list.stream().filter(ageBigger50).forEach(incAge);
+		// filter : non terminal stream-in, stream-out
+		// forEach : terminal & sur place
+
+		System.out.println("age > 50 +1 : ");
+		list.stream().filter(ageBigger50).forEach(p -> System.out.println(p.getAge()));
+
+		System.out.println("age > 50, +1 :" + list);
+		}
+
+	private static void use5(int n)
+		{
+		List<Personne> list = PersonneTools.create(n);
+
+		Predicate<Personne> ageBigger50 = p -> p.getAge() > 50;
+
+		List<Personne> listFiltrer = list.stream().filter(ageBigger50).collect(Collectors.toList());
+		// filter : non terminal stream-in, stream-out
+		// collect : terminal
+
+		System.out.println("age > 50 : " + listFiltrer);
+		}
+
+	private static void use6(int n)
+		{
+		List<Personne> list = PersonneTools.create(n);
+
+		Predicate<Personne> ageBigger50 = p -> p.getAge() > 50;
+		Function<Personne, Integer> getAge = p -> p.getAge();
+
+		List<Integer> listFiltrerMap = list.stream().filter(ageBigger50).map(getAge).collect(Collectors.toList());
+
+		System.out.println("age > 50 : " + listFiltrerMap);
+		}
+
+	private static void use7(int n)
+		{
+		List<Personne> list = PersonneTools.create(n);
+
+		Predicate<Personne> ageBigger50= p -> p.getAge()>50;
+
+		// version 1
+			{
+			Function<Personne,Integer> getAge= p -> p.getAge();
+			BinaryOperator<Integer> add=(n1,n2) -> n1+n2;
+
+			Integer somme = list.stream().filter(ageBigger50).map(getAge).reduce(0,add); // 0 init, optional
+			// filter : non terminal stream-in, stream-out
+			// map : non terminal stream-in, stream-out
+			// reduce : terminal
+
+			System.out.println("somme age > 50 : "+somme);
+			}
+
+		// version 2
+			{
+			ToIntFunction<Personne> getAge=p -> p.getAge();
+			Integer somme= list.stream().filter(ageBigger50).mapToInt(getAge).sum();
+			//Integer somme = list.stream().filter(ageBigger50).mapToInt(p -> p.getAge()).sum();
+
+			System.out.println("somme age > 50 : "+somme);
+			}
+
+		// version 3
+			{
+			Integer somme= list.stream().mapToInt(p -> p.getAge()).filter(age -> age>50).sum();
+			System.out.println("somme age > 50 : "+somme);
+			}
+
+		// version 4 Optimisation
+			{
+			Integer somme= list.parallelStream().mapToInt(p -> p.getAge()).filter(age -> age>50).sum();
+			System.out.println("somme age > 50 : "+somme);
+			}
+
+		// version 5 reduction par collector
+			{
+
+
+			Integer somme= list.parallelStream().filter(age -> age>50).collect(Collectors.summarizingInt(p -> p.getAge());
+			System.out.println("somme age > 50 : "+somme);
+			}
+		}
+
+	}

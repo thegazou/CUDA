@@ -1,0 +1,62 @@
+
+package ch.arc.cours.lamda.interfacefonctionelle.neu.existant.binaryoperator;
+
+import java.util.function.BinaryOperator;
+
+import org.junit.Assert;
+
+
+
+public class UseBInaryOperator
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		int n=10;
+		int[] tab=create(n);
+
+		BinaryOperator<Integer> add=new BinaryOperator<Integer>()
+			{
+
+			@Override
+			public Integer apply(Integer v1, Integer v2)
+				{
+				return v1+v2;
+				}
+			};
+
+		int sum = NumberManipulator.reduce(tab, add, 0);
+
+		System.out.println("sum = "+sum);
+		Assert.assertTrue(sum==n*(n+1)/2);
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	/**
+	 * [0,n]
+	 */
+	private static int[] create(int n)
+		{
+		int[] tab = new int[n];
+
+		for(int i = 0; i < n; i++)
+			{
+			tab[i] = i;
+			}
+
+		return tab;
+		}
+
+	}

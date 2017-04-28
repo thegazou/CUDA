@@ -1,4 +1,4 @@
-09:32:33 **** Incremental Build of configuration CudaGCC_parallel for project Student_Cuda_Image ****
+17:22:39 **** Incremental Build of configuration CudaGCC_parallel for project Student_Cuda_Image ****
 cbicc cuda jall 
 
 --------------------------------------------------------
@@ -374,18 +374,6 @@ Cuda compilation tools, release 8.0, V8.0.44
 
 [CBI] -> Compilation parallel (32 threads)
 
-[Student_Cuda_Image_cuda_80_x86_64] -> nvcc compiling .cu : src/cpp/core/03_RayTracing/moo/device/RaytracingDevice.cu
-src/cpp/core/03_RayTracing/moo/device/RaytracingDevice.cu(60): warning: function "syncthreads"
-/usr/local/cuda-8.0/include/device_functions.hpp(168): here was declared deprecated ("Please use __syncthreads() instead.")
-
-src/cpp/core/03_RayTracing/moo/device/RaytracingDevice.cu(29): warning: function "copyGMtoSM" was declared but never referenced
-
-src/cpp/core/03_RayTracing/moo/device/RaytracingDevice.cu(22): warning: function "uploadGPU" was declared but never referenced
-
-src/cpp/core/03_RayTracing/moo/device/RaytracingDevice.cu(29): warning: function "copyGMtoSM" was declared but never referenced
-
-src/cpp/core/03_RayTracing/moo/device/RaytracingDevice.cu(22): warning: function "uploadGPU" was declared but never referenced
-
 
 [CBI] -> Linking to   : /tmp/ramdrive/arc22/Targets/Student_Cuda_Image/bin/Student_Cuda_Image_cuda_80_x86_64.run
 
@@ -513,10 +501,10 @@ src/cpp/core/03_RayTracing/moo/device/RaytracingDevice.cu(22): warning: function
 [CBI] ->              : -lopencv_videostab_gcc484
 
 /tmp/ramdrive/arc22/Targets/Student_Cuda_Image/obj/Raytracing.o: In function `Raytracing::Raytracing(Grid const&, unsigned int, unsigned int, float, unsigned int)':
-tmpxft_0000525a_00000000-4_Raytracing.cudafe1.cpp:(.text+0x3a0): undefined reference to `uploadGPU(Sphere*)'
+tmpxft_00005330_00000000-4_Raytracing.cudafe1.cpp:(.text+0x3a0): undefined reference to `uploadGPU(Sphere*)'
 collect2: error: ld returned 1 exit status
 make[1]: *** [/tmp/ramdrive/arc22/Targets/Student_Cuda_Image/bin/Student_Cuda_Image_cuda_80_x86_64.run] Error 1
 make: *** [jall] Error 2
 
-09:32:37 Build Finished (took 3s.815ms)
+17:22:39 Build Finished (took 682ms)
 

@@ -1,0 +1,47 @@
+
+package ch.arc.cours.lamda.interfacefonctionelle.neu.custom;
+
+
+
+public class FunctionTools
+	{
+
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	/**
+	 * (h 0 g)(x) = g(h(x))
+	 */
+	private Fonction_I composition1(Fonction_I h,Fonction_I g)
+	{
+	return new Fonction_I()
+		{
+
+		@Override
+		public double f(double x)
+			{
+			return h.f(g.f(x));
+			}
+		};
+	}
+
+
+	/**
+	 * (h 0 g)(x) = g(h(x))
+	 */
+	private Fonction_I composition2(Fonction_I h,Fonction_I g)
+	{
+	Function_I function=
+
+			return function;
+	}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+
+	}
+

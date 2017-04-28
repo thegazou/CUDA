@@ -1,0 +1,81 @@
+
+package ch.arc.cours.lamda.interfacefonctionelle.neu.existant.consumer;
+
+import java.util.function.Consumer;
+
+import ch.arc.cours.lamda.interfacefonctionelle.neu.existant.consumerprediacte.HommeManipuleur;
+import ch.arc.cours.lamda.interfacefonctionelle.neu.existant.consumerprediacte.tools.Homme;
+
+public class UseConsumer
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		int n = 5;
+
+		version1(n);
+
+		// lamda
+			{
+			version2(n);
+			version3(n);
+			}
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private static void version1(int n)
+		{
+		Iterable<Homme> iterable = HommeManipuleur.create(n);
+
+		System.out.println("Before : " + iterable);
+
+		HommeManipuleur.modify(iterable, new Consumer<Homme>()
+			{
+
+			@Override
+			public void accept(Homme t)
+				{
+				t.opposePoids();
+				}
+			});
+
+		System.out.println("After  : " + iterable);
+		}
+
+	/*------------------------------*\
+	|*				lamda			*|
+	\*------------------------------*/
+
+	private static void version2(int n)
+		{
+		Iterable<Homme> iterable = HommeManipuleur.create(n);
+
+		HommeManipuleur.modify(iterable, t -> t.opposePoids());
+
+		System.out.println("After  : " + iterable);
+		}
+
+	private static void version3(int n)
+		{
+		Iterable<Homme> iterable = HommeManipuleur.create(n);
+
+		Consumer<Homme> consumer = t -> t.opposePoids();
+
+		HommeManipuleur.modify(iterable, consumer);
+
+		System.out.println("After  : " + iterable);
+		}
+
+	}

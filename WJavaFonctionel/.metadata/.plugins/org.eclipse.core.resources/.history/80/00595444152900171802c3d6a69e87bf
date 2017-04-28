@@ -1,0 +1,34 @@
+
+package ch.arc.cours.lamda.interfacefonctionelle.neu.existant.function.simple;
+
+import java.util.function.Function;
+
+public class UseFunctionSimple
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private static void print(Maison maison,Function<Maison, Integer> function)
+	{
+	Integer value=function.
+	System.out.println(value);
+	}
+
+	}
+
